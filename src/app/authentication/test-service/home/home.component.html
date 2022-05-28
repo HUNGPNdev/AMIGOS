@@ -1,13 +1,719 @@
-<div *ngIf="info.token; else loggedOut">
-    <h5 class="text-primary">Your Information</h5>
-    <p>
-      <strong>Username:</strong> {{info.username}}<br/>
-      <strong>Roles:</strong> {{info.authorities}}<br />
-      <strong>Token:</strong> {{info.token}}.
-    </p>
-    <button class="btn btn-secondary" (click)="logout()">Logout</button>
-  </div>
-   
-  <ng-template #loggedOut>
-    Please login.
-  </ng-template>
+<div id="page-content">
+  <section id="home" class="home-page-content page-content">
+    <section class="homepage-slider" tabindex="-1" aria-label="carousel" role="contentinfo">
+      <div class="container">
+
+        <div class="homeCarousel flexslider" data-animation="fade" data-slideshowspeed="10000" role="region"
+          tabindex="-1" aria-label="carousel" role="contentinfo">
+          <ul class="slides" tabindex="-1">
+
+            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img
+                  src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a></li>
+            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img
+                  src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a></li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="products-section">
+      <div class="container" aria-label="featuredproducts" role="main">
+        <h1 class="header-specials h2" role="heading" aria-level="1">Featured Products</h1>
+        <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
+
+          <ul class="product-items slides" data-productcols="4">
+            <script class="slick-cloned"
+              type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script>
+            <li>
+              <div class="product-item" data-catalogid="1" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="details">
+                    <img src="assets/assets/images/thumbnails/prod_1_thumbnail.png"
+                      alt="Mezzanine Houseplant" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="details">Mezzanine Houseplant</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-5" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$13.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="details"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text"> Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="2" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Cozy-Bloom-Shrub_p_2.html">
+                    <img src="assets/assets/images/thumbnails/prod_2_thumbnail.png"
+                      alt="Cozy Bloom Shrub" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Cozy-Bloom-Shrub_p_2.html">Cozy Bloom Shrub</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$14.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cartc112.html?quick=1&amp;item_id=2&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text"> Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="3" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Porcelain-Succulent_p_3.html">
+                    <img src="assets/assets/images/thumbnails/prod_3_thumbnail.png"
+                      alt="Porcelain Succulent" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Porcelain-Succulent_p_3.html">Porcelain Succulent</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+
+                    <del class="regular-price" aria-label="regular price">$15.99</del>
+                    <span class="sale-price">$13.99</span>
+                    <span class="on-sale-badge">Sale</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cartc112.html?quick=1&amp;item_id=3&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="4" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Tropical-Aglaonema-Shrub_p_4.html">
+                    <img src="assets/assets/images/thumbnails/prod_4_thumbnail.png"
+                      alt="Tropical Aglaonema Shrub" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Tropical-Aglaonema-Shrub_p_4.html">Tropical Aglaonema Shrub</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$17.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cartc112.html?quick=1&amp;item_id=4&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="6" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Terracota-Succulent_p_6.html">
+                    <img src="assets/assets/images/thumbnails/prod_5_thumbnail.png"
+                      alt="Terracota Succulent" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Terracota-Succulent_p_6.html">Terracota Succulent</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$18.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="Terracota-Succulent_p_6.html?quick=1&amp;item_id=6&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text"> Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="7" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Ficus-Altissima_p_7.html">
+                    <img src="assets/assets/images/thumbnails/prod_6_thumbnail.png"
+                      alt="Ficus Altissima" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Ficus-Altissima_p_7.html">Ficus Altissima</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-5" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$20.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cartc112.html?quick=1&amp;item_id=7&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="8" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Pearl-Succulent_p_8.html">
+                    <img src="assets/assets/images/thumbnails/prod_7_thumbnail.png"
+                      alt="Pearl Succulent" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Pearl-Succulent_p_8.html">Pearl Succulent</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+                    <span class="regular-price">$23.99</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cartc112.html?quick=1&amp;item_id=8&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="9" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="0">
+                <div class="img">
+                  <a href="Corner-Top-Cacti_p_9.html">
+                    <img src="assets/assets/images/thumbnails/prod_8_thumbnail.png"
+                      alt="Corner Top Cacti" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Corner-Top-Cacti_p_9.html">Corner Top Cacti</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+
+
+                    <del class="regular-price" aria-label="regular price">$25.99</del>
+                    <span class="sale-price">$24.99</span>
+                    <span class="on-sale-badge">Sale</span>
+
+                  </div>
+
+
+                  <div class="action">
+                    <a href="Corner-Top-Cacti_p_9.html?quick=1&amp;item_id=9&amp;cat_id=0"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text"> Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+
+    <div id="modNewReleases" class="products-section">
+      <div class="container">
+        <h2 class="header-specials" role="heading" aria-level="2">New Releases</h2>
+        <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
+          <ul class="product-items slides" data-productcols="[product-cols-number]">
+            <li>
+              <div class="product-item" data-catalogid="9" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+                <div class="img">
+                  <a href="Corner-Top-Cacti_p_9.html">
+                    <img src="assets/assets/images/thumbnails/prod_8_thumbnail.png"
+                      alt="[imagecaption1]" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Corner-Top-Cacti_p_9.html">Corner Top Cacti</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+                    <del class="regular-price" aria-label="regular price">$25.99</del>
+                    <span class="sale-price">$24.99</span>
+                    <span class="on-sale-badge">Sale</span>
+                  </div>
+
+
+                  <div class="action">
+                    <a href="Corner-Top-Cacti_p_9.html?quick=1&amp;item_id=9&amp;cat_id=[cat_id]"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                  <div id="divPrevMessage_9" style="display: none; margin-bottom:15px;">
+                    <em>You previously purchased this item on&nbsp;<span
+                        id="spnPrevPurchDate_9"></span></em>
+                    <br /><a href="#" id="lnkPrevPurchOrderTracking_9">View this order</a>
+                  </div>
+                  <script>
+                    if ("" != "") {
+                      setTimeout("checkPrevPurch('','9');", 500);
+                    }
+                  </script>
+
+                </div>
+              </div>
+
+              <script>
+                function checkPrevPurch(userId, caId) {
+
+                  jQuery.ajax({
+                    url: 'ajaxPrevPurch.asp',
+                    dataType: 'json',
+                    type: 'get',
+                    data: 'cu=' + userId + '&ca=' + caId,
+                    cache: false,
+                    success: function (strResult) {
+                      if (strResult.trackinglink != '') {
+                        jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "block" });
+                        jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
+                      }
+                      else {
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" });
+                      }
+                    },
+                    error: jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" })
+
+                  });
+                }
+              </script>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="8" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+                <div class="img">
+                  <a href="Pearl-Succulent_p_8.html">
+                    <img src="assets/assets/images/thumbnails/prod_7_thumbnail.png"
+                      alt="[imagecaption1]" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Pearl-Succulent_p_8.html">Pearl Succulent</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+                    <span class="regular-price">$23.99</span>
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cart509f.html?quick=1&amp;item_id=8&amp;cat_id=[cat_id]"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                  <div id="divPrevMessage_8" style="display: none; margin-bottom:15px;">
+                    <em>You previously purchased this item on&nbsp;<span
+                        id="spnPrevPurchDate_8"></span></em>
+                    <br /><a href="#" id="lnkPrevPurchOrderTracking_8">View this order</a>
+                  </div>
+                  <script>
+                    if ("" != "") {
+                      setTimeout("checkPrevPurch('','8');", 500);
+                    }
+                  </script>
+
+                </div>
+              </div>
+
+              <script>
+                function checkPrevPurch(userId, caId) {
+
+                  jQuery.ajax({
+                    url: 'ajaxPrevPurch.asp',
+                    dataType: 'json',
+                    type: 'get',
+                    data: 'cu=' + userId + '&ca=' + caId,
+                    cache: false,
+                    success: function (strResult) {
+                      if (strResult.trackinglink != '') {
+                        jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "block" });
+                        jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
+                      }
+                      else {
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" });
+                      }
+                    },
+                    error: jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" })
+
+                  });
+                }
+              </script>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="7" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+                <div class="img">
+                  <a href="Ficus-Altissima_p_7.html">
+                    <img src="assets/assets/images/thumbnails/prod_6_thumbnail.png"
+                      alt="[imagecaption1]" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Ficus-Altissima_p_7.html">Ficus Altissima</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-5" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+                    <span class="regular-price">$20.99</span>
+                  </div>
+
+
+                  <div class="action">
+                    <a href="view_cart509f.html?quick=1&amp;item_id=7&amp;cat_id=[cat_id]"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Add To Cart</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                  <div id="divPrevMessage_7" style="display: none; margin-bottom:15px;">
+                    <em>You previously purchased this item on&nbsp;<span
+                        id="spnPrevPurchDate_7"></span></em>
+                    <br /><a href="#" id="lnkPrevPurchOrderTracking_7">View this order</a>
+                  </div>
+                  <script>
+                    if ("" != "") {
+                      setTimeout("checkPrevPurch('','7');", 500);
+                    }
+                  </script>
+
+                </div>
+              </div>
+
+              <script>
+                function checkPrevPurch(userId, caId) {
+
+                  jQuery.ajax({
+                    url: 'ajaxPrevPurch.asp',
+                    dataType: 'json',
+                    type: 'get',
+                    data: 'cu=' + userId + '&ca=' + caId,
+                    cache: false,
+                    success: function (strResult) {
+                      if (strResult.trackinglink != '') {
+                        jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "block" });
+                        jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
+                      }
+                      else {
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" });
+                      }
+                    },
+                    error: jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" })
+
+                  });
+                }
+              </script>
+
+            </li>
+            <li>
+              <div class="product-item" data-catalogid="6" data-ajaxcart="1"
+                data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+                <div class="img">
+                  <a href="Terracota-Succulent_p_6.html">
+                    <img src="assets/assets/images/thumbnails/prod_5_thumbnail.png"
+                      alt="[imagecaption1]" class="img-responsive" />
+                  </a>
+
+                  <button class="quickview" data-toggle="modal">Quick View</button>
+
+                </div>
+                <div class="product-content">
+                  <div class="name">
+                    <a href="Terracota-Succulent_p_6.html">Terracota Succulent</a>
+                  </div>
+                  <div class="reviews">
+
+
+                    <span class="reviews-stars rating-0" role="presentation"></span>
+
+
+                  </div>
+                  <div class="price">
+                    <span class="regular-price">$18.99</span>
+                  </div>
+
+
+                  <div class="action">
+                    <a href="Terracota-Succulent_p_6.html?quick=1&amp;item_id=6&amp;cat_id=[cat_id]"
+                      class="add-to-cart btn btn-default">
+                      <span class="buyitlink-text">Select Options</span>
+                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                      <span class="ajaxcart-added icon-ok"></span>
+                    </a>
+                  </div>
+
+
+                  <div id="divPrevMessage_6" style="display: none; margin-bottom:15px;">
+                    <em>You previously purchased this item on&nbsp;<span
+                        id="spnPrevPurchDate_6"></span></em>
+                    <br /><a href="#" id="lnkPrevPurchOrderTracking_6">View this order</a>
+                  </div>
+                  <script>
+                    if ("" != "") {
+                      setTimeout("checkPrevPurch('','6');", 500);
+                    }
+                  </script>
+
+                </div>
+              </div>
+
+              <script>
+                function checkPrevPurch(userId, caId) {
+
+                  jQuery.ajax({
+                    url: 'ajaxPrevPurch.asp',
+                    dataType: 'json',
+                    type: 'get',
+                    data: 'cu=' + userId + '&ca=' + caId,
+                    cache: false,
+                    success: function (strResult) {
+                      if (strResult.trackinglink != '') {
+                        jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "block" });
+                        jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
+                      }
+                      else {
+                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" });
+                      }
+                    },
+                    error: jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" })
+
+                  });
+                }
+              </script>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>

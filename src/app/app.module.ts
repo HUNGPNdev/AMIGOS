@@ -12,6 +12,14 @@ import { LoginComponent } from './authentication/test-service/login/login.compon
 import { PmComponent } from './authentication/test-service/pm/pm.component';
 import { RegisterComponent } from './authentication/test-service/register/register.component';
 import { UserComponent } from './authentication/test-service/user/user.component';
+import { ProductsComponent } from './authentication/test-service/products/products.component';
+import { AboutComponent } from './authentication/test-service/about/about.component';
+import { GiftRegistriesComponent } from './authentication/test-service/gift-registries/gift-registries.component';
+import { ContactComponent } from './authentication/test-service/contact/contact.component';
+import { BlogComponent } from './authentication/test-service/blog/blog.component';
+import { AccountComponent } from './authentication/test-service/account/account.component';
+import { ShoppingCartComponent } from './authentication/test-service/shopping-cart/shopping-cart.component';
+import { DetailsComponent } from './authentication/test-service/details/details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +29,15 @@ import { UserComponent } from './authentication/test-service/user/user.component
     LoginComponent,
     PmComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    ProductsComponent,
+    AboutComponent,
+    GiftRegistriesComponent,
+    ContactComponent,
+    BlogComponent,
+    AccountComponent,
+    ShoppingCartComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
