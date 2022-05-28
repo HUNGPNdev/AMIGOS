@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>NgtestSecurity</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="./assets/admin/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/admin/css/datepicker3.css" rel="stylesheet">
+  <link href="./assets/admin/css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="./assets/admin/ckeditor/ckeditor.js"></script>
+  <script src="./assets/admin/js/lumino.glyphs.js"></script>
+</head>
+
+<body>
+  
+  <app-root></app-root>
+
+
+  <script src="./assets/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="./assets/admin/js/bootstrap.min.js"></script>
+	<script src="./assets/admin/js/chart.min.js"></script>
+	<script src="./assets/admin/js/chart-data.js"></script>
+	<script src="./assets/admin/js/easypiechart.js"></script>
+	<script src="./assets/admin/js/easypiechart-data.js"></script>
+	<script src="./assets/admin/js/bootstrap-datepicker.js"></script>
+	<script>
+		$('#calendar').datepicker({
+		});
+
+		!function ($) {
+		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
+		        $(this).find('em:first').toggleClass("glyphicon-minus");      
+		    }); 
+		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+</html>
