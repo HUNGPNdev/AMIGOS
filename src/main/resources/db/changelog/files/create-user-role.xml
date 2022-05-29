@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="create-new-table-user_role" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_role"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_role">
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="add-foreignkey-to-user_role" author="hungpn">
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id" constraintName="fk_user_role" referencedTableName="user" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="role_id" constraintName="fk_role_user" referencedTableName="role" referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="assign" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="user_role" />
+        </preConditions>
+        <insert tableName="user_role">
+            <column name="user_id" valueComputed="UNHEX('BD0964E6224A458A86E2B014FD2E23B1')"/>
+            <column name="role_id" valueComputed="UNHEX('49CDF643A2FC420FA850791FE193CE3D')"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

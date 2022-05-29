@@ -5,11 +5,13 @@ import com.amigos.authentication.request.LoginForm;
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.authentication.response.JwtResponse;
 import com.amigos.authentication.response.ResponseMessage;
+import com.amigos.dto.UserDTO;
 import com.amigos.role.model.Role;
 import com.amigos.role.model.RoleName;
 import com.amigos.role.repository.RoleRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,6 +50,9 @@ public class AuthRestAPIs {
     @Autowired
     JwtProvider jwtProvider;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -61,8 +68,10 @@ public class AuthRestAPIs {
     }
 
     @PostMapping("/role")
-    public String createRole(@RequestBody Role role) {
-        roleRepository.save(role);
+    public String createRole() {
+        Role role1 = new Role();
+        role1.setName(RoleName.ROLE_PM);
+        roleRepository.save(role1);
         return ">>> Ok";
 
     }
@@ -74,9 +83,17 @@ public class AuthRestAPIs {
 
     }
 
+    @PostMapping("/user-details")
+    public ResponseEntity<?> getUserByName(@RequestBody LoginForm loginRequest) {
+        Optional<User> u = userRepository.findByUserName(loginRequest.getUsername());
+
+        return ResponseEntity.ok(modelMapper.map(u.get(), UserDTO.class));
+
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUserName(signUpRequest.getUserName())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -87,8 +104,10 @@ public class AuthRestAPIs {
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(),  signUpRequest.getEmail(), signUpRequest.getUsername(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getUserName(), signUpRequest.getFirstName(), signUpRequest.getLastName(),
+                signUpRequest.getEmail(), signUpRequest.getPhone(), signUpRequest.getAddress(),
+                encoder.encode(signUpRequest.getPassword()), false);
+        user.setCreate_at(new Date());
 
         List<String> strRoles = signUpRequest.getRole();
         List<Role> roles = new ArrayList<>();

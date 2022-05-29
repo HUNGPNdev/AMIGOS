@@ -19,24 +19,32 @@ public class UserPrinciple implements UserDetails {
 
     private UUID id;
 
-    private String name;
-
     private String username;
 
+    private String firstName;
+
+    private String lastName;
+
     private String email;
+
+    private String phone;
+
+    private String address;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(UUID id, String name,
-                         String username, String email, String password,
-                         Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(UUID id, String userName, String firstName, String lastName, String email, String phone,
+                         String address, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.name = name;
-        this.username = username;
+        this.username = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
+        this.address = address;
         this.password = password;
         this.authorities = authorities;
     }
@@ -48,22 +56,15 @@ public class UserPrinciple implements UserDetails {
 
         return new UserPrinciple(
                 user.getId(),
-                user.getName(),
-                user.getUsername(),
+                user.getUserName(),
+                user.getFirstName(),
+                user.getLastName(),
                 user.getEmail(),
+                user.getPhone(),
+                user.getAddress(),
                 user.getPassword(),
                 authorities
         );
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @Override
