@@ -1,5 +1,6 @@
 package com.amigos.user.repository;
 
+import com.amigos.dto.UserDTO;
 import com.amigos.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

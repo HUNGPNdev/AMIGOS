@@ -5,12 +5,14 @@ import com.amigos.authentication.request.LoginForm;
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.authentication.response.JwtResponse;
 import com.amigos.authentication.response.ResponseMessage;
+import com.amigos.common.ResponseApi;
 import com.amigos.dto.UserDTO;
 import com.amigos.role.model.Role;
 import com.amigos.role.model.RoleName;
 import com.amigos.role.repository.RoleRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
+import com.amigos.user.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +55,9 @@ public class AuthRestAPIs {
     @Autowired
     ModelMapper modelMapper;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -93,49 +98,9 @@ public class AuthRestAPIs {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if (userRepository.existsByUserName(signUpRequest.getUserName())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+        ResponseApi userDTO = userService.registerUser(signUpRequest);
 
-        // Creating user's account
-        User user = new User(signUpRequest.getUserName(), signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getEmail(), signUpRequest.getPhone(), signUpRequest.getAddress(),
-                encoder.encode(signUpRequest.getPassword()), false);
-        user.setCreate_at(new Date());
-
-        List<String> strRoles = signUpRequest.getRole();
-        List<Role> roles = new ArrayList<>();
-
-        strRoles.forEach(role -> {
-            switch (role) {
-                case "admin":
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(adminRole);
-
-                    break;
-                case "pm":
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(pmRole);
-
-                    break;
-                default:
-                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(userRole);
-            }
-        });
-
-        user.setRoles(roles);
-        userRepository.save(user);
-
-        return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 }
