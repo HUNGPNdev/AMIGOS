@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="create-new-table-category" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(250)" defaultValue="Null"/>
+            <column name="is_deleted" type="bit(1)" defaultValue="false"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

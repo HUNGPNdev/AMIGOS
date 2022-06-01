@@ -8,4 +8,14 @@
     <include file="/db/changelog/files/create-user.xml"/>
     <include file="/db/changelog/files/create-role.xml"/>
     <include file="/db/changelog/files/create-user-role.xml"/>
+    <include file="/db/changelog/files/create-contact.xml"/>
+    <include file="/db/changelog/files/create-blog.xml"/>
+    <include file="/db/changelog/files/create-cart.xml"/>
+    <include file="/db/changelog/files/create-category.xml"/>
+    <include file="/db/changelog/files/create-product.xml"/>
+    <include file="/db/changelog/files/create-size.xml"/>
+    <include file="/db/changelog/files/create-product_size.xml"/>
+    <include file="/db/changelog/files/create-cart_product_size.xml"/>
+    <include file="/db/changelog/files/create-customer_review.xml"/>
+
 </databaseChangeLog>

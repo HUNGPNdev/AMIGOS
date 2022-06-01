@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="create-new-table-cart" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cart">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(250)" defaultValue="Null"/>
+            <column name="is_deleted" type="bit(1)" defaultValue="false"/>
+            <column name="create_at" type="DATETIME" defaultValue="now()"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add-foreignkey-to-cart" author="hungpn">
+        <addForeignKeyConstraint baseTableName="cart" baseColumnNames="user_id" constraintName="fk_cart_user" referencedTableName="user" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

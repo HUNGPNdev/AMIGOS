@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 "THIS IS SWAGGER. HUNG TEST SWAGGER",
                 "V1",
                 "HUNG",
-                new Contact("PHI HUNG", "http://localhost:8080/swagger-ui.html", "hung929912a@gmail.com"),
+                new Contact("PHI HUNG", "http://localhost:8081/swagger-ui.html", "hung929912a@gmail.com"),
                 "CC BY-SA 3.0",
                 "https://creativecommons.org/licenses/by-sa/3.0/",
                 Collections.emptyList()
