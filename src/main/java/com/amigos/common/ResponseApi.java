@@ -22,4 +22,9 @@ public class ResponseApi {
         this.message = message;
         this.data = data;
     }
+
+    public ResponseApi(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 }

@@ -4,7 +4,6 @@ import com.amigos.authentication.jwt.JwtProvider;
 import com.amigos.authentication.request.LoginForm;
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.authentication.response.JwtResponse;
-import com.amigos.authentication.response.ResponseMessage;
 import com.amigos.common.ResponseApi;
 import com.amigos.dto.UserDTO;
 import com.amigos.role.model.Role;
@@ -26,9 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 
