@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Category } from './authentication/entity/category/Category';
+import { CategoryService } from './authentication/entity/category/category.service';
 import { TokenStorageService } from './authentication/entity/token-storage.service';
 
 @Component({
@@ -7,26 +9,18 @@ import { TokenStorageService } from './authentication/entity/token-storage.servi
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngtestSecurity';
-  private roles: string[];
-   authority: string;
- 
-  constructor(private tokenStorage: TokenStorageService) { }
+
+  categories: Category[];
+
+  constructor(private cataService: CategoryService) { }
  
   ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
-          this.authority = 'admin';
-          return false;
-        } else if (role === 'ROLE_PM') {
-          this.authority = 'pm';
-          return false;
-        }
-        this.authority = 'user';
-        return true;
-      });
-    }
+    this.getAllCata();
+  }
+
+  getAllCata() {
+    this.cataService.listCategory().subscribe( data => {
+      this.categories = data.data;
+    }, error => console.log(error))
   }
 }
