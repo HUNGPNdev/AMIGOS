@@ -10,6 +10,6 @@ public interface CategoryService {
     ResponseApi updateCategory(CategoryEntity category);
     ResponseApi getDetailCategory(UUID id);
     ResponseApi delete(UUID id);
-    ResponseApi getAll();
+    ResponseApi getLimit();
 
 }

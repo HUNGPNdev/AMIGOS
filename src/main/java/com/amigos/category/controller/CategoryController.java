@@ -14,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/categories")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CategoryController {
 
     @Autowired
@@ -32,17 +33,20 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseApi> getDetailCategory(@NotEmpty @PathVariable("id") UUID id) {
         return ResponseEntity.ok(service.getDetailCategory(id));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseApi> delete(@NotEmpty @PathVariable("id") UUID id) {
         return ResponseEntity.ok(service.delete(id));
     }
 
     @GetMapping("")
-    public ResponseEntity<ResponseApi> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<ResponseApi> getLimit() {
+        return ResponseEntity.ok(service.getLimit());
     }
 }
