@@ -11,5 +11,6 @@ public interface CategoryService {
     ResponseApi getDetailCategory(UUID id);
     ResponseApi delete(UUID id);
     ResponseApi getLimit();
+    ResponseApi getCateByCondition();
 
 }

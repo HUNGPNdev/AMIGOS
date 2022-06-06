@@ -26,7 +26,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public ResponseApi addCategory(CategoryEntity category) {
-        category.setIsDeleted(Boolean.FALSE);
         CategoryEntity categoryEntity = categoryRepository.save(category);
         CategoryDTO categoryDTO = modelMapper.map(categoryEntity, CategoryDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTO);
@@ -81,6 +80,13 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryEntity> categoryEntity = categoryRepository.getLimit(Boolean.FALSE, 5);
         List<CategoryDTO> categoryDTOS = modelMapper.mapAll(categoryEntity, CategoryDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getCateByCondition() {
+        List<CategoryDTO> cateByCondition = categoryRepository.getCateByCondition();
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cateByCondition);
         return rs;
     }
 
