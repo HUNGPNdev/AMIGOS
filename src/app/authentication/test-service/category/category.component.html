@@ -55,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let p of categories | filter:searchText">
+                            <tr *ngFor="let p of categories | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
                                 <td>{{p.name}}</td>
                                 <td>{{p.isDeleted}}</td>
                                 <td>
@@ -67,7 +67,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- <br><br><pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                    <br><br><pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
                 <div class="clearfix"></div>
             </div>
