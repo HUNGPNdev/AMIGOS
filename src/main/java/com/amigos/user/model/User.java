@@ -1,5 +1,6 @@
 package com.amigos.user.model;
 
+import com.amigos.product.model.ProductEntity;
 import com.amigos.role.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -72,4 +73,7 @@ public class User {
         this.password = password;
         this.is_deleted = is_deleted;
     }
+
+    @OneToMany(mappedBy = "userId")
+    private List<ProductEntity> products = new ArrayList<>();
 }
