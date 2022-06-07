@@ -15,6 +15,7 @@ import { LoginComponent } from './authentication/test-service/login/login.compon
 import { PmComponent } from './authentication/test-service/pm/pm.component';
 import { RegisterComponent } from './authentication/test-service/register/register.component';
 import { UserComponent } from './authentication/test-service/user/user.component';
+import { CreateProductComponent } from './authentication/test-service/product/create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserComponent } from './authentication/test-service/user/user.component
     PmComponent,
     RegisterComponent,
     UserComponent,
-    CategoryComponent
+    CategoryComponent,
+    CreateProductComponent
   ],
   imports: [
     NgxPaginationModule,
