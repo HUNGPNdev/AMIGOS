@@ -55,37 +55,53 @@
 		});
 		function changeImg1(input) {
 			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				//Sự kiện file đã được load vào website
-				reader.onload = function (e) {
-					//Thay đổi đường dẫn ảnh
-					$('#avatar1').attr('src', e.target.result);
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar1').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
 				}
-				reader.readAsDataURL(input.files[0]);
+
 			}
 		}
 
 		function changeImg2(input) {
 			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				//Sự kiện file đã được load vào website
-				reader.onload = function (e) {
-					//Thay đổi đường dẫn ảnh
-					$('#avatar2').attr('src', e.target.result);
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar2').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
 				}
-				reader.readAsDataURL(input.files[0]);
 			}
 		}
 
 		function changeImg3(input) {
 			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				//Sự kiện file đã được load vào website
-				reader.onload = function (e) {
-					//Thay đổi đường dẫn ảnh
-					$('#avatar3').attr('src', e.target.result);
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar3').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
 				}
-				reader.readAsDataURL(input.files[0]);
 			}
 		}
 	</script>

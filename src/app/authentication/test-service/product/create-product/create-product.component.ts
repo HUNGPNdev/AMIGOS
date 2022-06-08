@@ -58,14 +58,23 @@ export class CreateProductComponent implements OnInit {
   }
 
   onChangeImage1(event) {
-    this.selectedImage1 = event.target.files[0];
+    var file = event.target.files[0];
+    if(file.size < 1048576) {
+      this.selectedImage1 = file;
+    }
   }
 
   onChangeImage2(event) {
-    this.selectedImage2 = event.target.files[0];
+    var file = event.target.files[0];
+    if(file.size < 1048576) {
+      this.selectedImage2 = file;
+    }
   }
 
   onChangeImage3(event) {
-    this.selectedImage3 = event.target.files[0];
+    var file = event.target.files[0];
+    if(file.size < 1048576) {
+      this.selectedImage3 = file;
+    }
   }
 }
