@@ -2,75 +2,90 @@
     <div class="col-lg-12">
         <h1 class="page-header">Product</h1>
     </div>
-</div><!--/.row-->
+</div>
+<!--/.row-->
 
 <div class="row">
     <div class="col-xs-12 col-md-12 col-lg-12">
-        
+
         <div class="panel panel-primary">
             <div class="panel-heading">Add Product</div>
             <div class="panel-body">
-                <form method="post" enctype="multipart/form-data">
+                <form (ngSubmit)="f.valid && onSubmit()" enctype="multipart/form-data" #f="ngForm">
                     <div class="row" style="margin-bottom:40px">
                         <div class="col-xs-8">
-                            <div class="form-group" >
-                                <label>Tên sản phẩm</label>
-                                <input required type="text" name="name" class="form-control">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" name="name" class="form-control" [(ngModel)]="product.name" #name="ngModel" required>
+                                <div *ngIf="f.submitted && name.invalid">
+                                    <div *ngIf="name.errors?.required" style="color: red;">Product Name</div>
+                                </div>
                             </div>
-                            <div class="form-group" >
-                                <label>Giá sản phẩm</label>
-                                <input required type="number" name="price" class="form-control">
+                            <div class="form-group">
+                                <label>Provider</label>
+                                <input type="text" name="provider" class="form-control" [(ngModel)]="product.provider">
                             </div>
-                            <div class="form-group" >
-                                <label>Ảnh sản phẩm</label>
-                                <input required id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
-                                <img id="avatar" class="thumbnail" width="300px" [src]="src">
+
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" name="title" class="form-control"
+                                    [(ngModel)]="product.title">
                             </div>
-                            <div class="form-group" >
-                                <label>Phụ kiện</label>
-                                <input required type="text" name="accessories" class="form-control">
+                            <div class="form-group">
+                                <label>Guarantee</label>
+                                <input type="text" name="guarantee" class="form-control"
+                                    [(ngModel)]="product.guarantee">
                             </div>
-                            <div class="form-group" >
-                                <label>Bảo hành</label>
-                                <input required type="text" name="warranty" class="form-control">
+                            <div class="form-group">
+                                <label>Part</label>
+                                <input type="text" name="part" class="form-control" [(ngModel)]="product.part">
                             </div>
-                            <div class="form-group" >
-                                <label>Khuyến mãi</label>
-                                <input required type="text" name="promotion" class="form-control">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" [(ngModel)]="product.description"></textarea>
                             </div>
-                            <div class="form-group" >
-                                <label>Tình trạng</label>
-                                <input required type="text" name="condition" class="form-control">
+                            <div class="form-group">
+                                <label>Image 1</label>
+                                <input required (change)="onChangeImage1($event)" [required]="true" id="img1"
+                                    type="file" class="hidden" onchange="changeImg1(this)" >
+                                <img id="avatar1" onclick="getElementById('img1').click()" class="thumbnail"
+                                    width="100px" [src]="src">
                             </div>
-                            <div class="form-group" >
-                                <label>Trạng thái</label>
-                                <select required name="status" class="form-control">
-                                    <option value="1">Còn hàng</option>
-                                    <option value="0">Hết hàng</option>
+                            <div class="form-group">
+                                <label>Image 2</label>
+                                <input (change)="onChangeImage2($event)" [required]="true" id="img2" type="file"
+                                    class="hidden" onchange="changeImg2(this)">
+                                <img id="avatar2" onclick="getElementById('img2').click()" class="thumbnail"
+                                    width="100px" [src]="src">
+                            </div>
+                            <div class="form-group">
+                                <label>Image 3</label>
+                                <input (change)="onChangeImage3($event)" [required]="true" id="img3" type="file"
+                                    class="hidden" onchange="changeImg3(this)">
+                                <img id="avatar3" onclick="getElementById('img3').click()" class="thumbnail"
+                                    width="100px" [src]="src">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select required class="form-control" name="cateId" [(ngModel)]="product.cateId" #cateId="ngModel">
+                                    <option [value]="cate.id" *ngFor="let cate of categories">{{cate.name}}</option>
                                 </select>
+                                <div *ngIf="f.submitted && cateId.invalid">
+                                    <div *ngIf="cateId.errors?.required" style="color: red;">Please select Category!</div>
+                                </div>
                             </div>
-                            <div class="form-group" >
-                                <label>Miêu tả</label>
-                                <textarea required name="description"></textarea>
+                            <div class="form-group">
+                                <label>Status</label><br>
+                                <label for="status">true: </label>
+                                <input type="radio" [(ngModel)]="product.isDeleted" id="status" name="isDeleted"
+                                    [value]="true">
+                                &nbsp;
+                                <label for="status1">false: </label>
+                                <input type="radio" [(ngModel)]="product.isDeleted" checked id="status1"
+                                    name="isDeleted" [value]="false">
                             </div>
-                            <div class="form-group" >
-                                <label>Danh mục</label>
-                                <select required name="cate" class="form-control">
-                                    <option value="1">iPhone</option>
-                                    <option value="2">Samsung</option>
-                                    <option value="3">Nokia</option>
-                                    <option value="4">HTC</option>
-                                    <option value="5">LG</option>
-                                    <option value="6">Sony</option>
-                                </select>
-                            </div>
-                            <div class="form-group" >
-                                <label>Sản phẩm nổi bật</label><br>
-                                Có: <input type="radio" name="featured" value="1">
-                                Không: <input type="radio" checked name="featured" value="0">
-                            </div>
-                            <input type="submit" name="submit" value="Thêm" class="btn btn-primary">
-                            <a href="#" class="btn btn-danger">Hủy bỏ</a>
+                            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                            <a href="#" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -78,4 +93,5 @@
             </div>
         </div>
     </div>
-</div><!--/.row-->
+</div>
+<!--/.row-->
