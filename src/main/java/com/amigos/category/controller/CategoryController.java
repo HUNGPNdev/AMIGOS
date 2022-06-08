@@ -3,6 +3,7 @@ package com.amigos.category.controller;
 import com.amigos.category.CategoryService;
 import com.amigos.category.model.CategoryEntity;
 import com.amigos.common.ResponseApi;
+import com.amigos.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class CategoryController {
 
     @PostMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryEntity category) {
+    public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryDTO category) {
         return new ResponseEntity<>(service.addCategory(category), HttpStatus.OK);
     }
 
     @PatchMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> updateCategory(@RequestBody CategoryEntity category) {
+    public ResponseEntity<ResponseApi> updateCategory(@RequestBody CategoryDTO category) {
         return new ResponseEntity<>(service.updateCategory(category), HttpStatus.OK);
     }
 
