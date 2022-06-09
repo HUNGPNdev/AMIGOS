@@ -1,8 +1,8 @@
-package com.amigos.category.controller;
+package com.amigos.contact.controller;
 
-import com.amigos.category.CategoryService;
-import com.amigos.category.model.CategoryEntity;
 import com.amigos.common.ResponseApi;
+import com.amigos.contact.ContactService;
+import com.amigos.contact.model.ContactEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,29 +12,28 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("/contact")
+public class ContactController {
 
     @Autowired
-    CategoryService service;
+    ContactService service;
 
     @PostMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryEntity category) {
-        return new ResponseEntity<>(service.addCategory(category), HttpStatus.OK);
+    public ResponseEntity<ResponseApi> addContact(@RequestBody ContactEntity contact) {
+        return new ResponseEntity<>(service.addContact(contact), HttpStatus.OK);
     }
 
     @PatchMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> updateCategory(@RequestBody CategoryEntity category) {
-        return new ResponseEntity<>(service.updateCategory(category), HttpStatus.OK);
+    public ResponseEntity<ResponseApi> updateContact(@RequestBody ContactEntity contact) {
+        return new ResponseEntity<>(service.updateContact(contact), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseApi> getDetailCategory(@NotEmpty @PathVariable("id") UUID id) {
-        return ResponseEntity.ok(service.getDetailCategory(id));
+    public ResponseEntity<ResponseApi> getDetailContact(@NotEmpty @PathVariable("id") UUID id) {
+        return ResponseEntity.ok(service.getDetailContact(id));
     }
 
     @DeleteMapping("/{id}")
