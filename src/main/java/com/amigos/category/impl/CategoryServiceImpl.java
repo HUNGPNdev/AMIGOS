@@ -25,19 +25,22 @@ public class CategoryServiceImpl implements CategoryService {
     ModelMapperConfig modelMapper;
 
     @Override
-    public ResponseApi addCategory(CategoryEntity category) {
-        category.setIsDeleted(Boolean.FALSE);
-        CategoryEntity categoryEntity = categoryRepository.save(category);
-        CategoryDTO categoryDTO = modelMapper.map(categoryEntity, CategoryDTO.class);
+    public ResponseApi addCategory(CategoryDTO category) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setName(category.getName());
+        categoryEntity.setIsDeleted(Boolean.FALSE);
+        CategoryEntity rp = categoryRepository.save(categoryEntity);
+        CategoryDTO categoryDTO = modelMapper.map(rp, CategoryDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTO);
         return rs;
     }
 
     @Override
-    public ResponseApi updateCategory(CategoryEntity category) {
+    public ResponseApi updateCategory(CategoryDTO category) {
         Optional<CategoryEntity> find = categoryRepository.findById(category.getId());
         if(!find.isEmpty()) {
-            CategoryEntity categoryEntity = categoryRepository.save(category);
+            CategoryEntity model = modelMapper.map(category, CategoryEntity.class);
+            CategoryEntity categoryEntity = categoryRepository.save(model);
             CategoryDTO categoryDTO = modelMapper.map(categoryEntity, CategoryDTO.class);
             ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTO);
             return rs;
@@ -77,9 +80,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResponseApi getAll() {
-        List<CategoryDTO> categoryEntity = categoryRepository.getAll(Boolean.FALSE);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), modelMapper.mapAll(categoryEntity, CategoryDTO.class));
+    public ResponseApi getLimit() {
+        List<CategoryEntity> categoryEntity = categoryRepository.getLimit(Boolean.FALSE, 5);
+        List<CategoryDTO> categoryDTOS = modelMapper.mapAll(categoryEntity, CategoryDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getCateByCondition() {
+        List<CategoryDTO> cateByCondition = categoryRepository.getCateByCondition();
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cateByCondition);
         return rs;
     }
 

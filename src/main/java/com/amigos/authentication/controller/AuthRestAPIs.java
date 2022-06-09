@@ -6,8 +6,6 @@ import com.amigos.authentication.request.SignUpForm;
 import com.amigos.authentication.response.JwtResponse;
 import com.amigos.common.ResponseApi;
 import com.amigos.dto.UserDTO;
-import com.amigos.role.model.Role;
-import com.amigos.role.model.RoleName;
 import com.amigos.role.repository.RoleRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
@@ -66,22 +64,6 @@ public class AuthRestAPIs {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-    }
-
-    @PostMapping("/role")
-    public String createRole() {
-        Role role1 = new Role();
-        role1.setName(RoleName.ROLE_PM);
-        roleRepository.save(role1);
-        return ">>> Ok";
-
-    }
-
-    @PostMapping("/user")
-    public String createUser(@RequestBody User user) {
-        userRepository.save(user);
-        return ">>> Ok";
-
     }
 
     @PostMapping("/user-details")
