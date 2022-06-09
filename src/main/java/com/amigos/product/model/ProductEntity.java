@@ -2,9 +2,9 @@ package com.amigos.product.model;
 
 import com.amigos.category.model.CategoryEntity;
 import com.amigos.user.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,10 +12,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "category")
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class ProductEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -48,7 +49,7 @@ public class ProductEntity {
     private Boolean isDeleted;
 
     @ManyToOne
-    @JoinColumn(name = "cate_id", nullable = false)
+    @JoinColumn(name = "cate_id")
     private CategoryEntity cateId;
 
     private Date createAt;

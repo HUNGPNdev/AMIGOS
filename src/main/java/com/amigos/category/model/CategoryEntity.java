@@ -1,9 +1,10 @@
 package com.amigos.category.model;
 
 import com.amigos.product.model.ProductEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,7 +18,8 @@ import java.util.UUID;
 @Table(name = "category")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class CategoryEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
