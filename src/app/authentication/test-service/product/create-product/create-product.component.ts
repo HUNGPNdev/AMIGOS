@@ -32,48 +32,50 @@ export class CreateProductComponent implements OnInit {
     uploadData.append('product', JSON.stringify(this.product));
     console.log(uploadData.getAll('product'));
 
-    if(this.selectedImage1 != null) {
+    if (this.selectedImage1 != null) {
       uploadData.append('image_1', this.selectedImage1, this.selectedImage1.name);
     }
-    if(this.selectedImage2 != null) {
+    if (this.selectedImage2 != null) {
       uploadData.append('image_2', this.selectedImage2, this.selectedImage2.name);
     }
-    if(this.selectedImage3 != null) {
+    if (this.selectedImage3 != null) {
       uploadData.append('image_3', this.selectedImage3, this.selectedImage3.name);
     }
+
     this.createProduct(uploadData);
-    
-    
+
+
   }
 
-  createProduct(uploadData:FormData) {
-    this.productService.createProduct(uploadData).subscribe( data => {
+  createProduct(uploadData: FormData) {
+    this.productService.createProduct(uploadData).subscribe(data => {
+      this.router.navigate(['/list-product']);
     }, error => console.log(error));
   }
 
   getAllCata() {
-    this.cataService.listCategory().subscribe( data => {
+    this.cataService.listCategory().subscribe(data => {
       this.categories = data.data;
     }, error => console.log(error))
   }
 
   onChangeImage1(event) {
     var file = event.target.files[0];
-    if(file.size < 1048576) {
+    if (file.size < 1048576) {
       this.selectedImage1 = file;
     }
   }
 
   onChangeImage2(event) {
     var file = event.target.files[0];
-    if(file.size < 1048576) {
+    if (file.size < 1048576) {
       this.selectedImage2 = file;
     }
   }
 
   onChangeImage3(event) {
     var file = event.target.files[0];
-    if(file.size < 1048576) {
+    if (file.size < 1048576) {
       this.selectedImage3 = file;
     }
   }

@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Product</h1>
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">Product List</div>
+            <div class="panel-body">
+                <div class="bootstrap-table">
+                    <div class="table-responsive">
+                        <a routerLink="../create-product" class="btn btn-primary">Add Product</a>
+                        <table class="table table-bordered" style="margin-top:20px;">				
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Name</th>
+                                    <th>Provider</th>
+                                    <th>Title</th>
+                                    <th>Guarantee</th>
+                                    <th>Part</th>
+                                    <th>Description</th>
+                                    <th>Image 1</th>
+                                    <th>Image 2</th>
+                                    <th>Image 3</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of products">
+                                    <td>{{p.name}}</td>
+                                    <td>{{p.provider}}</td>
+                                    <td>{{p.title}}</td>
+                                    <td>{{p.guarantee}}</td>
+                                    <td>{{p.part}}</td>
+                                    <td>{{p.description}}</td>
+                                    <td>
+                                        <img width="70px" src="http://localhost:8081/images/{{p.image_1}}" class="thumbnail">
+                                    </td>
+                                    <td>
+                                        <img width="70px" src="http://localhost:8081/images/{{p.image_2}}" class="thumbnail">
+                                    </td>
+                                    <td>
+                                        <img width="70px" src="http://localhost:8081/images/{{p.image_3}}" class="thumbnail">
+                                    </td>
+                                    <td>{{p.isDeleted}}</td>
+                                    <td>
+                                        <a class="btn btn-warning" (click)="goToUpdate(p.id)"><i class="fa fa-pencil" aria-hidden="true"></i> update</a>
+                                        <a (click)="deleteById(p.id)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>							
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div><!--/.row-->

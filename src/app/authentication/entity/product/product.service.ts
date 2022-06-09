@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ResponseApi } from '../ResponseApi';
 import { Product } from './product';
 
 @Injectable({
@@ -15,4 +16,8 @@ export class ProductService {
   createProduct(file: any): Observable<Object> {
     return this.httpClient.post(`${this.baseUrl}`, file);
   }
+
+  getAllProduct(): Observable<ResponseApi>  {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl}`);
+  } 
 }

@@ -30,7 +30,7 @@
               <use xlink:href="#stroked-male-user"></use>
             </svg> User <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="auth/login"><svg class="glyph stroked lock">
+            <li *ngIf="!authority"><a href="auth/login"><svg class="glyph stroked lock">
                   <use xlink:href="#stroked-lock"></use>
                 </svg> Login</a>
             </li>
@@ -50,7 +50,7 @@
     <li class="active"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
           <use xlink:href="#stroked-dashboard-dial"></use>
         </svg> Home</a></li>
-    <li><a routerLink="create-product"><svg class="glyph stroked calendar">
+    <li><a routerLink="list-product"><svg class="glyph stroked calendar">
           <use xlink:href="#stroked-calendar"></use>
         </svg> Product</a></li>
     <li><a routerLink="category"><svg class="glyph stroked line-graph">
