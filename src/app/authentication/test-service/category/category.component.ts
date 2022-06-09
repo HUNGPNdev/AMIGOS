@@ -40,7 +40,7 @@ export class CategoryComponent implements OnInit {
   createCategory() {
     this.cataService.createCata(this.category).subscribe( data => {
       this.category = new Category();
-      this.id = 0;
+     
       this.getAllCata();
     }, error => console.log(error));
   }
