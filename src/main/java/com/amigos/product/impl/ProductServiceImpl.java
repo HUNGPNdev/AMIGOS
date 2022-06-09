@@ -11,12 +11,9 @@ import com.amigos.product.repository.ProductRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -24,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,6 +65,14 @@ public class ProductServiceImpl implements ProductService {
         entityCreate = productRepository.save(entityCreate);
         proD = modelMapper.map(entityCreate, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getListProduct() {
+        List<ProductEntity> products = productRepository.findAll();
+        List<ProductDTO> categoryDTOS = modelMapper.mapAll(products, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
         return rs;
     }
 

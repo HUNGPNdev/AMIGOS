@@ -28,4 +28,10 @@ public class ProductController
             @ModelAttribute("product") String product, HttpServletRequest httpServletRequest) throws IOException {
         return new ResponseEntity<>(productService.addCategory(image_1, image_2, image_3, product, httpServletRequest), HttpStatus.OK);
     }
+
+    @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> getListProduct() {
+        return new ResponseEntity<>(productService.getListProduct(), HttpStatus.OK);
+    }
 }

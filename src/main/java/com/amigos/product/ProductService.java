@@ -8,4 +8,5 @@ import java.io.IOException;
 
 public interface ProductService {
     ResponseApi addCategory(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException;
+    ResponseApi getListProduct();
 }
