@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -57,7 +59,8 @@ public class ProductServiceImpl implements ProductService {
         entityCreate.setCreateAt(new Date());
         User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
         if(createBy == null) {
-            return null;
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
         entityCreate.setUserId(createBy);
         entityCreate.setCateId(categoryRepository.findById(proD.getCateId()).get());
@@ -83,13 +86,15 @@ public class ProductServiceImpl implements ProductService {
         Optional<ProductEntity> findProduct = productRepository.findById(proD.getId());
 
         if (findProduct.isEmpty()) {
-            return null;
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
         ProductEntity productUpdate = findProduct.get();
         modelMapper.map(proD, productUpdate);
         User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
         if(createBy == null) {
-            return null;
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
         productUpdate.setUserId(createBy);
         productUpdate.setCateId(categoryRepository.findById(proD.getCateId()).get());
@@ -108,7 +113,8 @@ public class ProductServiceImpl implements ProductService {
     {
         Optional<ProductEntity> findProduct = productRepository.findById(id);
         if (findProduct.isEmpty()) {
-            return null;
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
         ProductDTO proD = modelMapper.map(findProduct.get(), ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
@@ -120,7 +126,8 @@ public class ProductServiceImpl implements ProductService {
     {
         Optional<ProductEntity> findProduct = productRepository.findById(id);
         if (findProduct.isEmpty()) {
-            return null;
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
         ProductEntity productDelete = findProduct.get();
         productDelete.setIsDeleted(Boolean.TRUE);
