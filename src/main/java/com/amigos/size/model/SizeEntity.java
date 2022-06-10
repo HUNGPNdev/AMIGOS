@@ -1,15 +1,18 @@
 package com.amigos.size.model;
 
+import com.amigos.productsize.model.ProductSizeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "category")
+@Table(name = "size")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,5 +25,6 @@ public class SizeEntity {
 
     private String name;
 
-
+    @OneToMany(mappedBy = "sizeId")
+    private List<ProductSizeEntity> productSizes = new ArrayList<>();
 }

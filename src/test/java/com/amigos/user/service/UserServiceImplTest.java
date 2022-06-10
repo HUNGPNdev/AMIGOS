@@ -124,8 +124,7 @@ public class UserServiceImplTest {
 
     @Test
     public void TestPR() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        System.out.println(date.getTime());
+        System.out.println(Boolean.valueOf("1"));
+        System.out.println(Boolean.valueOf("0"));
     }
 }
