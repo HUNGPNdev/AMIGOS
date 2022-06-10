@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/authentication/entity/category/Category';
 import { CategoryService } from 'src/app/authentication/entity/category/category.service';
 import { Product } from 'src/app/authentication/entity/product/product';
@@ -11,6 +11,9 @@ import { ProductService } from 'src/app/authentication/entity/product/product.se
 })
 export class CreateProductComponent implements OnInit {
   src = "./assets/admin/img/new_seo-10-512.png"
+  image1 = this.src;
+  image2 = this.src;
+  image3 = this.src;
 
   product: Product = new Product();
   categories: Category[];
@@ -18,19 +21,27 @@ export class CreateProductComponent implements OnInit {
   selectedImage2: any;
   selectedImage3: any;
   form: any = {};
+  id: number = 0;
 
   constructor(private cataService: CategoryService,
     private router: Router,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAllCata();
+    this.id = this.route.snapshot.params['id'];
+    console.log(this.id)
+    if (this.id != null) {
+      this.getCateById(this.id);
+    }
   }
 
   onSubmit() {
     const uploadData = new FormData();
+    this.product.id = this.id;
     uploadData.append('product', JSON.stringify(this.product));
-    console.log(uploadData.getAll('product'));
+    // console.log(uploadData.getAll('product'));
 
     if (this.selectedImage1 != null) {
       uploadData.append('image_1', this.selectedImage1, this.selectedImage1.name);
@@ -42,7 +53,11 @@ export class CreateProductComponent implements OnInit {
       uploadData.append('image_3', this.selectedImage3, this.selectedImage3.name);
     }
 
-    this.createProduct(uploadData);
+    if (this.id != null) {
+      this.updateProduct(uploadData);
+    } else {
+      this.createProduct(uploadData);
+    }
 
 
   }
@@ -50,6 +65,12 @@ export class CreateProductComponent implements OnInit {
   createProduct(uploadData: FormData) {
     this.productService.createProduct(uploadData).subscribe(data => {
       this.router.navigate(['/list-product']);
+    }, error => console.log(error));
+  }
+
+  updateProduct(uploadData: FormData) {
+    this.productService.updateProduct(uploadData).subscribe(data => {
+      alert("Updated Successfully!");
     }, error => console.log(error));
   }
 
@@ -78,5 +99,15 @@ export class CreateProductComponent implements OnInit {
     if (file.size < 1048576) {
       this.selectedImage3 = file;
     }
+  }
+
+  getCateById(id: number) {
+    this.productService.getProductById(id).subscribe(data => {
+      this.product = data.data;
+      this.image1 = "http://localhost:8081/images/" + this.product.image_1;
+      this.image2 = "http://localhost:8081/images/" + this.product.image_2;
+      this.image3 = "http://localhost:8081/images/" + this.product.image_3;
+      this.id = id;
+    })
   }
 }

@@ -17,7 +17,19 @@ export class ProductService {
     return this.httpClient.post(`${this.baseUrl}`, file);
   }
 
-  getAllProduct(): Observable<ResponseApi>  {
-    return this.httpClient.get<ResponseApi>(`${this.baseUrl}`);
+  getAllProduct(status:any): Observable<ResponseApi>  {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/status"}/${status}`);
   } 
+
+  updateProduct(file: any): Observable<Object> {
+    return this.httpClient.patch(`${this.baseUrl}`, file);
+  }
+
+  getProductById(id: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl}/${id}`);
+  }
+
+  deleteById(id: number): Observable<Object> {
+    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+  }
 }
