@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">List Size</h1>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-5 col-lg-5">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Size
+            </div>
+            <div class="panel-body">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="row" style="margin-bottom:40px">
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <label>Size Name</label>
+                                <input required type="text" [(ngModel)]="size.name" name="name"
+                                    class="form-control">
+                            </div>
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-7 col-lg-7">
+        <div class="panel panel-primary">
+            <div class="panel-heading">List Categories</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
+                </div>
+                <hr>
+                <div class="bootstrap-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th>Name</th>
+                                <th style="width:30%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let p of sizes | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
+                                <td>{{p.name}}</td>
+                                <td>
+                                    <a (click)="getSizeById(p.id)" class="btn btn-warning"><span
+                                            class="glyphicon glyphicon-edit"></span>
+                                        Update</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br><br>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->
