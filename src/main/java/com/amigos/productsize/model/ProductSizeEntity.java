@@ -31,9 +31,9 @@ public class ProductSizeEntity
 
     private double price;
 
-    private String discount;
+    private float discount;
 
-    private float count;
+    private int count;
 
     @ManyToOne
     @JoinColumn(name = "size_id")

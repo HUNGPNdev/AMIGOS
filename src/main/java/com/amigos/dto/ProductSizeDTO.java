@@ -16,9 +16,9 @@ public class ProductSizeDTO
 
     private double price;
 
-    private String discount;
+    private float discount;
 
-    private float count;
+    private int count;
 
     private UUID sizeId;
 
@@ -41,4 +41,6 @@ public class ProductSizeDTO
     private String image_3;
 
     private Boolean isDeleted;
+
+    private String sizeName;
 }

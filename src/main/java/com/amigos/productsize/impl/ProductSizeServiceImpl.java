@@ -2,7 +2,6 @@ package com.amigos.productsize.impl;
 
 import com.amigos.common.ResponseApi;
 import com.amigos.config.ModelMapperConfig;
-import com.amigos.dto.CategoryDTO;
 import com.amigos.dto.ProductSizeDTO;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.product.repository.ProductRepository;
@@ -61,35 +60,6 @@ public class ProductSizeServiceImpl implements ProductSizeService
     }
 
     @Override
-    public ResponseApi update(ProductSizeDTO productSizeDTO)
-    {
-        Optional<ProductSizeEntity> productSize = productSizeRepository.findById(productSizeDTO.getId());
-        if (productSize.isEmpty()) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        Optional<ProductEntity> product = productRepository.findById(productSizeDTO.getProductId());
-        if (product.isEmpty()) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        Optional<SizeEntity> size = sizeRepository.findById(productSizeDTO.getSizeId());
-        if (size.isEmpty()) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        ProductSizeEntity productSizeUpdate = productSize.get();
-        modelMapper.map(productSizeDTO, productSizeUpdate);
-        productSizeUpdate.setProductId(product.get());
-        productSizeUpdate.setSizeId(size.get());
-        productSizeUpdate = productSizeRepository.save(productSizeUpdate);
-
-        ProductSizeDTO productSizeResponse = modelMapper.map(productSizeUpdate, ProductSizeDTO.class);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productSizeResponse);
-        return rs;
-    }
-
-    @Override
     public ResponseApi getDetail(UUID id)
     {
         Optional<ProductSizeEntity> productSize = productSizeRepository.findById(id);
@@ -122,7 +92,7 @@ public class ProductSizeServiceImpl implements ProductSizeService
     @Override
     public ResponseApi getAllByStatus(boolean status)
     {
-        List<ProductSizeDTO> productSizeEntities = productSizeRepository.getAllByStatus(Boolean.TRUE);
+        List<ProductSizeDTO> productSizeEntities = productSizeRepository.getAllByStatus(status);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productSizeEntities);
         return rs;
     }
