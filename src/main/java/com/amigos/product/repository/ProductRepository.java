@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
     @Query("select c from ProductEntity c where c.isDeleted = ?1")
     List<ProductEntity> findAllByIsDeleted(boolean isDeleted);
+
+    @Query("select c from ProductEntity c where c.id in ?1")
+    List<ProductEntity> findAllByCateIdAndProductId(List<UUID> productIds);
 }

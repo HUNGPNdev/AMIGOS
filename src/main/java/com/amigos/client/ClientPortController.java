@@ -1,0 +1,41 @@
+package com.amigos.client;
+
+import com.amigos.category.CategoryService;
+import com.amigos.common.ResponseApi;
+import com.amigos.product.ProductService;
+import com.amigos.productsize.ProductSizeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotEmpty;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/client")
+@CrossOrigin(origins = "*", maxAge = 3600)
+public class ClientPortController {
+    @Autowired
+    CategoryService service;
+
+    @Autowired
+    ProductSizeService productSizeService;
+
+    @Autowired
+    ProductService productService;
+
+    @GetMapping("/categories")
+    public ResponseEntity<ResponseApi> getLimit() {
+        return ResponseEntity.ok(service.getLimit());
+    }
+
+    @GetMapping("/products/{cate_id}")
+    public ResponseEntity<ResponseApi> getAllProductByCateId(@NotEmpty @PathVariable("cate_id") UUID cateId) {
+        return ResponseEntity.ok(productService.getAllProductByCateId(cateId));
+    }
+
+    @GetMapping("/products-size/{product_id}")
+    public ResponseEntity<ResponseApi> findProductSizeByProductId(@NotEmpty @PathVariable("product_id") UUID productId) {
+        return ResponseEntity.ok(productSizeService.findProductSizeByProductId(productId));
+    }
+}

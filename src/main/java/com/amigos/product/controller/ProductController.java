@@ -43,7 +43,7 @@ public class ProductController
             @RequestParam(value = "image_2", required=false) MultipartFile image_2,
             @RequestParam(value = "image_3", required=false) MultipartFile image_3,
             @ModelAttribute("product") String product, HttpServletRequest httpServletRequest) throws IOException {
-        return new ResponseEntity<>(productService.updateProduct(image_1, image_2, image_3, product, httpServletRequest), HttpStatus.OK);
+        return new ResponseEntity<>(productService.addProduct(image_1, image_2, image_3, product, httpServletRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

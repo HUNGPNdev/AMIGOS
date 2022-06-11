@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +35,9 @@ public class ProductSizeServiceImpl implements ProductSizeService
 
     @Autowired
     SizeRepository sizeRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Override
     public ResponseApi addProductSize(ProductSizeDTO productSizeDTO)
@@ -96,4 +100,19 @@ public class ProductSizeServiceImpl implements ProductSizeService
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productSizeEntities);
         return rs;
     }
+
+    @Override
+    public ResponseApi getAllProductSizeByCateId(UUID cateId) {
+        List<ProductSizeDTO> productSizeEntities = productSizeRepository.getAllProductSizeByCateId(cateId);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productSizeEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi findProductSizeByProductId(UUID productId) {
+        List<ProductSizeDTO> productSizeEntities = productSizeRepository.findProductSizeByProductId(productId);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productSizeEntities);
+        return rs;
+    }
+
 }
