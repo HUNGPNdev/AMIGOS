@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './authentication/test-service/admin/admin.component';
 import { CategoryComponent } from './authentication/test-service/category/category.component';
+import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { HomeComponent } from './authentication/test-service/home/home.component';
 import { LoginComponent } from './authentication/test-service/login/login.component';
 import { PmComponent } from './authentication/test-service/pm/pm.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
     {
         path: 'create-product',
         component: CreateProductComponent
+    },
+    {
+        path: 'contact',
+        component: ContactComponent
     }
 
 ];
