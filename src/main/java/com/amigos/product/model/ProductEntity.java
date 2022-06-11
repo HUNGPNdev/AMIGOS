@@ -1,6 +1,8 @@
 package com.amigos.product.model;
 
 import com.amigos.category.model.CategoryEntity;
+import com.amigos.productsize.model.ProductSizeEntity;
+import com.amigos.size.model.SizeEntity;
 import com.amigos.user.model.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -8,7 +10,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -51,6 +55,9 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "cate_id")
     private CategoryEntity cateId;
+
+    @OneToMany(mappedBy = "productId")
+    private List<ProductSizeEntity> productSizes = new ArrayList<>();
 
     private Date createAt;
 

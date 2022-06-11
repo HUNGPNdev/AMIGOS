@@ -57,11 +57,4 @@ public class CategoryController {
         return ResponseEntity.ok(service.getCateByCondition());
     }
 
-//    @GetMapping("/{page}/{size}")
-//    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-//    public ResponseEntity<ResponseApi> getCateByCondition(@PathVariable("page") int page, @PathVariable("size") int size,
-//                                                          @RequestBody CategoryDTO cate) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        return ResponseEntity.ok(service.getCateByCondition(cate, pageable));
-//    }
 }

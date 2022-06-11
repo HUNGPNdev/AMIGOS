@@ -3,6 +3,7 @@ package com.amigos.product.impl;
 import com.amigos.authentication.jwt.JwtProvider;
 import com.amigos.category.repository.CategoryRepository;
 import com.amigos.common.ResponseApi;
+import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
 import com.amigos.dto.ProductDTO;
 import com.amigos.product.ProductService;
@@ -23,6 +24,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
+import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -48,20 +52,19 @@ public class ProductServiceImpl implements ProductService {
     UserRepository userRepository;
 
     @Override
-    public ResponseApi addCategory(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException {
+    public ResponseApi addProduct(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException {
         ProductEntity entityCreate = new ProductEntity();
         ProductDTO proD = objectMapper.readValue(product, ProductDTO.class);
         modelMapper.map(proD, entityCreate);
-        setProductImages(image_1, image_2, image_3, entityCreate);
-        entityCreate.setCateId(categoryRepository.findById(proD.getCateId()).get());
         entityCreate.setCreateAt(new Date());
-        String jwt = tokenProvider.getJwt(httpServletRequest);
-        String userName = tokenProvider.getUserNameFromJwtToken(jwt);
-        Optional<User> createBy = userRepository.findByUserName(userName);
-        if(createBy.isEmpty()) {
-            return null;
+        User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
+        if(createBy == null) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
         }
-        entityCreate.setUserId(createBy.get());
+        entityCreate.setUserId(createBy);
+        entityCreate.setCateId(categoryRepository.findById(proD.getCateId()).get());
+        setProductImages(image_1, image_2, image_3, entityCreate);
         entityCreate = productRepository.save(entityCreate);
         proD = modelMapper.map(entityCreate, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
@@ -69,10 +72,68 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseApi getListProduct() {
-        List<ProductEntity> products = productRepository.findAll();
+    public ResponseApi getListProduct(boolean status) {
+        List<ProductEntity> products = productRepository.findAllByIsDeleted(status);
         List<ProductDTO> categoryDTOS = modelMapper.mapAll(products, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi updateProduct(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException
+    {
+        ProductDTO proD = objectMapper.readValue(product, ProductDTO.class);
+        Optional<ProductEntity> findProduct = productRepository.findById(proD.getId());
+
+        if (findProduct.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        ProductEntity productUpdate = findProduct.get();
+        modelMapper.map(proD, productUpdate);
+        User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
+        if(createBy == null) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        productUpdate.setUserId(createBy);
+        productUpdate.setCateId(categoryRepository.findById(proD.getCateId()).get());
+        setProductImages(image_1, image_2, image_3, productUpdate);
+        productUpdate.setUpdateAt(new Date());
+
+        productUpdate = productRepository.save(productUpdate);
+        proD = modelMapper.map(productUpdate, ProductDTO.class);
+
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductById(UUID id)
+    {
+        Optional<ProductEntity> findProduct = productRepository.findById(id);
+        if (findProduct.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        ProductDTO proD = modelMapper.map(findProduct.get(), ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi delete(UUID id)
+    {
+        Optional<ProductEntity> findProduct = productRepository.findById(id);
+        if (findProduct.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        ProductEntity productDelete = findProduct.get();
+        productDelete.setIsDeleted(Boolean.TRUE);
+        productRepository.save(productDelete);
+        ProductDTO proD = modelMapper.map(findProduct.get(), ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
         return rs;
     }
 

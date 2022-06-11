@@ -1,6 +1,7 @@
-package com.amigos.product.repository;
+package com.amigos.size.repository;
 
 import com.amigos.product.model.ProductEntity;
+import com.amigos.size.model.SizeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,5 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
-    @Query("select c from ProductEntity c where c.isDeleted = ?1")
-    List<ProductEntity> findAllByIsDeleted(boolean isDeleted);
+public interface SizeRepository extends JpaRepository<SizeEntity, UUID> {
 }
