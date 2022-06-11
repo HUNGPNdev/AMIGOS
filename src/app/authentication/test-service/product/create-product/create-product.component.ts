@@ -31,7 +31,6 @@ export class CreateProductComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCata();
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id)
     if (this.id != null) {
       this.getCateById(this.id);
     }
@@ -53,7 +52,7 @@ export class CreateProductComponent implements OnInit {
       uploadData.append('image_3', this.selectedImage3, this.selectedImage3.name);
     }
 
-    if (this.id != null) {
+    if (this.id != 0) {
       this.updateProduct(uploadData);
     } else {
       this.createProduct(uploadData);

@@ -5,6 +5,8 @@ import { CategoryComponent } from './authentication/test-service/category/catego
 import { HomeComponent } from './authentication/test-service/home/home.component';
 import { LoginComponent } from './authentication/test-service/login/login.component';
 import { PmComponent } from './authentication/test-service/pm/pm.component';
+import { CreateProductSizeComponent } from './authentication/test-service/product-size/create-product-size/create-product-size.component';
+import { ListProductSizeComponent } from './authentication/test-service/product-size/list-product-size/list-product-size.component';
 import { CreateProductComponent } from './authentication/test-service/product/create-product/create-product.component';
 import { ListProductComponent } from './authentication/test-service/product/list-product/list-product.component';
 import { RegisterComponent } from './authentication/test-service/register/register.component';
@@ -60,6 +62,18 @@ const routes: Routes = [
     {
         path: 'size',
         component: SizeComponent
+    },
+    {
+        path: 'list-product-size',
+        component: ListProductSizeComponent
+    },
+    {
+        path: 'create-product-size',
+        component: CreateProductSizeComponent
+    },
+    {
+        path: 'update-product-size/:id',
+        component: CreateProductSizeComponent
     }
 
 ];
