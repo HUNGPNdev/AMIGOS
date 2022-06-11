@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from './authentication/entity/category/Category';
 import { CategoryService } from './authentication/entity/category/category.service';
 import { TokenStorageService } from './authentication/entity/token-storage.service';
@@ -12,7 +13,8 @@ export class AppComponent {
 
   categories: Category[];
 
-  constructor(private cataService: CategoryService) { }
+  constructor(private cataService: CategoryService,
+    private router: Router) { }
  
   ngOnInit() {
     this.getAllCata();

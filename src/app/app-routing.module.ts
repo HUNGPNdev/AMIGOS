@@ -41,7 +41,7 @@ const routes: Routes = [
     component: RegisterComponent
 },
 {
-    path: 'products',
+    path: 'products/:cateId',
     component: ProductsComponent
 },
 {

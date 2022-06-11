@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class HomeComponent implements OnInit {
 
   info: any;
  
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService,
+    private clientPortService: ClientPortService) { }
  
   ngOnInit() {
     this.info = {
@@ -25,4 +27,5 @@ export class HomeComponent implements OnInit {
     window.location.reload();
   }
 
+  
 }

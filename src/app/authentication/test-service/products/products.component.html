@@ -17,8 +17,8 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <div class="info">
-                                            <div class="name"><a href="Corner-Top-Cacti_p_9.html"
-                                                    class="link">Corner Top Cacti</a></div>
+                                            <div class="name"><a href="Corner-Top-Cacti_p_9.html" class="link">Corner
+                                                    Top Cacti</a></div>
 
                                             <div class="status">
                                                 <span class="freeshipping">Free Shipping.</span>
@@ -135,15 +135,15 @@
                 <div class="col-md-9 cat-items-grid">
 
                     <section class="breadcrumnb" aria-label="itemsgrid" role="main">
-                        <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix"
-                            role="navigation" aria-label="breadcrumbs">
+                        <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation"
+                            aria-label="breadcrumbs">
                             <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                 <meta itemprop="position" content="1" /><a href="index.html" itemprop="item"><span
                                         itemprop="name">Home</span></a>
                             </li>
                             <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                                <meta itemprop="position" content="2" /><a href="Plants_c_1.html"
-                                    itemprop="item"><span itemprop="name">Plants</span></a>
+                                <meta itemprop="position" content="2" /><a href="Plants_c_1.html" itemprop="item"><span
+                                        itemprop="name">Plants</span></a>
                             </li>
                         </ol>
                     </section>
@@ -156,8 +156,8 @@
 
 
                     <section class="category-products clearfix">
-                        <form action="https://branch-preview-com.3dcartstores.com/view_category.asp?cat=1"
-                            method="post" name="frmsortby" id="frmsortby">
+                        <form action="https://branch-preview-com.3dcartstores.com/view_category.asp?cat=1" method="post"
+                            name="frmsortby" id="frmsortby">
                             <div class="row category-toolbar">
                                 <div class="col-sm-6 clearfix">
 
@@ -180,7 +180,7 @@
                                         </a>
                                     </div>
 
-                                    <h2 class="titles">Products [5]</h2>
+                                    <h2 class="titles">Products [{{productLenght}}]</h2>
                                 </div>
                                 <div class="col-sm-6">
 
@@ -209,37 +209,26 @@
                         </form>
 
                         <div class="product-items product-items-3">
-                            <script class="slick-cloned"
-                                type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script>
-                            <div class="product-item" data-catalogid="1" data-ajaxcart="1"
+                            <!-- <script class="slick-cloned"
+                                type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
+                            <div *ngFor="let p of products" class="product-item" data-catalogid="1" data-ajaxcart="1"
                                 data-addcart-callback="addcart_callback" data-categoryid="1">
                                 <div class="img">
                                     <a href="Mezzanine-Houseplant_p_1.html">
-                                        <img src="assets/assets/images/thumbnails/prod_1_thumbnail.png"
-                                            alt="Mezzanine Houseplant" class="img-responsive" />
+                                        <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}"
+                                            alt="Mezzanine Houseplant" class="img-responsive"
+                                            style="height: 270px; width: 262;" />
                                     </a>
-
-                                    <button class="quickview" data-toggle="modal">Quick View</button>
-
+                                    <button (click)="findProductSizeByProductId(p.id)" class="quickview"
+                                        data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
                                 </div>
                                 <div class="product-content">
                                     <div class="name">
-                                        <a href="Mezzanine-Houseplant_p_1.html">Mezzanine Houseplant</a>
-                                    </div>
-                                    <div class="reviews">
-
-
-                                        <span class="reviews-stars rating-5" role="presentation"></span>
-
-
+                                        <a href="Mezzanine-Houseplant_p_1.html">{{p.name}}</a>
                                     </div>
                                     <div class="price">
-
-                                        <span class="regular-price">$13.99</span>
-
+                                        <span class="regular-price">{{p.title}}</span>
                                     </div>
-
-
                                     <div class="action">
                                         <a href="Mezzanine-Houseplant_p_1.html?quick=1&amp;item_id=1&amp;cat_id=1"
                                             class="add-to-cart btn btn-default">
@@ -248,66 +237,88 @@
                                             <span class="ajaxcart-added icon-ok"></span>
                                         </a>
                                     </div>
-
-
                                 </div>
                             </div>
-
-                            <div class="product-item" data-catalogid="2" data-ajaxcart="1"
-                                data-addcart-callback="addcart_callback" data-categoryid="1">
-                                <div class="img">
-                                    <a href="Cozy-Bloom-Shrub_p_2.html">
-                                        <img src="assets/assets/images/thumbnails/prod_2_thumbnail.png"
-                                            alt="Cozy Bloom Shrub" class="img-responsive" />
-                                    </a>
-
-                                    <button class="quickview" data-toggle="modal">Quick View</button>
-
-                                </div>
-                                <div class="product-content">
-                                    <div class="name">
-                                        <a href="Cozy-Bloom-Shrub_p_2.html">Cozy Bloom Shrub</a>
-                                    </div>
-                                    <div class="reviews">
-
-
-                                        <span class="reviews-stars rating-0" role="presentation"></span>
-
-
-                                    </div>
-                                    <div class="price">
-
-                                        <span class="regular-price">$14.99</span>
-
-                                    </div>
-
-
-                                    <div class="action">
-                                        <a href="view_cartd842.html?quick=1&amp;item_id=2&amp;cat_id=1"
-                                            class="add-to-cart btn btn-default">
-                                            <span class="buyitlink-text"> Select Options</span>
-                                            <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                                            <span class="ajaxcart-added icon-ok"></span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
                         </div>
-
                         <div class="bottom_breadcrumb">
                             <div class="paging">
-
                             </div>
                         </div>
                     </section>
-
-
                 </div>
             </div>
         </div>
     </section>
 
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{productSize.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img *ngIf="productSize.image_1"
+                                    src="http://localhost:8081/images/{{productSize.image_1}}"
+                                    style="height: 270px; width: 262;" />
+                            </div>
+                            <div class="col-md-5">
+                                <h3 itemprop="name" class="name">{{productSize.name}}</h3>
+                                <h4 itemprop="name" class="name">Your Price:&nbsp;${{price}}</h4>
+                                <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
+                                <div id="prodDetails">
+                                    <div id="divOptionsBlock" class="options sub-section">
+                                        <div class="header">
+                                            <h4 class="page_heading ">Choose Options</h4>
+                                        </div>
+                                        <div class="options-inner">
+                                            <div class="opt-regular">
+                                                <div class="opt-label">
+                                                    <label class="label">Size</label>
+                                                </div>
+                                                <div class="opt-field">
+                                                    <label class="radio-format" *ngFor="let p of productSizes">
+                                                        <label class="radio-option">
+                                                            <input type="radio" id="{{p.sizeName}}" name="size" class="customoption" value="{{p.sizeName}}">
+                                                            <span>{{p.sizeName}} </span>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix add-cart-block">
+                                        <div class="qty">
+                                            <input type="text" name="qty-0" value="1" class="form-control">
+                                        </div>
+                                        <div class="addcart">
+                                            <button type="button" class="btn btn-primary"><i class="icon-basket"></i> Add to Cart</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <a class="btn btn-link qv-moredetails"><i class="icon-search"></i> More Details</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

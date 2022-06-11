@@ -8,11 +8,11 @@ import { ResponseApi } from '../ResponseApi';
 })
 export class CategoryService {
 
-  private baseUrl = "http://localhost:8081/categories";
+  private baseUrl = "http://localhost:8081/client";
 
   constructor(private httpClient: HttpClient) { }
 
   listCategory(): Observable<ResponseApi> {
-    return this.httpClient.get<ResponseApi>(`${this.baseUrl}`);
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories"}`);
   }
 }
