@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/categories")
 @CrossOrigin(origins = "*", maxAge = 3600)
