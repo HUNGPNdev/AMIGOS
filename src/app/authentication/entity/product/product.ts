@@ -14,4 +14,5 @@ export class Product {
     cateId: number;
     createAt: Date;
     updateAt: Date;
+    cateName: string;
 }
