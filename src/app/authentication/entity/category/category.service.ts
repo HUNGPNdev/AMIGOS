@@ -15,4 +15,8 @@ export class CategoryService {
   listCategory(): Observable<ResponseApi> {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories"}`);
   }
+
+  getCateById(id: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories"}/${id}`);
+  }
 }

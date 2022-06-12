@@ -115,42 +115,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div id="modPrice" class="sidebar-widget">
-                        <h4 class="widget-header">Browse by Price</h4>
-                        <div class="widget-body">
-                            <ul class="sidebarUL" role="navigation">
-
-                                <li><a href="products_byprice_1-1-1.html">$0 - $24.99</a></li>
-                                <li><a href="products_byprice_2-1-1.html">$25 - $49.99</a></li>
-                                <li><a href="products_byprice_3-1-1.html">Over $50</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-
-
                 </aside>
 
                 <div class="col-md-9 cat-items-grid">
-
                     <section class="breadcrumnb" aria-label="itemsgrid" role="main">
-                        <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation"
-                            aria-label="breadcrumbs">
-                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                                <meta itemprop="position" content="1" /><a href="index.html" itemprop="item"><span
-                                        itemprop="name">Home</span></a>
+                        <ol class="clearfix">
+                            <li>
+                                <span>Home</span>
                             </li>
-                            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                                <meta itemprop="position" content="2" /><a href="Plants_c_1.html" itemprop="item"><span
-                                        itemprop="name">Plants</span></a>
+                            <li>
+                                <span>{{category.name}}</span>
                             </li>
                         </ol>
-                    </section>
-
-                    <section class="page_header">
-                        <h1 class="page_heading">Plants</h1>
-
                     </section>
 
 
@@ -183,8 +159,9 @@
                                     <h2 class="titles">Products [{{productLenght}}]</h2>
                                 </div>
                                 <div class="col-sm-6">
-
                                     <div class="sort-by">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            [(ngModel)]="searchText">
                                         <span> Sort by:</span>
                                         <select id="sortby" name="sortby">
                                             <option value="0"> Use Default Sorting</option>
@@ -211,7 +188,8 @@
                         <div class="product-items product-items-3">
                             <!-- <script class="slick-cloned"
                                 type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
-                            <div *ngFor="let p of products" class="product-item" data-catalogid="1" data-ajaxcart="1"
+                            <div *ngFor="let p of products  | filter:searchText"
+                                class="product-item" data-catalogid="1" data-ajaxcart="1"
                                 data-addcart-callback="addcart_callback" data-categoryid="1">
                                 <div class="img">
                                     <a href="Mezzanine-Houseplant_p_1.html">
@@ -238,6 +216,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
                             </div>
                         </div>
                         <div class="bottom_breadcrumb">
@@ -275,7 +254,9 @@
                             </div>
                             <div class="col-md-5">
                                 <h3 itemprop="name" class="name">{{productSize.name}}</h3>
-                                <h4 itemprop="name" class="name">Your Price:&nbsp;${{price}}</h4>
+                                <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSize.discount}}</h4>
+                                <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSize.price}}
+                                </div>
                                 <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
                                 <div id="prodDetails">
                                     <div id="divOptionsBlock" class="options sub-section">
@@ -291,7 +272,8 @@
                                                     <label class="radio-format" *ngFor="let p of productSizes">
                                                         <label class="radio-option">
                                                             <input type="radio" id="{{p.sizeName}}" name="size"
-                                                                class="customoption" value="{{p.sizeName}}">
+                                                                class="customoption" value="{{p.sizeName}}"
+                                                                (click)="findProductSizeBySizeName(p.sizeName)">
                                                             <span>{{p.sizeName}} </span>
                                                         </label>
                                                     </label>
