@@ -41,4 +41,6 @@ public class ProductDTO
     private Date createAt;
 
     private Date updateAt;
+
+    private String cateName;
 }

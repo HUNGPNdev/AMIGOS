@@ -16,7 +16,7 @@ import java.util.UUID;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ClientPortController {
     @Autowired
-    CategoryService service;
+    CategoryService categoryService;
 
     @Autowired
     ProductSizeService productSizeService;
@@ -26,7 +26,7 @@ public class ClientPortController {
 
     @GetMapping("/categories")
     public ResponseEntity<ResponseApi> getLimit() {
-        return ResponseEntity.ok(service.getLimit());
+        return ResponseEntity.ok(categoryService.getLimit());
     }
 
     @GetMapping("/products/{cate_id}")
@@ -37,5 +37,10 @@ public class ClientPortController {
     @GetMapping("/products-size/{product_id}")
     public ResponseEntity<ResponseApi> findProductSizeByProductId(@NotEmpty @PathVariable("product_id") UUID productId) {
         return ResponseEntity.ok(productSizeService.findProductSizeByProductId(productId));
+    }
+
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<ResponseApi> getCateById(@NotEmpty @PathVariable("id") UUID cateId) {
+        return ResponseEntity.ok(categoryService.getDetailCategory(cateId));
     }
 }

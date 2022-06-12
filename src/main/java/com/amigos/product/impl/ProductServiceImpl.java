@@ -117,9 +117,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseApi getAllProductByCateId(UUID cateId) {
         List<UUID> productIds = productSizeRepository.getProductIdByCateId(cateId);
-        List<ProductEntity> productEntities = productRepository.findAllByCateIdAndProductId(productIds);
-        List<ProductDTO> productDTOList = modelMapper.mapAll(productEntities, ProductDTO.class);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productDTOList);
+        List<ProductDTO> productEntities = productRepository.findAllByCateIdAndProductId(productIds);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;
     }
 
