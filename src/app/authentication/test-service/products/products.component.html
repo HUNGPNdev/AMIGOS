@@ -188,7 +188,7 @@
                         <div class="product-items product-items-3">
                             <!-- <script class="slick-cloned"
                                 type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
-                            <div *ngFor="let p of products  | filter:searchText"
+                            <div *ngFor="let p of products  | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}"
                                 class="product-item" data-catalogid="1" data-ajaxcart="1"
                                 data-addcart-callback="addcart_callback" data-categoryid="1">
                                 <div class="img">
@@ -216,11 +216,11 @@
                                         </a>
                                     </div>
                                 </div>
-                                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
                             </div>
                         </div>
                         <div class="bottom_breadcrumb">
                             <div class="paging">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
                             </div>
                         </div>
                     </section>

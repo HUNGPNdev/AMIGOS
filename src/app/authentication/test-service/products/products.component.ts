@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit {
   productSizes: ProductSize[];
   category: Category = new Category();
   searchText: string;
+  p:number;
 
   constructor(private clientPortService: ClientPortService,
     private cataService: CategoryService,

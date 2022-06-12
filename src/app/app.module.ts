@@ -20,6 +20,8 @@ import { BlogComponent } from './authentication/test-service/blog/blog.component
 import { AccountComponent } from './authentication/test-service/account/account.component';
 import { ShoppingCartComponent } from './authentication/test-service/shopping-cart/shopping-cart.component';
 import { DetailsComponent } from './authentication/test-service/details/details.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,12 @@ import { DetailsComponent } from './authentication/test-service/details/details.
     DetailsComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
