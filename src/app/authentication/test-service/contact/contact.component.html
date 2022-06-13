@@ -61,21 +61,20 @@
                             24 business hours.</p>
                         <div class="clearfix"></div>
                         <div class="row">
-                            <form method="post" action="https://branch-preview-com.3dcartstores.com/crm.asp"
-                                id="frmForm" name="frmForm">
+                            <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
                                 <input type="hidden" name="action" id="action" value="" />
                                 <input type="hidden" name="custid" value="0" />
                                 <input type="hidden" name="orderid" value="" />
                                 <input type="hidden" name="productid" value="[productid]" />
                                 <div class="crmField col-lg-6">
                                     <label for="customer">Name <span class="error-img required">*</span></label>
-                                    <input type="text" name="customer" value="" placeholder="Name" size="40"
+                                    <input required type="text" [(ngModel)]="contact.name" name="name" #name="ngModel" placeholder="Name" size="40"
                                         maxlength="50" tabindex="1" class="form-control txtBoxStyle" />
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="crmField col-lg-6">
                                     <label for="custemail">Email <span class="error-img required">*</span></label>
-                                    <input type="email" name="custemail" value="" placeholder="Email" size="40"
+                                    <input required type="email" [(ngModel)]="contact.email" name="email" #email="ngModel" placeholder="Email" size="40"
                                         maxlength="50" tabindex="2" class="form-control txtBoxStyle"
                                         data-parsley-trigger="change" />
                                     <div class="clearfix"></div>
@@ -83,74 +82,25 @@
                                 <div class="clearfix"></div>
                                 <div class="crmField col-lg-6">
                                     <label for="phone">Phone <span class="error-img required">*</span></label>
-                                    <input type="text" name="phone" value="" placeholder="Phone" size="40"
+                                    <input required type="text" [(ngModel)]="contact.phone" name="phone" #phone="ngModel" placeholder="Phone" size="40"
                                         maxlength="50" tabindex="3" class="form-control txtBoxStyle" />
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="crmField col-lg-12">
-                                    <label for="departmentid">Department</label>
-                                    <select name="departmentid" id="departmentid" tabindex="4"
-                                        class="form-control txtBoxStyle">
-                                        <option value='1'>General</option>
-                                        <option value='2'>Sales</option>
-                                    </select>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="crmField col-lg-12">
+                                <!-- <div class="crmField col-lg-12">
                                     <label for="subject">Subject <span class="error-img required">*</span></label>
-                                    <input name="subject" type="text" id="subject" value="" placeholder="Subject *"
+                                    <input required [(ngModel)]="contact.title" name="title" #title="ngModel" type="text" placeholder="Subject *"
                                         size="40" maxlength="150" tabindex="5" class="form-control txtBoxStyle" />
                                     <div class="clearfix"></div>
-                                </div>
+                                </div> -->
                                 <div class="crmField col-lg-12">
-                                    <label for="reply">Message <span class="error-img required">*</span></label>
-                                    <textarea name="reply" id="reply" tabindex="6" class="form-control txtBoxStyle"
+                                    <label for="reply">Subject <span class="error-img required">*</span></label>
+                                    <textarea required [(ngModel)]="contact.title" name="title" #title="ngModel" tabindex="6" class="form-control txtBoxStyle"
                                         data-parsley-trigger="keyup" placeholder="Message"></textarea>
                                     <div class="clearfix"></div>
                                 </div>
-
                                 <div class="crmField col-lg-12">
-                                    <div class="file-attachments-button">
-                                        <span class="btn fileinput-button btn-default">
-                                            <i class="icon-plus"></i>
-                                            <span>Select files...</span>
-
-                                            <input id="fileupload" type="file" name="files[]" multiple=""
-                                                data-url="/filesaction.asp?action=upload&folder=temp&hid=7P5kEPySxBG/FpQtP8W8Km18cJ4NExBUSwi1KQlTFtk="
-                                                onclick='fnCountReset();'>
-                                        </span>
-                                    </div>
-                                    <p></p>
-                                    <div id="progress">
-                                        <div class="bar" style="width: 0%;"></div>
-                                    </div>
-
-                                    <div id="files" class="files-to-upload"></div>
-                                    <input id="fileattachment" name="fileattachment" type="hidden" />
-                                    <p id="allelements"></p>
-                                </div>
-
-
-                                <div class="clearfix"></div>
-
-
-                                <div class="clearfix"></div>
-                                <div id="divSubmitButton" class="crmField col-lg-12">
-                                    <script data-cfasync="false"
-                                        src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-                                    <script>
-                                        function submitted_onclick() {
-                                            if (ValidateForm(frmForm)) {
-                                                if ('[recaptcha_robot_size]' == 'invisible')
-                                                    grecaptcha.execute();
-                                                else {
-                                                    submitFormContactUs('addnew');
-                                                }
-                                            }
-                                        }
-                                    </script>
-                                    <button type="button" class="btn btn-default btn-inverse"
-                                        onclick="return submitted_onclick();">Submit Request</button>
+                                    <button class="btn btn-default btn-inverse"
+                                        >Submit Request</button>
                                 </div>
                             </form>
                             <div class="clearfix"></div>

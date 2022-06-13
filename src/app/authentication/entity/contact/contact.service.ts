@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ResponseApi } from "../ResponseApi";
+import { Contact } from "./Contact";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ import { ResponseApi } from "../ResponseApi";
   
     constructor(private httpClient: HttpClient) { }
   
-    listCategory(): Observable<ResponseApi> {
-      return this.httpClient.get<ResponseApi>(`${this.baseUrl}`);
-    }
+    createContact(contact: Contact): Observable<Object> {
+        return this.httpClient.post(`${this.baseUrl}`, contact);
+      }
   }
