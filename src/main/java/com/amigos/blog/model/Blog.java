@@ -1,8 +1,7 @@
 package com.amigos.blog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.amigos.user.model.User;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +12,8 @@ import java.util.UUID;
 @Table(name = "blog")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Blog {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -24,17 +24,9 @@ public class Blog {
     private String image;
     private  String description;
     private String title;
+    @Column(name = "user_id")
     private UUID userId;
+
     private Boolean is_deleted;
     private Date create_at;
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    @Id
-    public UUID getId() {
-        return id;
-    }
-
-
 }
