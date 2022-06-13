@@ -22,18 +22,22 @@
             <div class="product-cols row">
                 <div class="col-md-6">
                     <div id="main-image" class="main-image text-center">
-                        <img src="http://localhost:8081/images/{{productSize.image_1}}" style="width: 570px; height: 554px;" />
+                        <img src="http://localhost:8081/images/{{productSize.image_1}}"
+                            style="width: 570px; height: 554px;" />
                     </div>
                     <div class="col-md-3 ">
-                        <img src="http://localhost:8081/images/{{productSize.image_2}}" style="width: 108px; height: 108px;" />
+                        <img src="http://localhost:8081/images/{{productSize.image_2}}"
+                            style="width: 108px; height: 108px;" />
                     </div>
                     <div class="col-md-3">
-                        <img src="http://localhost:8081/images/{{productSize.image_3}}" style="width: 108px; height: 108px;"/>
+                        <img src="http://localhost:8081/images/{{productSize.image_3}}"
+                            style="width: 108px; height: 108px;" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="product-details">
-                        <h1 itemprop="name" class="page_headers" aria-label="productname" role="main">{{productSize.name}}</h1>
+                        <h1 itemprop="name" class="page_headers" aria-label="productname" role="main">
+                            {{productSize.name}}</h1>
                         <div class="product-reviews">
                             <span class="reviews" itemprop="aggregateRating" itemscope
                                 itemtype="http://schema.org/AggregateRating">
@@ -57,7 +61,8 @@
                                 <span id="price">${{productSize.discount}}</span>
                                 <meta itemprop="price" content="14.99" />
                             </div>
-                            <div class="retailprice" aria-label="retail price">Retail Price:<span>$${{productSize.price}}</span>
+                            <div class="retailprice" aria-label="retail price">Retail
+                                Price:<span>$${{productSize.price}}</span>
                             </div>
                         </div>
                         <div class="product-id"><strong>Parts:</strong> {{productSize.part}}</div>
@@ -77,8 +82,8 @@
                                     <div class="opt-field">
                                         <label class="radio-format" *ngFor="let p of productSizes">
                                             <label class="radio-option">
-                                                <input type="radio" id="{{p.sizeName}}" name="size"
-                                                    class="customoption" value="{{p.sizeName}}"
+                                                <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                                    value="{{p.sizeName}}"
                                                     (click)="findProductSizeBySizeName(p.sizeName)">
                                                 <span>{{p.sizeName}} </span>
                                             </label>
@@ -92,7 +97,8 @@
                             <div class="qtybox-addcart form-group">
                                 <label>Quantity</label>
                                 <label class="qty-input">
-                                    <input type="number" name="qty-0" value="1" class="form-control" min="1" />
+                                    <input type="number" name="qty-0" value="{{quantity}}" class="form-control"
+                                        min="{{quantity}}" />
                                 </label>
                                 <button type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
                                         class="icon-basket" role="presentation"></i> Add to Cart</button>
@@ -116,20 +122,18 @@
                     <h2 class="page_heading">Related Items</h2>
                 </div>
                 <div class="product-items product-items-4">
-                    <script class="slick-cloned"
-                        type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script>
-                    <div class="product-item" data-catalogid="1" data-ajaxcart="1"
+                    <div *ngFor="let p of products" class="product-item" data-catalogid="1" data-ajaxcart="1"
                         data-addcart-callback="addcart_callback" data-categoryid="0">
                         <div class="img">
-                            <a href="Mezzanine-Houseplant_p_1.html">
-                                <img src="assets/assets/images/thumbnails/prod_1_thumbnail.png"
-                                    alt="Mezzanine Houseplant" class="img-responsive" />
+                            <a href="details/{{p.id}}">
+                                <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}"
+                                    style="height: 270px; width: 262;" class="img-responsive" />
                             </a>
-                            <button class="quickview" data-toggle="modal">Quick View</button>
+                            <button (click)="findProductSizeByProductIdModel(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
                         </div>
                         <div class="product-content">
                             <div class="name">
-                                <a href="Mezzanine-Houseplant_p_1.html">Mezzanine Houseplant</a>
+                                <a href="details/{{p.id}}">{{p.name}}</a>
                             </div>
                             <div class="reviews">
                                 <span class="reviews-stars rating-5" role="presentation"></span>
@@ -153,14 +157,79 @@
     </section>
 
 
-
-    <div id="help-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="false">
-        <div class="modal-dialog" role="document">
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{productSizeModel.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                    <iframe id="helpIframe" src="#"></iframe>
+                    <div class="container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img *ngIf="productSizeModel.image_1"
+                                        src="http://localhost:8081/images/{{productSizeModel.image_1}}"
+                                        style="height: 270px; width: 262;" />
+                                </div>
+                                <div class="col-md-5">
+                                    <h3 itemprop="name" class="name">{{productSizeModel.name}}</h3>
+                                    <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSizeModel.discount}}</h4>
+                                    <div style="text-decoration: line-through;">Retail
+                                        Price:&nbsp;${{productSizeModel.price}}
+                                    </div>
+                                    <h4><b>Provider:</b>&nbsp;{{productSizeModel.provider}}</h4><br>
+                                    <div id="prodDetails">
+                                        <div id="divOptionsBlock" class="options sub-section">
+                                            <div class="header">
+                                                <h4 class="page_heading ">Choose Options</h4>
+                                            </div>
+                                            <div class="options-inner">
+                                                <div class="opt-regular">
+                                                    <div class="opt-label">
+                                                        <label class="label">Size</label>
+                                                    </div>
+                                                    <div class="opt-field">
+                                                        <label class="radio-format" *ngFor="let p of productSizeModels">
+                                                            <label class="radio-option">
+                                                                <input type="radio" id="{{p.sizeName}}" name="size"
+                                                                    class="customoption" value="{{p.sizeName}}"
+                                                                    (click)="findProductSizeBySizeNameModel(p.sizeName)">
+                                                                <span>{{p.sizeName}} </span>
+                                                            </label>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix add-cart-block">
+                                            <div class="qty">
+                                                <input type="text" name="qty-0" value="1" class="form-control">
+                                            </div>
+                                            <div class="addcart">
+                                                <button type="button" class="btn btn-primary"><i
+                                                        class="icon-basket"></i>
+                                                    Add to Cart</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <a class="btn btn-link qv-moredetails"><i class="icon-search"></i> More
+                                                Details</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>

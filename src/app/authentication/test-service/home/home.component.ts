@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
+import { Product } from '../../entity/client-port/product';
+import { ProductSize } from '../../entity/client-port/product-size';
 import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-
+  productNewReleases: Product[];
+  productFeaturedProducts: Product[];
   info: any;
- 
+  productSize: ProductSize = new ProductSize();
+  productSizes: ProductSize[];
+
   constructor(private token: TokenStorageService,
     private clientPortService: ClientPortService) { }
  
@@ -20,6 +24,8 @@ export class HomeComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.getProductFeaturedProducts();
+    this.getProductNewReleases();
   }
  
   logout() {
@@ -27,5 +33,33 @@ export class HomeComponent implements OnInit {
     window.location.reload();
   }
 
-  
+  getProductNewReleases() {
+    var limit = 4;
+    this.clientPortService.getProductNewReleases(limit).subscribe( data => {
+      this.productNewReleases = data.data;
+    }, error => console.log(error))
+  }
+
+  findProductSizeBySizeName(sizeName: String) {
+    for(var i=0; i<= this.productSizes.length; i++) {
+      if(this.productSizes[i].sizeName == sizeName) {
+        this.productSize = this.productSizes[i];
+        break;
+      }
+    }
+  }
+
+  findProductSizeByProductId(id: number) {
+    this.clientPortService.findProductSizeByProductId(id).subscribe( data => {
+      this.productSizes = data.data;
+      this.productSize = this.productSizes[0];
+    }, error => console.log(error))
+  }
+
+  getProductFeaturedProducts() {
+    var limit = 8;
+    this.clientPortService.getProductNewReleases(limit).subscribe( data => {
+      this.productFeaturedProducts = data.data;
+    }, error => console.log(error))
+  }
 }

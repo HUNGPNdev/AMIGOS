@@ -23,4 +23,11 @@ export class ClientPortService {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products-size/limit"}/${limit}`);
   }
 
+  getProductRelatedItem(limit: any, cateId: number, productId: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products/"+productId+"/cateId/"+cateId+"/limit/"+limit}`);
+  }
+
+  getProductFeaturedProducts(limit: any): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products/featured/limit"}/${limit}`);
+  }
 }
