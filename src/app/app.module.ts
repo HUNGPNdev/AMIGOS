@@ -2,8 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-// import { Ng2SearchPipeModule } from 'ng2-search-filter';
-//  import { NgxPaginationModule } from 'ngx-pagination';
+ import { Ng2SearchPipeModule } from 'ng2-search-filter';
+  import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,8 @@ import { ListProductComponent } from './authentication/test-service/product/list
 import { SizeComponent } from './authentication/test-service/size/size.component';
 import { CreateProductSizeComponent } from './authentication/test-service/product-size/create-product-size/create-product-size.component';
 import { ListProductSizeComponent } from './authentication/test-service/product-size/list-product-size/list-product-size.component';
+import { CreateBlogComponent } from './authentication/test-service/blog/create-blog/create-blog.component';
+import { ListBlogComponent } from './authentication/test-service/blog/list-blog/list-blog.component';
 
 @NgModule({
   declarations: [
@@ -35,15 +37,17 @@ import { ListProductSizeComponent } from './authentication/test-service/product-
     ListProductComponent,
     SizeComponent,
     CreateProductSizeComponent,
-    ListProductSizeComponent
+    ListProductSizeComponent,
+    CreateBlogComponent,
+    ListBlogComponent
   ],
   imports: [
-   // NgxPaginationModule,
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-  //  Ng2SearchPipeModule
+   Ng2SearchPipeModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
