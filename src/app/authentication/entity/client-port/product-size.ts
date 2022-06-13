@@ -16,4 +16,6 @@ export class ProductSize {
     image_3: string;
     isDeleted: boolean;
     sizeName: string;
+    cateName: string;
+    cateId: number;
 }

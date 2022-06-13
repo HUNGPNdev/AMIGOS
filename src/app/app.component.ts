@@ -21,7 +21,8 @@ export class AppComponent {
   }
 
   getAllCata() {
-    this.cataService.listCategory().subscribe( data => {
+    var limit = 5;
+    this.cataService.listCategory(limit).subscribe( data => {
       this.categories = data.data;
     }, error => console.log(error))
   }

@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   productLenght: number;
   productSize: ProductSize = new ProductSize();
   productSizes: ProductSize[];
+  productNewReleases: Product[];
   category: Category = new Category();
   searchText: string;
   p:number;
@@ -29,6 +30,7 @@ export class ProductsComponent implements OnInit {
     this.cateId = this.route.snapshot.params['cateId'];
     this.getCateById();
     this.getAllProductByCateId();
+    this.getProductNewReleases();
   }
 
   getAllProductByCateId() {
@@ -58,5 +60,12 @@ export class ProductsComponent implements OnInit {
     this.cataService.getCateById(this.cateId).subscribe( data => {
       this.category = data.data;
     })
+  }
+
+  getProductNewReleases() {
+    var limit = 5;
+    this.clientPortService.getProductNewReleases(limit).subscribe( data => {
+      this.productNewReleases = data.data;
+    }, error => console.log(error))
   }
 }

@@ -7,76 +7,20 @@
 
                     <div id="modNewReleases" class="sidebar-widget">
                         <h4 class="widget-header">New Releases</h4>
-                        <div class="widget-body">
-                            <div class="new-release-item new-releases-item-first product-item">
+                        <div class="widget-body" *ngFor="let p of productNewReleases">
+                            <div class="new-release-item product-item" >
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        <div class="img"><a href="Corner-Top-Cacti_p_9.html"><img
-                                                    src="assets/assets/images/thumbnails/prod_8_thumbnail.png"
-                                                    alt="Corner Top Cacti" class="img-responsive" /></a></div>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <div class="info">
-                                            <div class="name"><a href="Corner-Top-Cacti_p_9.html" class="link">Corner
-                                                    Top Cacti</a></div>
-
-                                            <div class="status">
-                                                <span class="freeshipping">Free Shipping.</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <del class="regular-price" aria-label="regular price">$25.99</del>
-                                                <span class="sale-price">$24.99</span>
-                                            </div>
-
-                                            <div class="reviews">
-                                                <span class="reviews-stars rating-0" role="presentation"></span>
-                                                <span class="reviews-count">(0)</span>
-                                            </div>
-
+                                        <div class="img"><a href="Ficus-Altissima_p_7.html">
+                                            <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}" class="img-responsive" /></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="new-release-item product-item">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <div class="img"><a href="Pearl-Succulent_p_8.html"><img
-                                                    src="assets/assets/images/thumbnails/prod_7_thumbnail.png"
-                                                    alt="Pearl Succulent" class="img-responsive" /></a></div>
-                                    </div>
                                     <div class="col-xs-8">
                                         <div class="info">
-                                            <div class="name"><a href="Pearl-Succulent_p_8.html" class="link">Pearl
-                                                    Succulent</a></div>
+                                            <div class="name"><a href="Ficus-Altissima_p_7.html" class="link">{{p.name}}</a></div>
 
                                             <div class="price">
-                                                <span class="regular-price">$23.99</span>
-                                            </div>
-
-                                            <div class="reviews">
-                                                <span class="reviews-stars rating-0" role="presentation"></span>
-                                                <span class="reviews-count">(0)</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="new-release-item product-item">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <div class="img"><a href="Ficus-Altissima_p_7.html"><img
-                                                    src="assets/assets/images/thumbnails/prod_6_thumbnail.png"
-                                                    alt="Ficus Altissima" class="img-responsive" /></a></div>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <div class="info">
-                                            <div class="name"><a href="Ficus-Altissima_p_7.html" class="link">Ficus
-                                                    Altissima</a></div>
-
-                                            <div class="price">
-                                                <span class="regular-price">$20.99</span>
+                                                <span class="regular-price">{{p.cateName}}</span>
                                             </div>
 
                                             <div class="reviews">
@@ -88,36 +32,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="new-release-item product-item">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <div class="img"><a href="Terracota-Succulent_p_6.html"><img
-                                                    src="assets/assets/images/thumbnails/prod_5_thumbnail.png"
-                                                    alt="Terracota Succulent" class="img-responsive" /></a></div>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <div class="info">
-                                            <div class="name"><a href="Terracota-Succulent_p_6.html"
-                                                    class="link">Terracota Succulent</a></div>
-
-                                            <div class="price">
-                                                <span class="regular-price">$18.99</span>
-                                            </div>
-
-                                            <div class="reviews">
-                                                <span class="reviews-stars rating-0" role="presentation"></span>
-                                                <span class="reviews-count">(0)</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </aside>
 
-                <div class="col-md-9 cat-items-grid">
+                <div class="col-md-9">
                     <section class="breadcrumnb" aria-label="itemsgrid" role="main">
                         <ol class="clearfix">
                             <li>
@@ -160,8 +79,6 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="sort-by">
-                                        <input type="text" class="form-control" placeholder="Search..."
-                                            [(ngModel)]="searchText">
                                         <span> Sort by:</span>
                                         <select id="sortby" name="sortby">
                                             <option value="0"> Use Default Sorting</option>
@@ -186,9 +103,7 @@
                         </form>
 
                         <div class="product-items product-items-3">
-                            <!-- <script class="slick-cloned"
-                                type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
-                            <div *ngFor="let p of products  | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}"
+                            <div *ngFor="let p of products | paginate: {itemsPerPage: 6,currentPage: p}"
                                 class="product-item" data-catalogid="1" data-ajaxcart="1"
                                 data-addcart-callback="addcart_callback" data-categoryid="1">
                                 <div class="img">
@@ -202,7 +117,7 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="name">
-                                        <a href="Mezzanine-Houseplant_p_1.html">{{p.name}}</a>
+                                        <a href="details/{{p.id}}">{{p.name}}</a>
                                     </div>
                                     <div class="price">
                                         <span class="regular-price">{{p.title}}</span>

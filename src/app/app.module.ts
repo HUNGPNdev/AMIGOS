@@ -14,7 +14,6 @@ import { RegisterComponent } from './authentication/test-service/register/regist
 import { UserComponent } from './authentication/test-service/user/user.component';
 import { ProductsComponent } from './authentication/test-service/products/products.component';
 import { AboutComponent } from './authentication/test-service/about/about.component';
-import { GiftRegistriesComponent } from './authentication/test-service/gift-registries/gift-registries.component';
 import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { BlogComponent } from './authentication/test-service/blog/blog.component';
 import { AccountComponent } from './authentication/test-service/account/account.component';
@@ -34,7 +33,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UserComponent,
     ProductsComponent,
     AboutComponent,
-    GiftRegistriesComponent,
     ContactComponent,
     BlogComponent,
     AccountComponent,

@@ -4,922 +4,151 @@
         <div class="container">
             <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation"
                 aria-label="breadcrumbs">
-                <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                    <meta itemprop="position" content="1" /><a href="index.html" itemprop="item"><span
-                            itemprop="name">Home</span></a>
+                <li>
+                    <a routerLink="home">Home</a>
                 </li>
-                <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                    <meta itemprop="position" content="2" /><a href="Plants_c_1.html" itemprop="item"><span
-                            itemprop="name">Plants</span></a>
+                <li>
+                    <a href="products/{{productSize.cateId}}">{{productSize.cateName}}</a>
                 </li>
-                <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                    <meta itemprop="position" content="10" /><a href="Cozy-Bloom-Shrub_p_2.html"
-                        itemprop="item"><span itemprop="name">Cozy Bloom Shrub</span></a>
+                <li>
+                    <b>{{productSize.name}}</b>
                 </li>
             </ol>
         </div>
     </section>
 
-
-
-
-    <section id="listing" class="listing-page-content page-content" itemscope itemtype="http://schema.org/Product">
+    <section id="listing" class="listing-page-content page-content">
         <div class="container">
-            <form enctype="multipart/form-data" method="post"
-                action="https://branch-preview-com.3dcartstores.com/add_cart.asp" name="add" id="add">
-                <input type="hidden" name="item_id" id="catalogid" value="2" />
-                <input type="hidden" name="itemid" id="itemid" value="SAMPLE-1002" />
-                <input type="hidden" name="category_id" value="1" />
-                <input type="hidden" name="customPoints" id="customPoints" value="[customPoints]" />
-                <input type="hidden" name="pointsMultiplier" id="pointsMultiplier" value="[pointsMultiplier]" />
-                <input type="hidden" name="productRewardDesc" id="productRewardDesc" value="[productRewardDesc]" />
-                <input type="hidden" id="product_url"
-                    value="https://branch-preview-com.3dcartstores.com/Cozy-Bloom-Shrub_p_2.html" />
-                <input type="hidden" id="allowbackorder" value="1" />
-                <input type="hidden" id="allowadvancedoption_waitlist" value="0" />
-                <input type="hidden" id="has_rules" value="0" />
-                <input type="hidden" id="currency" value="$" />
-                <input type="hidden" id="prod_decimal_places" value="2" />
-                <input type="hidden" name="itemid_advancedoption" id="itemid_advancedoption" value="" />
-                <input type="hidden" id="availability_itemprop" value="In Stock." />
-                <input type="hidden" id="productAvailability-Instock" value="In Stock." />
-                <input type="hidden" id="productAvailability-Outofstock" value="Out of Stock." />
-                <input type="hidden" id="productAvailability-Backorder" value="Back Order." />
-                <meta itemprop="brand" content="" />
-                <meta itemprop="mpn" content="" />
-                <div class="prev-next clearfix">
-
-
+            <div class="product-cols row">
+                <div class="col-md-6">
+                    <div id="main-image" class="main-image text-center">
+                        <img src="http://localhost:8081/images/{{productSize.image_1}}" style="width: 570px; height: 554px;" />
+                    </div>
+                    <div class="col-md-3 ">
+                        <img src="http://localhost:8081/images/{{productSize.image_2}}" style="width: 108px; height: 108px;" />
+                    </div>
+                    <div class="col-md-3">
+                        <img src="http://localhost:8081/images/{{productSize.image_3}}" style="width: 108px; height: 108px;"/>
+                    </div>
                 </div>
-                <div class="product-cols row">
-                    <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="product-details">
+                        <h1 itemprop="name" class="page_headers" aria-label="productname" role="main">{{productSize.name}}</h1>
+                        <div class="product-reviews">
+                            <span class="reviews" itemprop="aggregateRating" itemscope
+                                itemtype="http://schema.org/AggregateRating">
+                                <span class="reviews-stars rating-0"></span>
+                                <span class="reviews-count">
+                                    <a id="review_count" href="#tab-4"><span itemprop="reviewCount">0</span>
+                                        Review(s)</a>
+                                </span>
+                                <span class="hidden review-meta">
+                                    <span itemprop="ratingValue">0</span>
+                                    <span itemprop="worstRating">0</span>
+                                    <span itemprop="bestRating">5</span>
+                                </span>
+                            </span>
+                        </div>
 
-                        <div id="main-image" class="main-image text-center">
-                            <a href="assets/assets/images/prod_2.png" class="MagicZoomPlus" id="listing_main_image_link"
-                                title="" data-options="zoomCaption: bottom;">
-                                <img itemprop="image"
-                                    src="assets/assets/images/thumbnail9618.png?file=assets/assets/images/prod_2.png&amp;maxx=572&amp;maxy=0"
-                                    id="large" alt="" class="img-responsive" />
+
+                        <div class="pricingBlock">
+                            <div class="yourprice price">
+                                Your Price:
+                                <span id="price">${{productSize.discount}}</span>
+                                <meta itemprop="price" content="14.99" />
+                            </div>
+                            <div class="retailprice" aria-label="retail price">Retail Price:<span>$${{productSize.price}}</span>
+                            </div>
+                        </div>
+                        <div class="product-id"><strong>Parts:</strong> {{productSize.part}}</div>
+                        <div class="product-id"><strong>Guarantee:</strong> {{productSize.guarantee}}</div>
+                        <div class="product-id"><strong>Provider:</strong> {{productSize.provider}}</div>
+                        <div class="product-id"><strong>Title:</strong> {{productSize.title}}</div>
+                        <div id="divOptionsBlock" class="options sub-section">
+                            <div class="header">
+                                <h4 class="page_heading ">Choose Options</h4>
+                            </div>
+                            <div class="options-inner">
+
+                                <div class="opt-regular">
+                                    <div class="opt-label">
+                                        <label class="label">Size</label>
+                                    </div>
+                                    <div class="opt-field">
+                                        <label class="radio-format" *ngFor="let p of productSizes">
+                                            <label class="radio-option">
+                                                <input type="radio" id="{{p.sizeName}}" name="size"
+                                                    class="customoption" value="{{p.sizeName}}"
+                                                    (click)="findProductSizeBySizeName(p.sizeName)">
+                                                <span>{{p.sizeName}} </span>
+                                            </label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="addToCartBlock sub-section">
+                            <div class="qtybox-addcart form-group">
+                                <label>Quantity</label>
+                                <label class="qty-input">
+                                    <input type="number" name="qty-0" value="1" class="form-control" min="1" />
+                                </label>
+                                <button type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
+                                        class="icon-basket" role="presentation"></i> Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="rTabs" class="rTabs">
+                <div class="card-header">
+                    <h3>Description</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{productSize.description}}</p>
+                    </blockquote>
+                </div>
+            </div><br><br><br>
+            <div class="relatedBlock sub-section">
+                <div class="header">
+                    <h2 class="page_heading">Related Items</h2>
+                </div>
+                <div class="product-items product-items-4">
+                    <script class="slick-cloned"
+                        type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script>
+                    <div class="product-item" data-catalogid="1" data-ajaxcart="1"
+                        data-addcart-callback="addcart_callback" data-categoryid="0">
+                        <div class="img">
+                            <a href="Mezzanine-Houseplant_p_1.html">
+                                <img src="assets/assets/images/thumbnails/prod_1_thumbnail.png"
+                                    alt="Mezzanine Houseplant" class="img-responsive" />
                             </a>
-                            <div name="imagecaptiont" title="" id="imagecaptiont" class="imagecaptiont"></div>
+                            <button class="quickview" data-toggle="modal">Quick View</button>
                         </div>
-
-
-                        <div id="addl-images" class="addl-images">
-                            <div class="flexslider" role="region" aria-label="Carousel">
-                                <ul class="slides">
-
-
-                                    <li class="prod-thumb image1">
-                                        <a data-zoom-id="listing_main_image_link" href="assets/assets/images/prod_2.png"
-                                            title="">
-                                            <img src="assets/assets/images/thumbnailfdc2.png?file=assets/assets/images/prod_2.png&amp;maxx=108&amp;maxy=108"
-                                                alt="" />
-                                        </a>
-                                    </li>
-
-
-                                    <li class="prod-thumb image2">
-                                        <a data-zoom-id="listing_main_image_link" href="assets/assets/assets/images/prod_2.png"
-                                            title=" ">
-                                            <img src="assets/assets/images/thumbnailfdc2.png?file=assets/assets/images/prod_2.png&amp;maxx=108&amp;maxy=108"
-                                                alt=" " />
-                                        </a>
-                                    </li>
-                                </ul>
+                        <div class="product-content">
+                            <div class="name">
+                                <a href="Mezzanine-Houseplant_p_1.html">Mezzanine Houseplant</a>
                             </div>
-                        </div>
-                        <div class="special-actions text-center">
-
-
-                            <span class="special-action addGiftRegistry">
-                                <button type="button" class="btn btn-link"
-                                    onclick="javascript:add_giftregistry();"><i class="icon-gift"
-                                        role="presentation"></i> Add to Gift Registry</button>
-                            </span>
-
-
-                            <span class="special-action email_friend">
-                                <button type="button" class="btn btn-link" onclick="javascript:showRecFriend();"><i
-                                        class="icon-paper-plane" role="presentation"></i> Email a friend</button>
-                            </span>
-                            <aside id="recommendafriend-modal"
-                                class="recommendafriend recommendafriend-modal modal text-left" tabindex="-1"
-                                role="dialog" style="z-index:9999">
-                                <div class="modal-vcenter">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content ajax-modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close"><span
-                                                        aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">Email a Friend</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Please complete the fields below to send your friend a link to
-                                                    this product. Your friend will receive an email from you with a
-                                                    link to our site.</p>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="visitorname" class="small-label">Your Name:
-                                                                <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" id="visitorname"
-                                                                value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="visitormail" class="small-label">Your Email:
-                                                                <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" id="visitormail"
-                                                                value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="friendname" class="small-label">Friend's
-                                                                Name: <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" id="friendname"
-                                                                value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="friendmail" class="small-label">Friend's
-                                                                Email: <span class="required">*</span></label>
-                                                            <input type="text" class="form-control" id="friendmail"
-                                                                value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="message" class="small-label">Note to
-                                                                friend:: <span class="required">*</span></label>
-                                                            <textarea id="recommendafriend-message" rows="3"
-                                                                class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-
-
-                                                            <div id="recommendafriend-recaptchaRobot"
-                                                                class="recaptchaRobot"
-                                                                data-sitekey="6Lf9BBkUAAAAAJoQH1mGjLuPIra-ZcFwPoZfFtkJ"
-                                                                data-size="invisible" data-type="image"
-                                                                data-theme="light"
-                                                                data-callback="recommendaFriendRequest_invisible">
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                                <button id="recommendafriend_button" type="button"
-                                                    class="btn btn-default btn-inverse">Recommend!</button>
-                                            </div>
-                                            <div class="loading-overlay">
-                                                <span class="modal-ajaxload icon-spin2 animate-spin"></span>
-                                            </div>
-                                            <div class="modal-response">
-                                                <div class="modal-resout">
-                                                    <div class="modal-resin recommendafriend-item">
-                                                        <p>Thank you for recommending this product.</p>
-                                                        <div class="modal-resacts">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </aside>
-
-
-                        </div>
-
-                        <div class="social-bookmarking">
-
-                            <script type="text/javascript"
-                                src="js/addthis_widget.js#pubid=xa-5350364935e4f191"></script>
-                            <script type="text/javascript">
-                                addthis.layers({
-                                    'theme': 'transparent',
-                                    'share': {
-                                        'position': 'left',
-                                        'numPreferredServices': 5
-                                    }
-                                });
-                            </script>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="product-details">
-
-
-                            <h1 itemprop="name" class="page_headers" aria-label="productname" role="main">Cozy Bloom
-                                Shrub</h1>
-                            <div class="product-reviews">
-
-                                <span class="reviews" itemprop="aggregateRating" itemscope
-                                    itemtype="http://schema.org/AggregateRating">
-                                    <span class="reviews-stars rating-0"></span>
-                                    <span class="reviews-count">
-                                        <a id="review_count" href="#tab-4"><span itemprop="reviewCount">0</span>
-                                            Review(s)</a>
-                                    </span>
-                                    <span class="hidden review-meta">
-                                        <span itemprop="ratingValue">0</span>
-                                        <span itemprop="worstRating">0</span>
-                                        <span itemprop="bestRating">5</span>
-                                    </span>
-                                </span>
-
-
-                                <span class="create-review-link">
-                                    <a class="createreview-link" href="#" data-review_login="0">Write a Review</a>
-                                </span>
-                                <aside id="createreview-modal"
-                                    class="createreview createreview-modal modal text-left" tabindex="-1"
-                                    role="dialog">
-                                    <div class="modal-vcenter">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content ajax-modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Add Review</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group rating-label">
-                                                                <label for="" class="small-label">Your rating: <span
-                                                                        class="required">*</span></label>
-                                                            </div>
-                                                            <span class="rating">
-                                                                <input type="radio" class="rating-input"
-                                                                    id="rating-input-1-5" name="rating-input"
-                                                                    value="5" />
-                                                                <label for="rating-input-1-5" class="rating-star"><i
-                                                                        class="icon-star"><span
-                                                                            class="hide">5</span></i></label>
-                                                                <input type="radio" class="rating-input"
-                                                                    id="rating-input-1-4" name="rating-input"
-                                                                    value="4" />
-                                                                <label for="rating-input-1-4" class="rating-star"><i
-                                                                        class="icon-star"><span
-                                                                            class="hide">4</span></i></label>
-                                                                <input type="radio" class="rating-input"
-                                                                    id="rating-input-1-3" name="rating-input"
-                                                                    value="3" />
-                                                                <label for="rating-input-1-3" class="rating-star"><i
-                                                                        class="icon-star"><span
-                                                                            class="hide">3</span></i></label>
-                                                                <input type="radio" class="rating-input"
-                                                                    id="rating-input-1-2" name="rating-input"
-                                                                    value="2" />
-                                                                <label for="rating-input-1-2" class="rating-star"><i
-                                                                        class="icon-star"><span
-                                                                            class="hide">2</span></i></label>
-                                                                <input type="radio" class="rating-input"
-                                                                    id="rating-input-1-1" name="rating-input"
-                                                                    value="1" />
-                                                                <label for="rating-input-1-1" class="rating-star"><i
-                                                                        class="icon-star"><span
-                                                                            class="hide">1</span></i></label>
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="user_name" class="small-label">Name:
-                                                                    <span class="required">*</span></label>
-                                                                <input type="text" class="form-control review-input"
-                                                                    id="createreview-custName"
-                                                                    name="createreview-custName" value=""
-                                                                    aria-label="createreview-custName">
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="createreview-custEmail"
-                                                                    class="small-label">Email: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="createreview-custEmail"
-                                                                    name="createreview-custEmail" value="">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="createreview-userCity"
-                                                                    class="small-label">Location: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="createreview-userCity"
-                                                                    name="createreview-userCity" value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="createreview-shorReview"
-                                                                    class="small-label">Title: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="createreview-shorReview"
-                                                                    name="createreview-shorReview" value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="createreview-longReview"
-                                                                    class="small-label">Review: <span
-                                                                        class="required">*</span></label>
-                                                                <textarea class="form-control"
-                                                                    id="createreview-longReview"
-                                                                    name="createreview-longReview"
-                                                                    rows="3"></textarea>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Close</button>
-
-                                                    <button id="createreview_button" name="createreview_button"
-                                                        type="button" class="btn btn-default btn-inverse">Add
-                                                        Review</button>
-
-                                                </div>
-                                                <div class="loading-overlay">
-                                                    <span class="modal-ajaxload icon-spin2 animate-spin"></span>
-                                                </div>
-                                                <div class="modal-response">
-                                                    <div class="modal-resout">
-                                                        <div class="modal-resin review-item">
-                                                            <p>Thank you for submitting your review.</p>
-                                                            <div class="modal-resacts">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </aside>
-
+                            <div class="reviews">
+                                <span class="reviews-stars rating-5" role="presentation"></span>
                             </div>
-
-
-                            <div class="pricingBlock" itemprop="offers" itemscope
-                                itemtype="http://schema.org/Offer">
-                                <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition"
-                                    content="http://schema.org/NewCondition" />
-                                <meta itemprop="availability" content="InStock" />
-                                <meta itemprop="priceCurrency" content="USD" />
-                                <meta itemprop="url" itemtype="https://schema.org/url"
-                                    content="https://branch-preview-com.3dcartstores.com/Cozy-Bloom-Shrub_p_2.html" />
-                                <meta itemprop="priceValidUntil" content="2050-12-31" />
-
-                                <div class="yourprice price">
-                                    Your Price:
-                                    <span id="price">$14.99</span>
-                                    <meta itemprop="price" content="14.99" />
-                                </div>
-
-
-
-                                <div class="retailprice" aria-label="retail price">Retail Price:<span>$16.99</span>
-                                </div>
-
-                                <div class="savings">You Save:<span>$2.00</span><span>(12%)</span></div>
-
-
+                            <div class="price">
+                                <span class="regular-price">$13.99</span>
                             </div>
-
-
-                            <div class="short-description" itemprop="description">Sample Product</div>
-
-
-                            <div class="product-id"><strong>Part Number:</strong> <span id="product_id"
-                                    itemprop="sku">SAMPLE-1002</span></div>
-
-                            <div id="availabilityInfo" class="availabilityInfo">
-
-                                <span class="availability-header">Availability:</span>
-                                <span id="availability" class="product_availability availability-item">In
-                                    Stock.</span>
-
+                            <div class="action">
+                                <a href="Mezzanine-Houseplant_p_1.html?quick=1&amp;item_id=1&amp;cat_id=0"
+                                    class="add-to-cart btn btn-default">
+                                    <span class="buyitlink-text"> Select Options</span>
+                                    <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                    <span class="ajaxcart-added icon-ok"></span>
+                                </a>
                             </div>
-
-                            <div class="extrafieldsBlock">
-
-
-
-
-
-                            </div>
-
-
-
-                            <div id="divOptionsBlock" class="options sub-section">
-
-                                <div class="header">
-                                    <h4 class="page_heading ">Choose Options</h4>
-                                </div>
-                                <div class="options-inner">
-
-                                    <div class="opt-regular">
-                                        <div class="opt-label">
-                                            <label class="label">Size</label>
-
-
-                                        </div>
-                                        <div class="opt-field">
-                                            <label class="radio-format">
-                                                <input type="radio" name="option-4-2" id="radio-16" value="16"
-                                                    class="customoption" />
-                                                <label class="radio-option" data-group="option-4-2" title="XS"
-                                                    id="16"
-                                                    onclick="document.getElementById('radio-16').checked=true;validateValues(document.add,1);selectOption(document.getElementById('radio-16'));">
-
-                                                    <span>XS </span>
-                                                </label>
-                                            </label>
-                                            <label class="radio-format">
-                                                <input type="radio" name="option-4-2" id="radio-17" value="17"
-                                                    class="customoption" />
-                                                <label class="radio-option" data-group="option-4-2" title="S"
-                                                    id="17"
-                                                    onclick="document.getElementById('radio-17').checked=true;validateValues(document.add,1);selectOption(document.getElementById('radio-17'));">
-
-                                                    <span>S </span>
-                                                </label>
-                                            </label>
-                                            <label class="radio-format">
-                                                <input type="radio" name="option-4-2" id="radio-18" value="18"
-                                                    class="customoption" />
-                                                <label class="radio-option" data-group="option-4-2" title="M"
-                                                    id="18"
-                                                    onclick="document.getElementById('radio-18').checked=true;validateValues(document.add,1);selectOption(document.getElementById('radio-18'));">
-
-                                                    <span>M </span>
-                                                </label>
-                                            </label>
-                                            <label class="radio-format">
-                                                <input type="radio" name="option-4-2" id="radio-19" value="19"
-                                                    class="customoption" />
-                                                <label class="radio-option" data-group="option-4-2" title="L"
-                                                    id="19"
-                                                    onclick="document.getElementById('radio-19').checked=true;validateValues(document.add,1);selectOption(document.getElementById('radio-19'));">
-
-                                                    <span>L </span>
-                                                </label>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="opt-regular">
-                                        <div class="opt-label">
-                                            <label class="label">Color</label>
-
-
-                                        </div>
-                                        <div class="opt-field">
-                                            <div class="dropdown-format">
-                                                <label>
-                                                    <select name="option-5-2"
-                                                        onchange="validateValues(document.add,1);selectOption(this);"
-                                                        class="form-control">
-
-                                                        <option value="">Color </option>
-                                                        <option value="20">Blue </option>
-                                                        <option value="21">Green </option>
-                                                        <option value="22">Pink </option>
-
-                                                    </select>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="std_price" value="14.99">
-                                    <input type="hidden" name="price_16" value="0">
-                                    <input type="hidden" name="OptID_16" value="">
-                                    <input type="hidden" name="price_17" value="0">
-                                    <input type="hidden" name="OptID_17" value="">
-                                    <input type="hidden" name="price_18" value="0">
-                                    <input type="hidden" name="OptID_18" value="">
-                                    <input type="hidden" name="price_19" value="0">
-                                    <input type="hidden" name="OptID_19" value="">
-                                    <input type="hidden" name="price_20" value="0">
-                                    <input type="hidden" name="OptID_20" value="">
-                                    <input type="hidden" name="price_21" value="0">
-                                    <input type="hidden" name="OptID_21" value="">
-                                    <input type="hidden" name="price_22" value="0">
-                                    <input type="hidden" name="OptID_22" value="">
-                                    <script type="text/javascript">var inventoryarray2 = new Array(); var idarray2 = new Array();
-                                        var aopricearray2 = new Array();
-                                        var gtinarray2 = new Array();
-                                    </script><input type="hidden" id="hdnHasDefaultSelected" name="hdnHasDefaultSelected" value="0" />
-
-                                </div>
-
-                            </div>
-
-
-
-
-                            <div id="divWaitlist_AdvancedOptions" style="display:none;">
-                                <div class="waitinglist sub-section">
-                                    <button id="waitinglist-btn" type="button"
-                                        class="btn btn-default btn-inverse btn-addcart"><i class="icon-clipboard"
-                                            role="presentation"></i> Put me on the Waiting List</button>
-                                </div>
-                                <aside id="waitinglist-modal"
-                                    class="createreview createreview-modal modal text-left" tabindex="-1"
-                                    role="dialog">
-                                    <div class="modal-vcenter">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content ajax-modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close"><span
-                                                            aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Put me on the waiting list</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>The item you are trying to purchase is currently out of
-                                                        stock.<br>Please enter your name, email, and phone number
-                                                        below.<br> We will contact you as soon as this product is
-                                                        available.</p>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="waitinglist-name"
-                                                                    class="small-label">Name: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="waitinglist-name" value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="waitinglist-email"
-                                                                    class="small-label">Email: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="waitinglist-email" value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="waitinglist-phone"
-                                                                    class="small-label">Phone: <span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" class="form-control"
-                                                                    id="waitinglist-phone" value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button id="waitinglist_button" type="button"
-                                                        class="btn btn-default btn-inverse">Submit</button>
-                                                </div>
-                                                <div class="loading-overlay">
-                                                    <span class="modal-ajaxload icon-spin2 animate-spin"></span>
-                                                </div>
-                                                <div class="modal-response">
-                                                    <div class="modal-resout">
-                                                        <div class="modal-resin review-item">
-                                                            <p id="waitinglist-response"></p>
-                                                            <div class="modal-resacts">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </aside>
-                            </div>
-
-
-
-
-
-
-
-                            <div class="quantityBlock sub-section">
-                                <div class="header clearfix">
-                                    <h4 class="page_heading"><a id="showQtyTable"
-                                            class="qtyTable-btn icon-angle-down" role="button"
-                                            data-toggle="collapse" href="#qtyTable" aria-expanded="true">Quantity
-                                            Pricing</a></h4>
-                                </div>
-                                <div id="qtyTable" class="quantity-table table-responsive collapse in"
-                                    aria-expanded="true">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>3 - 5</td>
-                                                <td>$13.49</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6 - 10</td>
-                                                <td>$12.74</td>
-                                            </tr>
-                                            <tr>
-                                                <td>11+</td>
-                                                <td>$11.99</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
-                            <div class="addToCartBlock sub-section">
-                                <div class="qtybox-addcart form-group">
-
-                                    <label>Quantity</label>
-                                    <label class="qty-input">
-                                        <input id="qty-0" type="text" name="qty-0" value="1" class="form-control"
-                                            onchange="validateValues(document.add,1);" />
-                                        <span class="qty-nav">
-                                            <button type="button" class="qty-up" data-target="#qty-0">+</button>
-                                            <button type="button" class="qty-down" data-target="#qty-0">-</button>
-                                        </span>
-                                    </label>
-
-
-                                    <button type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"
-                                        onclick="check_and_add(document.add);"><i class="icon-basket"
-                                            role="presentation"></i> Add to Cart</button>
-
-
-
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-
-                            <div id="extend-offer"></div>
-
-                            <div class="clear"></div>
-                            <div class="sub-section">
-
-                            </div>
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-                <div id="rTabs" class="rTabs">
-                    <ul>
-
-                        <li><a href="#tab-1">Description</a></li>
-
-                    </ul>
-                    <div id="tab-1">
-                        <div class="item" itemprop="description">
-                            <div>-4.2 oz.&nbsp;</div>
-                            <div>-52% combed and ringspun cotton/48% polyester&nbsp;</div>
-                            <div>-30 singles&nbsp;</div>
-                            <div><br></div>
-                            <div>Contrast ringer binding on sleeves and neck line Sideseamed Retail fit White/Black
-                                is 100 combed and ringspun cotton</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relatedBlock sub-section">
-                    <div class="header">
-                        <h2 class="page_heading">Related Items</h2>
-                    </div>
-                    <div class="product-items product-items-4">
-                        <script class="slick-cloned"
-                            type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script>
-                        <div class="product-item" data-catalogid="1" data-ajaxcart="1"
-                            data-addcart-callback="addcart_callback" data-categoryid="0">
-                            <div class="img">
-                                <a href="Mezzanine-Houseplant_p_1.html">
-                                    <img src="assets/assets/images/thumbnails/prod_1_thumbnail.png"
-                                        alt="Mezzanine Houseplant" class="img-responsive" />
-                                </a>
-
-                                <button class="quickview" data-toggle="modal">Quick View</button>
-
-                            </div>
-                            <div class="product-content">
-                                <div class="name">
-                                    <a href="Mezzanine-Houseplant_p_1.html">Mezzanine Houseplant</a>
-                                </div>
-                                <div class="reviews">
-
-
-                                    <span class="reviews-stars rating-5" role="presentation"></span>
-
-
-                                </div>
-                                <div class="price">
-
-                                    <span class="regular-price">$13.99</span>
-
-                                </div>
-
-
-                                <div class="action">
-                                    <a href="Mezzanine-Houseplant_p_1.html?quick=1&amp;item_id=1&amp;cat_id=0"
-                                        class="add-to-cart btn btn-default">
-                                        <span class="buyitlink-text"> Select Options</span>
-                                        <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                                        <span class="ajaxcart-added icon-ok"></span>
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="product-item" data-catalogid="3" data-ajaxcart="1"
-                            data-addcart-callback="addcart_callback" data-categoryid="0">
-                            <div class="img">
-                                <a href="Porcelain-Succulent_p_3.html">
-                                    <img src="assets/assets/images/thumbnails/prod_3_thumbnail.png"
-                                        alt="Porcelain Succulent" class="img-responsive" />
-                                </a>
-
-                                <button class="quickview" data-toggle="modal">Quick View</button>
-
-                            </div>
-                            <div class="product-content">
-                                <div class="name">
-                                    <a href="Porcelain-Succulent_p_3.html">Porcelain Succulent</a>
-                                </div>
-                                <div class="reviews">
-
-
-                                    <span class="reviews-stars rating-0" role="presentation"></span>
-
-
-                                </div>
-                                <div class="price">
-
-
-                                    <del class="regular-price" aria-label="regular price">$15.99</del>
-                                    <span class="sale-price">$13.99</span>
-                                    <span class="on-sale-badge">Sale</span>
-
-                                </div>
-
-
-                                <div class="action">
-                                    <a href="view_cartc112.html?quick=1&amp;item_id=3&amp;cat_id=0"
-                                        class="add-to-cart btn btn-default">
-                                        <span class="buyitlink-text">Add To Cart</span>
-                                        <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                                        <span class="ajaxcart-added icon-ok"></span>
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="product-item" data-catalogid="4" data-ajaxcart="1"
-                            data-addcart-callback="addcart_callback" data-categoryid="0">
-                            <div class="img">
-                                <a href="Tropical-Aglaonema-Shrub_p_4.html">
-                                    <img src="assets/assets/images/thumbnails/prod_4_thumbnail.png"
-                                        alt="Tropical Aglaonema Shrub" class="img-responsive" />
-                                </a>
-
-                                <button class="quickview" data-toggle="modal">Quick View</button>
-
-                            </div>
-                            <div class="product-content">
-                                <div class="name">
-                                    <a href="Tropical-Aglaonema-Shrub_p_4.html">Tropical Aglaonema Shrub</a>
-                                </div>
-                                <div class="reviews">
-
-
-                                    <span class="reviews-stars rating-0" role="presentation"></span>
-
-
-                                </div>
-                                <div class="price">
-
-                                    <span class="regular-price">$17.99</span>
-
-                                </div>
-
-
-                                <div class="action">
-                                    <a href="view_cartc112.html?quick=1&amp;item_id=4&amp;cat_id=0"
-                                        class="add-to-cart btn btn-default">
-                                        <span class="buyitlink-text">Add To Cart</span>
-                                        <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                                        <span class="ajaxcart-added icon-ok"></span>
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="product-item" data-catalogid="6" data-ajaxcart="1"
-                            data-addcart-callback="addcart_callback" data-categoryid="0">
-                            <div class="img">
-                                <a href="Terracota-Succulent_p_6.html">
-                                    <img src="assets/assets/images/thumbnails/prod_5_thumbnail.png"
-                                        alt="Terracota Succulent" class="img-responsive" />
-                                </a>
-
-                                <button class="quickview" data-toggle="modal">Quick View</button>
-
-                            </div>
-                            <div class="product-content">
-                                <div class="name">
-                                    <a href="Terracota-Succulent_p_6.html">Terracota Succulent</a>
-                                </div>
-                                <div class="reviews">
-
-
-                                    <span class="reviews-stars rating-0" role="presentation"></span>
-
-
-                                </div>
-                                <div class="price">
-
-                                    <span class="regular-price">$18.99</span>
-
-                                </div>
-
-
-                                <div class="action">
-                                    <a href="Terracota-Succulent_p_6.html?quick=1&amp;item_id=6&amp;cat_id=0"
-                                        class="add-to-cart btn btn-default">
-                                        <span class="buyitlink-text"> Select Options</span>
-                                        <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                                        <span class="ajaxcart-added icon-ok"></span>
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 

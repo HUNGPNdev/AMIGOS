@@ -19,4 +19,8 @@ export class ClientPortService {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products-size"}/${productId}`);
   }
 
+  getProductNewReleases(limit: any): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products-size/limit"}/${limit}`);
+  }
+
 }

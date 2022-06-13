@@ -12,8 +12,8 @@ export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listCategory(): Observable<ResponseApi> {
-    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories"}`);
+  listCategory(limit: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories/limit"}/${limit}`);
   }
 
   getCateById(id: number): Observable<ResponseApi> {
