@@ -21,6 +21,7 @@
                             <thead>
                                 <tr class="bg-primary">
                                     <th>Name</th>
+                                    <th>Cate Name</th>
                                     <th>Price</th>
                                     <th>Discount</th>
                                     <th>Count</th>
@@ -36,6 +37,7 @@
                             <tbody>
                                 <tr *ngFor="let p of productSize | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
                                     <td>{{p.name}}</td>
+                                    <td>{{p.cateName}}</td>
                                     <td>{{p.price}}</td>
                                     <td>{{p.discount}}</td>
                                     <td>{{p.count}}</td>
