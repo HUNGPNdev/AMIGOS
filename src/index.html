@@ -2,25 +2,25 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>NgtestSecurity</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<meta charset="utf-8">
+	<title>NgtestSecurity</title>
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <link href="./assets/admin/css/bootstrap.min.css" rel="stylesheet">
-  <link href="./assets/admin/css/datepicker3.css" rel="stylesheet">
-  <link href="./assets/admin/css/styles.css" rel="stylesheet">
-  <script type="text/javascript" src="./assets/admin/ckeditor/ckeditor.js"></script>
-  <script src="./assets/admin/js/lumino.glyphs.js"></script>
+	<link href="./assets/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./assets/admin/css/datepicker3.css" rel="stylesheet">
+	<link href="./assets/admin/css/styles.css" rel="stylesheet">
+	<script type="text/javascript" src="./assets/admin/ckeditor/ckeditor.js"></script>
+	<script src="./assets/admin/js/lumino.glyphs.js"></script>
 </head>
 
 <body>
-  
-  <app-root></app-root>
+
+	<app-root></app-root>
 
 
-  <script src="./assets/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="./assets/admin/js/jquery-1.11.1.min.js"></script>
 	<script src="./assets/admin/js/bootstrap.min.js"></script>
 	<script src="./assets/admin/js/chart.min.js"></script>
 	<script src="./assets/admin/js/chart-data.js"></script>
@@ -32,18 +32,79 @@
 		});
 
 		!function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
-		        $(this).find('em:first').toggleClass("glyphicon-minus");      
-		    }); 
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+			$(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+				$(this).find('em:first').toggleClass("glyphicon-minus");
+			});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
 		}(window.jQuery);
 
 		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+			if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
 		})
 		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+			if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>	
+
+		$(document).ready(function () {
+			$("#myInput").on("keyup", function () {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function () {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+		function changeImg1(input) {
+			if (input.files && input.files[0]) {
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar1').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
+				}
+
+			}
+		}
+
+		function changeImg2(input) {
+			if (input.files && input.files[0]) {
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar2').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
+				}
+			}
+		}
+
+		function changeImg3(input) {
+			if (input.files && input.files[0]) {
+				var file = input.files[0];
+				if (file.size < 1048576) {
+					var reader = new FileReader();
+					//Sự kiện file đã được load vào website
+					reader.onload = function (e) {
+						//Thay đổi đường dẫn ảnh
+						$('#avatar3').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					console.log("The field have size " + file.size + " exceeds its maximum permitted size of 1048576 bytes");
+				}
+			}
+		}
+	</script>
 </body>
+
 </html>

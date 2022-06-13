@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Product</h1>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Product</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Product:&nbsp; </label>
+                    <input type="text"  placeholder="Product search..." [(ngModel)]="searchProductText">
+                </div>
+                <form (ngSubmit)="f.valid && onSubmit()" enctype="multipart/form-data" #f="ngForm">
+                    <div class="row" style="margin-bottom:40px">
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <select required class="form-control" name="productId" [(ngModel)]="productSize.productId" #productId="ngModel" size="4">
+                                    <option [value]="product.id" *ngFor="let product of products | filter:searchProductText">{{product.name}}</option>
+                                </select>
+                                <div *ngIf="f.submitted && productId.invalid">
+                                    <div *ngIf="productId.errors?.required" style="color: red;">Please select Product!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number" step="0.1" name="price" class="form-control" [(ngModel)]="productSize.price" #price="ngModel" required>
+                                <div *ngIf="f.submitted && price.invalid">
+                                    <div *ngIf="price.errors?.required" style="color: red;">Please select price!</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Discount</label>
+                                <input type="number" step="0.1" name="discount" class="form-control" [(ngModel)]="productSize.discount" #discount="ngModel" required>
+                                <div *ngIf="f.submitted && discount.invalid">
+                                    <div *ngIf="discount.errors?.required" style="color: red;">Please select discount!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Count</label>
+                                <input type="number" name="count" class="form-control" [(ngModel)]="productSize.count" #count="ngModel" required>
+                                <div *ngIf="f.submitted && count.invalid">
+                                    <div *ngIf="count.errors?.required" style="color: red;">Please select count!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Size</label>
+                                <select required class="form-control" name="sizeId" [(ngModel)]="productSize.sizeId" #sizeId="ngModel">
+                                    <option [value]="size.id" *ngFor="let size of sizes">{{size.name}}</option>
+                                </select>
+                                <div *ngIf="f.submitted && sizeId.invalid">
+                                    <div *ngIf="sizeId.errors?.required" style="color: red;">Please select Size!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label><br>
+                                <label for="status">true: </label>
+                                <input type="radio" [(ngModel)]="productSize.isDeleted" id="status" name="isDeleted"
+                                    [value]="true">
+                                &nbsp;
+                                <label for="status1">false: </label>
+                                <input type="radio" [(ngModel)]="productSize.isDeleted" checked id="status1"
+                                    name="isDeleted" [value]="false">
+                            </div>
+                            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                            <a href="#" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->

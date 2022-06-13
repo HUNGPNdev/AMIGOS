@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../entity/category/Category';
 import { CategoryService } from '../../entity/category/category.service';
 
@@ -13,7 +13,7 @@ export class CategoryComponent implements OnInit {
   categories: Category[];
   searchText: string;
   p:number;
-  id: number;
+  id: number = 0;
 
   constructor(private cataService: CategoryService,
     private router: Router) { }
@@ -40,7 +40,6 @@ export class CategoryComponent implements OnInit {
   createCategory() {
     this.cataService.createCata(this.category).subscribe( data => {
       this.category = new Category();
-     
       this.getAllCata();
     }, error => console.log(error));
   }

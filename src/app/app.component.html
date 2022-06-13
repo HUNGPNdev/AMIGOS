@@ -30,7 +30,7 @@
               <use xlink:href="#stroked-male-user"></use>
             </svg> User <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="auth/login"><svg class="glyph stroked lock">
+            <li *ngIf="!authority"><a href="auth/login"><svg class="glyph stroked lock">
                   <use xlink:href="#stroked-lock"></use>
                 </svg> Login</a>
             </li>
@@ -49,13 +49,19 @@
     <li role="presentation" class="divider"></li>
     <li class="active"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
           <use xlink:href="#stroked-dashboard-dial"></use>
-        </svg> Trang chủ</a></li>
-    <li><a routerLink="home"><svg class="glyph stroked calendar">
+        </svg> Home</a></li>
+    <li><a routerLink="list-product"><svg class="glyph stroked calendar">
           <use xlink:href="#stroked-calendar"></use>
-        </svg> Sản phẩm</a></li>
+        </svg> Product</a></li>
     <li><a routerLink="category"><svg class="glyph stroked line-graph">
           <use xlink:href="#stroked-line-graph"></use>
-        </svg> Danh mục</a></li>
+        </svg> Category</a></li>
+    <li><a routerLink="size"><svg class="glyph stroked plus sign">
+          <use xlink:href="#stroked-plus-sign"></use>
+        </svg> Size</a></li>
+        <li><a routerLink="list-product-size"><svg class="glyph stroked calendar">
+          <use xlink:href="#stroked-calendar"></use>
+        </svg> Product Size</a></li>
     <li role="presentation" class="divider"></li>
   </ul>
 </div>
