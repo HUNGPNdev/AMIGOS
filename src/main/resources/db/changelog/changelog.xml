@@ -17,5 +17,6 @@
     <include file="/db/changelog/files/create-product_size.xml"/>
     <include file="/db/changelog/files/create-cart_product_size.xml"/>
     <include file="/db/changelog/files/create-customer_review.xml"/>
+    <include file="/db/changelog/files/product-drop-foreign-key-update-by.xml"/>
 
 </databaseChangeLog>

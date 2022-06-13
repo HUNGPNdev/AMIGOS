@@ -1,20 +1,25 @@
 package com.amigos.category.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.amigos.product.model.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "category")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class CategoryEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -27,4 +32,7 @@ public class CategoryEntity {
     private String name;
 
     private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "cateId")
+    private List<ProductEntity> products = new ArrayList<>();
 }

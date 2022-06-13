@@ -21,19 +21,21 @@ public class CategoryController {
     @Autowired
     CategoryService service;
 
-   @PostMapping("/add")
+   @PostMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryDTO categoryDto) {
 
-       CategoryEntity category = new CategoryEntity();
+       CategoryDTO category = new CategoryDTO();
        category.setName(categoryDto.getName());
        category.setIsDeleted(Boolean.FALSE);
+
         return new ResponseEntity<>(service.addCategory(category), HttpStatus.OK);
     }
 
     @PatchMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> updateCategory(@RequestBody CategoryEntity category) {
+    public ResponseEntity<ResponseApi> updateCategory(@RequestBody CategoryDTO category) {
         return new ResponseEntity<>(service.updateCategory(category), HttpStatus.OK);
     }
 
@@ -54,4 +56,11 @@ public class CategoryController {
     public ResponseEntity<ResponseApi> getLimit() {
         return ResponseEntity.ok(service.getLimit());
     }
+
+    @GetMapping("/alls")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> getCateByCondition() {
+        return ResponseEntity.ok(service.getCateByCondition());
+    }
+
 }

@@ -11,8 +11,8 @@ public class AmigosApplication {
 	private static final Logger log = LoggerFactory.getLogger(AmigosApplication.class);
 
 	public static void main(String[] args) {
-		log.info("Starting Amigos Backend: Start (debug flag)");
-		SpringApplication.run(AmigosApplication.class, args);
+							log.info("Starting Amigos Backend: Start (debug flag)");
+					SpringApplication.run(AmigosApplication.class, args);
 		log.info("Starting Amigos Backend: Finish");
 	}
 }

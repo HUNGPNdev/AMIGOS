@@ -24,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -120,4 +122,9 @@ public class UserServiceImplTest {
         assertEquals(responseApi, signUpForm2);
     }
 
+    @Test
+    public void TestPR() {
+        System.out.println(Boolean.valueOf("1"));
+        System.out.println(Boolean.valueOf("0"));
+    }
 }

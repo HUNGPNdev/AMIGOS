@@ -1,11 +1,10 @@
 package com.amigos.user.model;
 
+import com.amigos.product.model.ProductEntity;
 import com.amigos.role.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,9 +16,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -72,4 +72,7 @@ public class User {
         this.password = password;
         this.is_deleted = is_deleted;
     }
+
+    @OneToMany(mappedBy = "userId")
+    private List<ProductEntity> products = new ArrayList<>();
 }
