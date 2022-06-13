@@ -51,29 +51,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <<<<<<< HEAD <tr *ngFor="let p of categories ">
-                                =======
                                 <tr *ngFor="let p of categories | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
-                                    >>>>>>> 542e0142915b99e2f7ca98d262786ba73bb28493
                                     <td>{{p.name}}</td>
                                     <td>{{p.isDeleted}}</td>
                                     <td>
                                         <a (click)="getCateById(p.id)" class="btn btn-warning"><span
                                             class="glyphicon glyphicon-edit"></span>
                                         Update</a>
-                                        <<<<<<< HEAD <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-                                            =======
                                             <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-                                        Delete</a> >>>>>>> 542e0142915b99e2f7ca98d262786ba73bb28493
+                                        Delete</a> 
                                     </td>
                                 </tr>
                         </tbody>
                     </table>
                     <br><br>
-                    <<<<<<< HEAD <!-- <pagination-controls (pageChange)="p = $event">
-                        </pagination-controls> --> =======
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                        >>>>>>> 542e0142915b99e2f7ca98d262786ba73bb28493
                 </div>
                 <div class="clearfix"></div>
             </div>
