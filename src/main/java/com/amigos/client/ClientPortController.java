@@ -6,7 +6,6 @@ import com.amigos.product.ProductService;
 import com.amigos.productsize.ProductSizeService;
 import com.amigos.productsize.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +51,16 @@ public class ClientPortController {
     @GetMapping("/products-size/limit/{limit}")
     public ResponseEntity<ResponseApi> getProductNewReleases(@NotEmpty @PathVariable("limit") int limit) {
         return ResponseEntity.ok(productService.getProductNewReleases(limit));
+    }
+
+    @GetMapping("/products/{productId}/cateId/{cateId}/limit/{limit}")
+    public ResponseEntity<ResponseApi> getProductRelatedItem(@NotEmpty @PathVariable("limit") int limit, @NotEmpty @PathVariable("cateId") UUID cateId,
+                                                             @NotEmpty @PathVariable("productId") UUID productId) {
+        return ResponseEntity.ok(productService.getProductRelatedItem(limit, cateId, productId));
+    }
+
+    @GetMapping("/products/featured/limit/{limit}")
+    public ResponseEntity<ResponseApi> getProductFeaturedProducts(@NotEmpty @PathVariable("limit") int limit) {
+        return ResponseEntity.ok(productService.getProductFeaturedProducts(limit));
     }
 }
