@@ -2,6 +2,7 @@ package com.amigos.productsize.impl;
 
 import com.amigos.common.ResponseApi;
 import com.amigos.config.ModelMapperConfig;
+import com.amigos.dto.ProductDTO;
 import com.amigos.dto.ProductSizeDTO;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.product.repository.ProductRepository;
@@ -10,12 +11,15 @@ import com.amigos.productsize.model.ProductSizeEntity;
 import com.amigos.productsize.repository.ProductSizeRepository;
 import com.amigos.size.model.SizeEntity;
 import com.amigos.size.repository.SizeRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,6 +42,9 @@ public class ProductSizeServiceImpl implements ProductSizeService
 
     @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Override
     public ResponseApi addProductSize(ProductSizeDTO productSizeDTO)
