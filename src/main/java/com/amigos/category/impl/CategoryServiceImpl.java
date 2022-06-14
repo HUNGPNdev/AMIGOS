@@ -80,8 +80,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResponseApi getLimit() {
-        List<CategoryEntity> categoryEntity = categoryRepository.getLimit(Boolean.FALSE, 5);
+    public ResponseApi getLimit(int limit) {
+        List<CategoryEntity> categoryEntity = categoryRepository.getLimit(Boolean.FALSE, limit);
         List<CategoryDTO> categoryDTOS = modelMapper.mapAll(categoryEntity, CategoryDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
         return rs;

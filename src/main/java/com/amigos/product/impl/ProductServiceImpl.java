@@ -9,6 +9,7 @@ import com.amigos.dto.ProductDTO;
 import com.amigos.product.ProductService;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.product.repository.ProductRepository;
+import com.amigos.productsize.repository.ProductSizeRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,8 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -51,7 +54,14 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ProductSizeRepository productSizeRepository;
+
+    @Autowired
+    EntityManager entityManager;
+
     @Override
+    @Transactional
     public ResponseApi addProduct(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException {
         ProductEntity entityCreate = new ProductEntity();
         ProductDTO proD = objectMapper.readValue(product, ProductDTO.class);
@@ -74,37 +84,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseApi getListProduct(boolean status) {
         List<ProductEntity> products = productRepository.findAllByIsDeleted(status);
-        List<ProductDTO> categoryDTOS = modelMapper.mapAll(products, ProductDTO.class);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
-        return rs;
-    }
-
-    @Override
-    public ResponseApi updateProduct(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, String product, HttpServletRequest httpServletRequest) throws IOException
-    {
-        ProductDTO proD = objectMapper.readValue(product, ProductDTO.class);
-        Optional<ProductEntity> findProduct = productRepository.findById(proD.getId());
-
-        if (findProduct.isEmpty()) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        ProductEntity productUpdate = findProduct.get();
-        modelMapper.map(proD, productUpdate);
-        User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
-        if(createBy == null) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        productUpdate.setUserId(createBy);
-        productUpdate.setCateId(categoryRepository.findById(proD.getCateId()).get());
-        setProductImages(image_1, image_2, image_3, productUpdate);
-        productUpdate.setUpdateAt(new Date());
-
-        productUpdate = productRepository.save(productUpdate);
-        proD = modelMapper.map(productUpdate, ProductDTO.class);
-
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
+        List<ProductDTO> productDTOList = modelMapper.mapAll(products, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productDTOList);
         return rs;
     }
 
@@ -134,6 +115,41 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(productDelete);
         ProductDTO proD = modelMapper.map(findProduct.get(), ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), proD);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getAllProductByCateId(UUID cateId) {
+        List<UUID> productIds = productSizeRepository.getProductIdByCateId(cateId);
+        List<ProductDTO> productEntities = productRepository.findAllByCateIdAndProductId(productIds);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductNewReleases(int limit)
+    {
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false order by p.createAt desc").setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductRelatedItem(int limit, UUID cateId, UUID productId) {
+        List<UUID> productIds = productSizeRepository.getProductIdByCateId(cateId);
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.id in ?1 and p.id <> ?2")
+                .setParameter(1, productIds).setParameter(2, productId).setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductFeaturedProducts(int limit) {
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false").setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;
     }
 

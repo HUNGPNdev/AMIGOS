@@ -11,7 +11,7 @@ public interface CategoryService {
     ResponseApi updateCategory(CategoryDTO category);
     ResponseApi getDetailCategory(UUID id);
     ResponseApi delete(UUID id);
-    ResponseApi getLimit();
+    ResponseApi getLimit(int limit);
     ResponseApi getCateByCondition();
 
 }

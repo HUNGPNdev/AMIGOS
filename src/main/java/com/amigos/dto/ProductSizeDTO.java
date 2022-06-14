@@ -43,4 +43,8 @@ public class ProductSizeDTO
     private Boolean isDeleted;
 
     private String sizeName;
+
+    private String cateName;
+
+    private UUID cateId;
 }

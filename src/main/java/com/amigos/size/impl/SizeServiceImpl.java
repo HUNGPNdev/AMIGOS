@@ -1,10 +1,7 @@
 package com.amigos.size.impl;
 
-import com.amigos.category.model.CategoryEntity;
-import com.amigos.category.repository.CategoryRepository;
 import com.amigos.common.ResponseApi;
 import com.amigos.config.ModelMapperConfig;
-import com.amigos.dto.CategoryDTO;
 import com.amigos.dto.SizeDTO;
 import com.amigos.size.SizeService;
 import com.amigos.size.model.SizeEntity;
@@ -78,4 +75,6 @@ public class SizeServiceImpl implements SizeService
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), sizeDTOS);
         return rs;
     }
+
+
 }

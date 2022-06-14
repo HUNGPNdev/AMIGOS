@@ -11,4 +11,6 @@ public interface ProductSizeService
     ResponseApi getDetail(UUID id);
     ResponseApi delete(UUID id);
     ResponseApi getAllByStatus(boolean status);
+    ResponseApi getAllProductSizeByCateId(UUID cateId);
+    ResponseApi findProductSizeByProductId(UUID productId);
 }

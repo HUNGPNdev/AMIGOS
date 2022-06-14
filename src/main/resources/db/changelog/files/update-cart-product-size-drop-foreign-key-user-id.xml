@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="update-cart_product_size-drop-foreign-key-user-id" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_cart_product_size_user_id" foreignKeyTableName="cart_product_size"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="cart_product_size" constraintName="fk_cart_product_size_user_id" />
+        <dropColumn columnName="user_id" columnDataType="BINARY(16)"
+                    tableName="cart_product_size"/>
+        <renameColumn tableName="cart_product_size" oldColumnName="product_id" newColumnName="product_size_id" columnDataType="BINARY(16)"/>
+    </changeSet>
+</databaseChangeLog>
