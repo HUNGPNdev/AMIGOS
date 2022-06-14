@@ -7,17 +7,19 @@
 
                     <div id="modNewReleases" class="sidebar-widget">
                         <h4 class="widget-header">New Releases</h4>
-                        <div class="widget-body" *ngFor="let p of productNewReleases">
-                            <div class="new-release-item product-item" >
+                        <div class="widget-body" *ngFor="let p of productNewReleases | filter:searchText">
+                            <div class="new-release-item product-item">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="img"><a href="Ficus-Altissima_p_7.html">
-                                            <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}" class="img-responsive" /></a>
+                                                <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}"
+                                                    class="img-responsive" /></a>
                                         </div>
                                     </div>
                                     <div class="col-xs-8">
                                         <div class="info">
-                                            <div class="name"><a href="Ficus-Altissima_p_7.html" class="link">{{p.name}}</a></div>
+                                            <div class="name"><a href="Ficus-Altissima_p_7.html"
+                                                    class="link">{{p.name}}</a></div>
 
                                             <div class="price">
                                                 <span class="regular-price">{{p.cateName}}</span>
@@ -51,59 +53,47 @@
 
 
                     <section class="category-products clearfix">
-                        <form action="https://branch-preview-com.3dcartstores.com/view_category.asp?cat=1" method="post"
-                            name="frmsortby" id="frmsortby">
-                            <div class="row category-toolbar">
-                                <div class="col-sm-6 clearfix">
+                        
+                        <div class="row category-toolbar">
+                            <div class="col-sm-6 clearfix">
 
-                                    <div class="view-as-btn">
-                                        <a href="javascript:void(0);" id="grid-view" title="Grid View"
-                                            class="current-view" aria-label="Grid view button" role="button">
-                                            <div>
-                                                <div class="icon-bar"></div>
-                                                <div class="icon-bar"></div>
-                                                <div class="icon-bar"></div>
-                                            </div>
-                                        </a>
-                                        <a href="javascript:void(0);" id="list-view" title="List View" class=""
-                                            aria-label="List view button" role="button">
-                                            <div>
-                                                <div class="icon-bar"></div>
-                                                <div class="icon-bar"></div>
-                                                <div class="icon-bar"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <h2 class="titles">Products [{{productLenght}}]</h2>
+                                <div class="view-as-btn">
+                                    <a href="javascript:void(0);" id="grid-view" title="Grid View" class="current-view"
+                                        aria-label="Grid view button" role="button">
+                                        <div>
+                                            <div class="icon-bar"></div>
+                                            <div class="icon-bar"></div>
+                                            <div class="icon-bar"></div>
+                                        </div>
+                                    </a>
+                                    <a href="javascript:void(0);" id="list-view" title="List View" class=""
+                                        aria-label="List view button" role="button">
+                                        <div>
+                                            <div class="icon-bar"></div>
+                                            <div class="icon-bar"></div>
+                                            <div class="icon-bar"></div>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="sort-by">
-                                        <span> Sort by:</span>
-                                        <select id="sortby" name="sortby">
-                                            <option value="0"> Use Default Sorting</option>
-                                            <option value="0" selected>Order By</option>
-                                            <option value="1">Price: Low to High</option>
-                                            <option value="2">Price: High to Low</option>
-                                            <option value="3">Name</option>
-                                            <option value="4">Newest</option>
-                                            <option value="13">Avg Review</option>
-                                        </select>
-                                    </div>
 
-                                </div>
+                                <h2 class="titles">Products [{{productLenght}}]</h2>
                             </div>
-                            <div class="category-actions clearfix">
-                                <div class="paging">
-
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
                                 </div>
+                                <!-- <div class="sort-by">
+                                    <span> Sort by:</span>
+                                    <select (change)="onChangeSort($event)">
+                                        <option [value]="1">Name</option>
+                                        <option [value]="2">Newest</option>
+                                    </select>
+                                </div> -->
                             </div>
-
-
-                        </form>
+                        </div>
 
                         <div class="product-items product-items-3">
-                            <div *ngFor="let p of products | paginate: {itemsPerPage: 6,currentPage: p}"
+                            <div *ngFor="let p of products | filter:searchText | paginate: {itemsPerPage: 6,currentPage: p}"
                                 class="product-item" data-catalogid="1" data-ajaxcart="1"
                                 data-addcart-callback="addcart_callback" data-categoryid="1">
                                 <div class="img">
@@ -132,7 +122,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><br><br>
                         <div class="bottom_breadcrumb">
                             <div class="paging">
                                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -205,7 +195,7 @@
                                                 Add to Cart</button>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <a class="btn btn-link qv-moredetails"><i class="icon-search"></i> More
+                                        <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i class="icon-search"></i> More
                                             Details</a>
                                     </div>
                                     <div class="clearfix"></div>
