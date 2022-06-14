@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { Product } from '../../entity/client-port/product';
 import { ProductSize } from '../../entity/client-port/product-size';
+import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
   selector: 'app-details',
@@ -18,7 +19,8 @@ export class DetailsComponent implements OnInit {
   products: Product[];
 
   constructor(private clientPortService: ClientPortService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.params['productId'];
@@ -64,5 +66,18 @@ export class DetailsComponent implements OnInit {
         break;
       }
     }
+  }
+
+  addToCart() {
+    if(this.token.getUsername()) {
+      console.log(this.quantity)
+    } else {
+      alert("Please login!")
+    }
+  }
+
+  onChangeSort(event) {
+    var value = event.target.value;
+    this.quantity = value;
   }
 }

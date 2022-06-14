@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit {
   productNewReleases: Product[];
   category: Category = new Category();
   searchText: string;
-  p:number;
+  p: number;
+  selectedSkill: any
 
   constructor(private clientPortService: ClientPortService,
     private cataService: CategoryService,
@@ -34,22 +35,22 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProductByCateId() {
-    this.clientPortService.getAllProductByCateId(this.cateId).subscribe( data => {
+    this.clientPortService.getAllProductByCateId(this.cateId).subscribe(data => {
       this.products = data.data;
       this.productLenght = this.products.length;
     }, error => console.log(error))
   }
 
   findProductSizeByProductId(id: number) {
-    this.clientPortService.findProductSizeByProductId(id).subscribe( data => {
+    this.clientPortService.findProductSizeByProductId(id).subscribe(data => {
       this.productSizes = data.data;
       this.productSize = this.productSizes[0];
     }, error => console.log(error))
   }
 
   findProductSizeBySizeName(sizeName: String) {
-    for(var i=0; i<= this.productSizes.length; i++) {
-      if(this.productSizes[i].sizeName == sizeName) {
+    for (var i = 0; i <= this.productSizes.length; i++) {
+      if (this.productSizes[i].sizeName == sizeName) {
         this.productSize = this.productSizes[i];
         break;
       }
@@ -57,15 +58,24 @@ export class ProductsComponent implements OnInit {
   }
 
   getCateById() {
-    this.cataService.getCateById(this.cateId).subscribe( data => {
+    this.cataService.getCateById(this.cateId).subscribe(data => {
       this.category = data.data;
     })
   }
 
   getProductNewReleases() {
     var limit = 5;
-    this.clientPortService.getProductNewReleases(limit).subscribe( data => {
+    this.clientPortService.getProductNewReleases(limit).subscribe(data => {
       this.productNewReleases = data.data;
     }, error => console.log(error))
+  }
+
+  // onChangeSort(event) {
+  //   var value = event.target.value;
+  //   console.log(value)
+  // }
+
+  onsubmit() {
+    
   }
 }

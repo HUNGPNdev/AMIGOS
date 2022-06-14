@@ -97,11 +97,10 @@
                             <div class="qtybox-addcart form-group">
                                 <label>Quantity</label>
                                 <label class="qty-input">
-                                    <input type="number" name="qty-0" value="{{quantity}}" class="form-control"
-                                        min="{{quantity}}" />
+                                    <input type="number" name="qty-0" [value]="quantity" class="form-control" (change)="onChangeSort($event)" />
                                 </label>
-                                <button type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
-                                        class="icon-basket" role="presentation"></i> Add to Cart</button>
+                                <button (click)="addToCart()" type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
+                                        class="icon-basket" role="presentation" ></i> Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -217,7 +216,7 @@
                                                     Add to Cart</button>
                                             </div>
                                             <div class="clearfix"></div>
-                                            <a class="btn btn-link qv-moredetails"><i class="icon-search"></i> More
+                                            <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i class="icon-search"></i> More
                                                 Details</a>
                                         </div>
                                         <div class="clearfix"></div>
@@ -228,7 +227,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
