@@ -14,12 +14,13 @@ import { RegisterComponent } from './authentication/test-service/register/regist
 import { UserComponent } from './authentication/test-service/user/user.component';
 import { ProductsComponent } from './authentication/test-service/products/products.component';
 import { AboutComponent } from './authentication/test-service/about/about.component';
-import { GiftRegistriesComponent } from './authentication/test-service/gift-registries/gift-registries.component';
 import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { BlogComponent } from './authentication/test-service/blog/blog.component';
 import { AccountComponent } from './authentication/test-service/account/account.component';
 import { ShoppingCartComponent } from './authentication/test-service/shopping-cart/shopping-cart.component';
 import { DetailsComponent } from './authentication/test-service/details/details.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,6 @@ import { DetailsComponent } from './authentication/test-service/details/details.
     UserComponent,
     ProductsComponent,
     AboutComponent,
-    GiftRegistriesComponent,
     ContactComponent,
     BlogComponent,
     AccountComponent,
@@ -40,10 +40,12 @@ import { DetailsComponent } from './authentication/test-service/details/details.
     DetailsComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

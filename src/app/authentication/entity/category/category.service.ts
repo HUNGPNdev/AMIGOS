@@ -8,11 +8,15 @@ import { ResponseApi } from '../ResponseApi';
 })
 export class CategoryService {
 
-  private baseUrl = "http://localhost:8081/categories";
+  private baseUrl = "http://localhost:8081/client";
 
   constructor(private httpClient: HttpClient) { }
 
-  listCategory(): Observable<ResponseApi> {
-    return this.httpClient.get<ResponseApi>(`${this.baseUrl}`);
+  listCategory(limit: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories/limit"}/${limit}`);
+  }
+
+  getCateById(id: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/categories"}/${id}`);
   }
 }

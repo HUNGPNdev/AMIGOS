@@ -5,11 +5,10 @@
       <nav id="menulinks-outer" class="menulinks">
         <ul id="menulinks" class="clearfix">
 
-          <li><a href="home" class="menu" target="_self">Home</a></li>
-          <li><a href="about" class="menu" target="_self">About Us</a></li>
-          <li><a href="gift-registries" class="menu" target="_self">Gift Registry</a></li>
-          <li><a href="contact" class="menu" target="_self">Contact Us</a></li>
-          <li><a href="blog" class="menu" target="_self">Blog</a></li>
+          <li><a routerLink="home" class="menu" target="_self">Home</a></li>
+          <li><a routerLink="about" class="menu" target="_self">About Us</a></li>
+          <li><a routerLink="contact" class="menu" target="_self">Contact Us</a></li>
+          <li><a routerLink="blog" class="menu" target="_self">Blog</a></li>
 
         </ul>
       </nav>
@@ -81,7 +80,7 @@
 
         <ul id="categories" class="nav navbar-nav">
           <li class="" *ngFor="let c of categories">
-            <a href="products"> {{c.name}}</a>
+            <a href="products/{{c.id}}"> {{c.name}}</a>
           </li>
         </ul>
 
