@@ -21,11 +21,11 @@
                             <thead>
                                 <tr class="bg-primary">
                                     <th>Name</th>
+                                    <th>Cate Name</th>
                                     <th>Provider</th>
                                     <th>Title</th>
                                     <th>Guarantee</th>
                                     <th>Part</th>
-                                    <th>Description</th>
                                     <th>Image 1</th>
                                     <th>Image 2</th>
                                     <th>Image 3</th>
@@ -36,11 +36,11 @@
                             <tbody>
                                 <tr *ngFor="let p of products | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
                                     <td>{{p.name}}</td>
+                                    <td>{{p.cateName}}</td>
                                     <td>{{p.provider}}</td>
                                     <td>{{p.title}}</td>
                                     <td>{{p.guarantee}}</td>
                                     <td>{{p.part}}</td>
-                                    <td>{{p.description}}</td>
                                     <td >
                                         <img *ngIf="p.image_1" width="70px" src="http://localhost:8081/images/{{p.image_1}}" class="thumbnail">
                                     </td>

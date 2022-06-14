@@ -52,7 +52,7 @@ export class CreateProductComponent implements OnInit {
       uploadData.append('image_3', this.selectedImage3, this.selectedImage3.name);
     }
 
-    if (this.id != 0) {
+    if (this.id != null) {
       this.updateProduct(uploadData);
     } else {
       this.createProduct(uploadData);
@@ -63,6 +63,7 @@ export class CreateProductComponent implements OnInit {
 
   createProduct(uploadData: FormData) {
     this.productService.createProduct(uploadData).subscribe(data => {
+      alert("Create Successfully!");
       this.router.navigate(['/list-product']);
     }, error => console.log(error));
   }

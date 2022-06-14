@@ -18,9 +18,7 @@ export class CategoryService {
   }
 
   createCata(category:Category): Observable<Object> {
-    debugger
-    //category.id = null;
-    return this.httpClient.post(`${this.baseUrl}/add`, category);
+    return this.httpClient.post(`${this.baseUrl}`, category);
   }
 
   getCateById(id: number): Observable<ResponseApi> {
