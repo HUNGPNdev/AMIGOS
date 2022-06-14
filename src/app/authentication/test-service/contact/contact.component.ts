@@ -28,7 +28,8 @@ export class ContactComponent implements OnInit {
 
   createContact() {
     this.contactService.createContact(this.contact).subscribe( data => {
-      this.contact = new Contact();
+      alert("Submitted Successfully");
+      location.reload();
     }, error => console.log(error));
   }
 

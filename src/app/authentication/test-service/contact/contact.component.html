@@ -61,15 +61,14 @@
                             24 business hours.</p>
                         <div class="clearfix"></div>
                         <div class="row">
-                            <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
-                                <input type="hidden" name="action" id="action" value="" />
-                                <input type="hidden" name="custid" value="0" />
-                                <input type="hidden" name="orderid" value="" />
-                                <input type="hidden" name="productid" value="[productid]" />
+                            <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
                                 <div class="crmField col-lg-6">
                                     <label for="customer">Name <span class="error-img required">*</span></label>
                                     <input required type="text" [(ngModel)]="contact.name" name="name" #name="ngModel" placeholder="Name" size="40"
                                         maxlength="50" tabindex="1" class="form-control txtBoxStyle" />
+                                        <div *ngIf="f.submitted && name.invalid">
+                                            <div *ngIf="name.errors?.required" style="color: red;">Please enter your name</div>
+                                        </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="crmField col-lg-6">
@@ -77,6 +76,9 @@
                                     <input required type="email" [(ngModel)]="contact.email" name="email" #email="ngModel" placeholder="Email" size="40"
                                         maxlength="50" tabindex="2" class="form-control txtBoxStyle"
                                         data-parsley-trigger="change" />
+                                        <div *ngIf="f.submitted && email.invalid">
+                                            <div *ngIf="email.errors?.required" style="color: red;">Please enter your email</div>
+                                        </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -84,18 +86,18 @@
                                     <label for="phone">Phone <span class="error-img required">*</span></label>
                                     <input required type="text" [(ngModel)]="contact.phone" name="phone" #phone="ngModel" placeholder="Phone" size="40"
                                         maxlength="50" tabindex="3" class="form-control txtBoxStyle" />
+                                        <div *ngIf="f.submitted && phone.invalid">
+                                            <div *ngIf="phone.errors?.required" style="color: red;">Please enter your phone</div>
+                                        </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <!-- <div class="crmField col-lg-12">
-                                    <label for="subject">Subject <span class="error-img required">*</span></label>
-                                    <input required [(ngModel)]="contact.title" name="title" #title="ngModel" type="text" placeholder="Subject *"
-                                        size="40" maxlength="150" tabindex="5" class="form-control txtBoxStyle" />
-                                    <div class="clearfix"></div>
-                                </div> -->
                                 <div class="crmField col-lg-12">
                                     <label for="reply">Subject <span class="error-img required">*</span></label>
                                     <textarea required [(ngModel)]="contact.title" name="title" #title="ngModel" tabindex="6" class="form-control txtBoxStyle"
                                         data-parsley-trigger="keyup" placeholder="Message"></textarea>
+                                        <div *ngIf="f.submitted && title.invalid">
+                                            <div *ngIf="title.errors?.required" style="color: red;">Please enter your subject</div>
+                                        </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="crmField col-lg-12">
