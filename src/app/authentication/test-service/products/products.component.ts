@@ -70,16 +70,10 @@ export class ProductsComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  onChangeSort(event) {
-    var value = event.target.value;
-    console.log(value)
-    console.log(this.products)
-    if(value == 1) {
-      this.products = this.products.sort((a, b) => a.name.localeCompare(b.name));
-      console.log(this.products)
-    } else if(value == 2) {
-    }
-  }
+  // onChangeSort(event) {
+  //   var value = event.target.value;
+  //   console.log(value)
+  // }
 
   onsubmit() {
     
