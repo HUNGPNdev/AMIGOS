@@ -42,7 +42,5 @@ public class CartProductSizeEntity
     @Enumerated(EnumType.STRING)
     private EnumStatusCart status;
 
-    private Boolean isDeleted;
-
     private Date createAt;
 }

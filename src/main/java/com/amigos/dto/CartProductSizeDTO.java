@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.util.Date;
@@ -28,8 +27,6 @@ public class CartProductSizeDTO
 
     @Enumerated(EnumType.STRING)
     private EnumStatusCart status;
-
-    private Boolean isDeleted;
 
     private Date createAt;
 }

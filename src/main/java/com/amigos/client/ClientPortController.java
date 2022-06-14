@@ -4,7 +4,6 @@ import com.amigos.cartproductsize.CartProductSizeService;
 import com.amigos.category.CategoryService;
 import com.amigos.common.ResponseApi;
 import com.amigos.dto.CartProductSizeDTO;
-import com.amigos.dto.CategoryDTO;
 import com.amigos.product.ProductService;
 import com.amigos.productsize.ProductSizeService;
 import com.amigos.productsize.repository.ProductSizeRepository;
@@ -71,8 +70,8 @@ public class ClientPortController {
         return ResponseEntity.ok(productService.getProductFeaturedProducts(limit));
     }
 
-    @GetMapping("/cart-product-size/{productSizeId}/count/{count}")
-    public ResponseEntity<ResponseApi> addToCart(HttpServletRequest httpServletRequest, @RequestBody CartProductSizeDTO cartProductSize) {
+    @PostMapping("/cart-product-size/add-to-cart")
+    public ResponseEntity<ResponseApi> addToCart(@RequestBody CartProductSizeDTO cartProductSize, HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(cartProductSizeService.addToCart(httpServletRequest, cartProductSize));
     }
 }
