@@ -51,11 +51,11 @@ public class CategoryController {
         return ResponseEntity.ok(service.delete(id));
     }
 
-    @GetMapping("")
-    @PreAuthorize("permitAll()")
-    public ResponseEntity<ResponseApi> getLimit() {
-        return ResponseEntity.ok(service.getLimit());
-    }
+//    @GetMapping("")
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<ResponseApi> getLimit() {
+//        return ResponseEntity.ok(service.getLimit());
+//    }
 
     @GetMapping("/alls")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")

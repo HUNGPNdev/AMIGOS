@@ -1,5 +1,6 @@
 package com.amigos.productsize.model;
 
+import com.amigos.cartproductsize.model.CartProductSizeEntity;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.size.model.SizeEntity;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,4 +44,6 @@ public class ProductSizeEntity
 
     private Boolean isDeleted;
 
+    @OneToMany(mappedBy = "productSizeId")
+    private List<CartProductSizeEntity> cartProductSizes = new ArrayList<>();
 }

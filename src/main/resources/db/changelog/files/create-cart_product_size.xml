@@ -25,7 +25,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
                 <constraints nullable="false"/>
             </column>
             <column name="count" type="INT" defaultValue="0"/>
-            <column name="status" type="ENUM('WAITING_FOR_CONFIRMATION', 'DELIVERING', 'DELIVERED', 'CANCELLED')" defaultValue="WAITING_FOR_CONFIRMATION">
+            <column name="status" type="ENUM('SHOPPING_CART', 'WAITING_FOR_CONFIRMATION', 'DELIVERING', 'DELIVERED', 'CANCELLED')" defaultValue="WAITING_FOR_CONFIRMATION">
                 <constraints nullable="false"/>
             </column>
             <column name="is_deleted" type="bit(1)" defaultValue="false"/>

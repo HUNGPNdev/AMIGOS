@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -55,6 +56,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductSizeRepository productSizeRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Override
     @Transactional
@@ -118,6 +122,33 @@ public class ProductServiceImpl implements ProductService {
     public ResponseApi getAllProductByCateId(UUID cateId) {
         List<UUID> productIds = productSizeRepository.getProductIdByCateId(cateId);
         List<ProductDTO> productEntities = productRepository.findAllByCateIdAndProductId(productIds);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductNewReleases(int limit)
+    {
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false order by p.createAt desc").setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductRelatedItem(int limit, UUID cateId, UUID productId) {
+        List<UUID> productIds = productSizeRepository.getProductIdByCateId(cateId);
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.id in ?1 and p.id <> ?2")
+                .setParameter(1, productIds).setParameter(2, productId).setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getProductFeaturedProducts(int limit) {
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false").setMaxResults(limit).getResultList();
+        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;
     }

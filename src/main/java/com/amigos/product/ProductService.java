@@ -13,5 +13,8 @@ public interface ProductService {
     ResponseApi getProductById(UUID id);
     ResponseApi delete(UUID id);
     ResponseApi getAllProductByCateId(UUID cateId);
+    ResponseApi getProductNewReleases(int limit);
+    ResponseApi getProductRelatedItem(int limit, UUID cateId, UUID productId);
+    ResponseApi getProductFeaturedProducts(int limit);
 
 }
