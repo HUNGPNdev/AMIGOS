@@ -17,23 +17,35 @@ export class RegisterComponent implements OnInit {
  
   constructor(private authService: AuthService) { }
  
-  ngOnInit() { }
+  ngOnInit() {
+  //  this.form = new SigupInfo();
+   }
 
   onSubmit() {
     console.log(this.form);
 
     this.signupInfo = new SigupInfo(
-      this.form.name,
+      this.form.firstName,
+      this.form.lastName,
       this.form.username,
       this.form.email,
-      this.form.password
+      this.form.password,
+      this.form.address,
+      this.form.phone
     );
  
     this.authService.signUp(this.signupInfo).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
+     (data:any) => {
+       
+          if(data.code == 400){
+            alert(data.message)
+          }else{
+            alert("Register success")
+            this.isSignedUp = true;
+            this.isSignUpFailed = false;
+            location.reload();
+          }
+       
       },
       error => {
         console.log(error);

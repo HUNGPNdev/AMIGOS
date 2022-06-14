@@ -1,15 +1,23 @@
 export class SigupInfo {
-    name: string;
-    username: string;
+    lastName: string;
+    userName: string;
     email: string;
     role: string[];
     password: string;
- 
-    constructor(name: string, username: string, email: string, password: string) {
-        this.name = name;
-        this.username = username;
+    firstName:string;
+    address:string;
+    phone :number;
+    
+    constructor(firstname: string,lastName:string, username: string, email: string, password: string, adress:string,phone:number) {
+        this.firstName = firstname;
+        this.lastName = lastName;
+        this.userName = username;
         this.email = email;
         this.password = password;
         this.role = ['user'];
+        this.address = adress;
+        this.phone = phone;
     }
+   
+    
 }
