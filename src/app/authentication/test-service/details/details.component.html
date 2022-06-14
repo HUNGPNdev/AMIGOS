@@ -97,9 +97,9 @@
                             <div class="qtybox-addcart form-group">
                                 <label>Quantity</label>
                                 <label class="qty-input">
-                                    <input type="number" name="qty-0" [value]="quantity" class="form-control" (change)="onChangeSort($event)" />
+                                    <input type="number" name="qty-0" [value]="quantity" min="1" class="form-control" (change)="onChangeSort($event)" />
                                 </label>
-                                <button (click)="addToCart()" type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
+                                <button (click)="addToCart(productSize.id)" type="button" id="Add" class="btn btn-default btn-inverse btn-addcart"><i
                                         class="icon-basket" role="presentation" ></i> Add to Cart</button>
                             </div>
                         </div>
