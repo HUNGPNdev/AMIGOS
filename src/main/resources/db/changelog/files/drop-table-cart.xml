@@ -17,6 +17,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
                 <constraints nullable="false"/>
             </column>
             <column name="address" type="TEXT" defaultValue="Null"/>
+            <column name="price" type="DOUBLE" defaultValue="0.0"/>
         </addColumn>
         <dropColumn columnName="cart_id" columnDataType="BINARY(16)"
                     tableName="cart_product_size"/>

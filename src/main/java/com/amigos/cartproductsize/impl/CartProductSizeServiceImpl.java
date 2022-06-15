@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
@@ -52,7 +53,8 @@ public class CartProductSizeServiceImpl implements CartProductSizeService
         if(cartProductSizeEntity != null) {
             cartProductSizeEntity.setCount(cartProductSizeEntity.getCount() + cartProductSize.getCount());
             cartProductSizeEntity = cartProductSizeRepository.save(cartProductSizeEntity);
-            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizeEntity);
+            modelMapper.map(cartProductSizeEntity, cartProductSize);
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSize);
             return rs;
         }
         cartProductSizeEntity = new CartProductSizeEntity();
@@ -68,7 +70,20 @@ public class CartProductSizeServiceImpl implements CartProductSizeService
         cartProductSizeEntity = cartProductSizeRepository.save(cartProductSizeEntity);
         modelMapper.map(cartProductSizeEntity, cartProductSize);
 
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizeEntity);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSize);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi getCartByUser(HttpServletRequest httpServletRequest)
+    {
+        User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
+        if(createBy == null) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        List<CartProductSizeDTO> cartProductSizes = cartProductSizeRepository.findCartByUserIdAndStatus(createBy.getId(), EnumStatusCart.SHOPPING_CART);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizes);
         return rs;
     }
 }
