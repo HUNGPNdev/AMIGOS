@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartProductSize } from '../../entity/client-port/cart-product-size';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { Product } from '../../entity/client-port/product';
@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit {
 
   constructor(private clientPortService: ClientPortService,
     private route: ActivatedRoute,
+    private router: Router,
     private token: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -57,7 +58,6 @@ export class DetailsComponent implements OnInit {
     this.clientPortService.findProductSizeByProductId(id).subscribe( data => {
       this.productSizeModels = data.data;
       this.productSizeModel = this.productSizeModels[0];
-      console.log(this.productSizeModel);
     }, error => console.log(error))
   }
 
@@ -74,9 +74,8 @@ export class DetailsComponent implements OnInit {
     if(this.token.getUsername()) {
       this.cartProductSize.count = this.quantity;
       this.cartProductSize.productSizeId = productSizeId;
-      console.log(this.cartProductSize)
       this.clientPortService.addToCart(this.cartProductSize).subscribe( data => {
-        
+        this.router.navigate(['/shopping-cart']);
       }, error => console.log(error))
     } else {
       alert("Please login!")

@@ -6,4 +6,9 @@ export class CartProductSize {
     address: String;
     status: String;
     createAt: Date;
+    price: number;
+    priductId: number;
+    productName: String;
+    productSizeDiscount: number;
+    image_1: String;
 }

@@ -35,4 +35,8 @@ export class ClientPortService {
   addToCart(cartProductSize:CartProductSize): Observable<ResponseApi> {
     return this.httpClient.post<ResponseApi>(`${this.baseUrl+"/cart-product-size/add-to-cart"}`, cartProductSize);
   }
+
+  getCartByUser(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/cart-product-size"}`);
+  }
 }
