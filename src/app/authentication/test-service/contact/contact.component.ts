@@ -41,7 +41,8 @@ export class ContactComponent implements OnInit {
 
   createContact() {
     this.contactService.createContact(this.contact).subscribe( data => {
-      this.contact = new Contact();
+      alert("Create Successfully!");
+      location.reload();
       this.getAllContact();
     }, error => console.log(error));
   }
@@ -56,7 +57,8 @@ export class ContactComponent implements OnInit {
   updateById() {
     this.contactService.updateById(this.contact).subscribe( data => {
       this.id = 0;
-      this.contact = new Contact();
+      alert("Update Successfully!");
+      location.reload();
       this.getAllContact();
     }, error => console.log(error))
   }
