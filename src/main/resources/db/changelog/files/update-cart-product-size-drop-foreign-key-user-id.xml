@@ -10,8 +10,8 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <foreignKeyConstraintExists foreignKeyName="fk_cart_product_size_user_id" foreignKeyTableName="cart_product_size"/>
         </preConditions>
         <dropForeignKeyConstraint baseTableName="cart_product_size" constraintName="fk_cart_product_size_user_id" />
-        <dropColumn columnName="user_id" columnDataType="BINARY(16)"
-                    tableName="cart_product_size"/>
+        <dropColumn columnName="user_id" columnDataType="BINARY(16)" tableName="cart_product_size"/>
+        <dropColumn columnName="is_deleted" columnDataType="bit(1)" tableName="cart_product_size"/>
         <renameColumn tableName="cart_product_size" oldColumnName="product_id" newColumnName="product_size_id" columnDataType="BINARY(16)"/>
     </changeSet>
 </databaseChangeLog>

@@ -18,8 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
 
@@ -39,24 +39,34 @@ public class CartProductSizeServiceImpl implements CartProductSizeService
     @Autowired CartProductSizeRepository cartProductSizeRepository;
 
     @Override
+    @Transactional
     public ResponseApi addToCart(HttpServletRequest httpServletRequest, CartProductSizeDTO cartProductSize)
     {
-        CartProductSizeEntity cartProductSizeEntity = new CartProductSizeEntity();
-        modelMapper.map(cartProductSize, cartProductSizeEntity);
-        Optional<ProductSizeEntity> productSize = productSizeRepository.findById(cartProductSize.getProductSizeId());
-        if(productSize.isEmpty()) {
-            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-            return rs;
-        }
-        cartProductSizeEntity.setProductSizeId(productSize.get());
         User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
         if(createBy == null) {
             ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
             return rs;
         }
+        CartProductSizeEntity cartProductSizeEntity = cartProductSizeRepository.findCartByProductSizeAndUserId(cartProductSize.getProductSizeId(),
+                createBy.getId(), EnumStatusCart.SHOPPING_CART);
+        if(cartProductSizeEntity != null) {
+            cartProductSizeEntity.setCount(cartProductSizeEntity.getCount() + cartProductSize.getCount());
+            cartProductSizeEntity = cartProductSizeRepository.save(cartProductSizeEntity);
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizeEntity);
+            return rs;
+        }
+        cartProductSizeEntity = new CartProductSizeEntity();
+        Optional<ProductSizeEntity> productSize = productSizeRepository.findById(cartProductSize.getProductSizeId());
+        if(productSize.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        cartProductSizeEntity.setCount(cartProductSize.getCount());
+        cartProductSizeEntity.setProductSizeId(productSize.get());
         cartProductSizeEntity.setStatus(EnumStatusCart.SHOPPING_CART);
         cartProductSizeEntity.setUserId(createBy);
         cartProductSizeEntity = cartProductSizeRepository.save(cartProductSizeEntity);
+        modelMapper.map(cartProductSizeEntity, cartProductSize);
 
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizeEntity);
         return rs;
