@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseApi } from '../ResponseApi';
+import { CartProductSize } from './cart-product-size';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class ClientPortService {
 
   getProductFeaturedProducts(limit: any): Observable<ResponseApi> {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/products/featured/limit"}/${limit}`);
+  }
+
+  addToCart(cartProductSize:CartProductSize): Observable<ResponseApi> {
+    return this.httpClient.post<ResponseApi>(`${this.baseUrl+"/cart-product-size/add-to-cart"}`, cartProductSize);
   }
 }

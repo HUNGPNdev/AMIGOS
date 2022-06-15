@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartProductSize } from '../../entity/client-port/cart-product-size';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { Product } from '../../entity/client-port/product';
 import { ProductSize } from '../../entity/client-port/product-size';
@@ -11,6 +12,7 @@ import { TokenStorageService } from '../../entity/token-storage.service';
 })
 export class DetailsComponent implements OnInit {
   productSize: ProductSize = new ProductSize();
+  cartProductSize: CartProductSize = new CartProductSize();
   productSizeModel: ProductSize = new ProductSize();
   productSizes: ProductSize[];
   productSizeModels: ProductSize[];
@@ -68,9 +70,14 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  addToCart() {
+  addToCart(productSizeId:number) {
     if(this.token.getUsername()) {
-      console.log(this.quantity)
+      this.cartProductSize.count = this.quantity;
+      this.cartProductSize.productSizeId = productSizeId;
+      console.log(this.cartProductSize)
+      this.clientPortService.addToCart(this.cartProductSize).subscribe( data => {
+        
+      }, error => console.log(error))
     } else {
       alert("Please login!")
     }
