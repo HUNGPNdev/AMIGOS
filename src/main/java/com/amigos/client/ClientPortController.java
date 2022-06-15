@@ -74,4 +74,9 @@ public class ClientPortController {
     public ResponseEntity<ResponseApi> addToCart(@RequestBody CartProductSizeDTO cartProductSize, HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(cartProductSizeService.addToCart(httpServletRequest, cartProductSize));
     }
+
+    @GetMapping("/cart-product-size")
+    public ResponseEntity<ResponseApi> getCartByUser(HttpServletRequest httpServletRequest) {
+        return ResponseEntity.ok(cartProductSizeService.getCartByUser(httpServletRequest));
+    }
 }

@@ -1,9 +1,7 @@
 package com.amigos.dto;
 
 import com.amigos.cartproductsize.model.EnumStatusCart;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,7 +10,8 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class CartProductSizeDTO
 {
     private UUID id;
@@ -29,4 +28,15 @@ public class CartProductSizeDTO
     private EnumStatusCart status;
 
     private Date createAt;
+
+    private double price;
+
+    private UUID proId;
+
+    private String proName;
+
+    private float productSizeDiscount;
+
+    private String image_1;
+
 }

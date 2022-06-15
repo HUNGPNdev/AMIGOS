@@ -2,13 +2,20 @@ package com.amigos.cartproductsize.repository;
 
 import com.amigos.cartproductsize.model.CartProductSizeEntity;
 import com.amigos.cartproductsize.model.EnumStatusCart;
+import com.amigos.dto.CartProductSizeDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CartProductSizeRepository extends JpaRepository<CartProductSizeEntity, UUID>
 {
     @Query("select c from CartProductSizeEntity c where c.productSizeId.id = ?1 and c.userId.id = ?2 and c.status = ?3")
     CartProductSizeEntity findCartByProductSizeAndUserId(UUID productSizeId, UUID userId, EnumStatusCart status);
+
+    @Query("select new com.amigos.dto.CartProductSizeDTO(c.id, c.productSizeId.id, c.userId.id, c.count, c.address, c.status, c.createAt, c.price, c.productSizeId.productId.id, "
+            + "c.productSizeId.productId.name, c.productSizeId.discount, c.productSizeId.productId.image_1)"
+            + " from CartProductSizeEntity c where c.userId.id = ?1 and c.status = ?2")
+    List<CartProductSizeDTO> findCartByUserIdAndStatus(UUID userId, EnumStatusCart status);
 }

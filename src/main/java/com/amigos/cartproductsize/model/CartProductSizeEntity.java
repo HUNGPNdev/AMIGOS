@@ -43,4 +43,6 @@ public class CartProductSizeEntity
     private EnumStatusCart status;
 
     private Date createAt;
+
+    private double price;
 }
