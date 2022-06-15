@@ -7,8 +7,8 @@ export class CartProductSize {
     status: String;
     createAt: Date;
     price: number;
-    priductId: number;
-    productName: String;
+    proId: number;
+    proName: String;
     productSizeDiscount: number;
     image_1: String;
 }

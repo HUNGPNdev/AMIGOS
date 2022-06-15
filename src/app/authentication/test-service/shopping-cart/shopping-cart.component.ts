@@ -10,6 +10,7 @@ import { ClientPortService } from '../../entity/client-port/client-port.service'
 export class ShoppingCartComponent implements OnInit {
   cartProductSize: CartProductSize = new CartProductSize();
   cartProductSizes: CartProductSize[];
+  cartEmpty = false;
   constructor(private clientPortService: ClientPortService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,9 @@ export class ShoppingCartComponent implements OnInit {
     this.clientPortService.getCartByUser().subscribe( data => {
       this.cartProductSizes = data.data;
       console.log(this.cartProductSizes)
+      if(this.cartProductSizes.length > 0) {
+        this.cartEmpty = true;
+      }
     }, error => console.log(error))
   }
 }
