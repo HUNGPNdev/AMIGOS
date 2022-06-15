@@ -40,7 +40,6 @@ export class ListProductSizeComponent implements OnInit {
   getAllByStatus() {
     this.productSizeService.getAllByStatus(this.status).subscribe( data => {
       this.productSize = data.data;
-      console.log(this.productSize);
     }, error => console.log(error))
   }
 }

@@ -17,7 +17,7 @@ export class CreateProductSizeComponent implements OnInit {
   sizes : Size[];
   searchProductText: string;
   status = false;
-  id: number = 0;
+  id: number;
 
   constructor(private productService : ProductService,
     private productSizeService : ProductSizeService,
@@ -35,7 +35,7 @@ export class CreateProductSizeComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.id != 0) {
+    if(this.id != null) {
       this.update();
     } else {
       this.addProductSize(this.productSize);

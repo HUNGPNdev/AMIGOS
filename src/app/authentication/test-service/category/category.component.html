@@ -17,18 +17,14 @@
                         <div class="col-xs-8">
                             <div class="form-group">
                                 <label>Category Name</label>
-                                <input required type="text" [(ngModel)]="category.name" name="name"
-                                    class="form-control">
+                                <input required type="text" [(ngModel)]="category.name" name="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Status</label><br>
                                 <label for="status">true: </label>
-                                <input type="radio" [(ngModel)]="category.isDeleted" id="status" name="isDeleted"
-                                    [value]="true">
-                                &nbsp;
+                                <input type="radio" [(ngModel)]="category.isDeleted" id="status" name="isDeleted" [value]="true"> &nbsp;
                                 <label for="status1">false: </label>
-                                <input type="radio" [(ngModel)]="category.isDeleted" checked id="status1"
-                                    name="isDeleted" [value]="false">
+                                <input type="radio" [(ngModel)]="category.isDeleted" checked id="status1" name="isDeleted" [value]="false">
                             </div>
                             <button class="btn btn-primary">Save</button>
                         </div>
@@ -55,24 +51,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let p of categories | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
-                                <td>{{p.name}}</td>
-                                <td>{{p.isDeleted}}</td>
-                                <td>
-                                    <a (click)="getCateById(p.id)" class="btn btn-warning"><span
+                                <tr *ngFor="let p of categories | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
+                                    <td>{{p.name}}</td>
+                                    <td>{{p.isDeleted}}</td>
+                                    <td>
+                                        <a (click)="getCateById(p.id)" class="btn btn-warning"><span
                                             class="glyphicon glyphicon-edit"></span>
                                         Update</a>
-                                    <a (click)="deleteById(p.id)"
-                                        onclick="return confirm('Are you sure you want to delete?')"
-                                        class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-                                        Delete</a>
-                                </td>
-                            </tr>
+                                            <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+                                        Delete</a> 
+                                    </td>
+                                </tr>
                         </tbody>
                     </table>
                     <br><br>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
                 <div class="clearfix"></div>
             </div>
