@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../entity/category/Category';
 import { CategoryService } from '../../entity/category/category.service';
+import { CartProductSize } from '../../entity/client-port/cart-product-size';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { Product } from '../../entity/client-port/product';
 import { ProductSize } from '../../entity/client-port/product-size';
+import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
   selector: 'app-products',
@@ -22,9 +24,13 @@ export class ProductsComponent implements OnInit {
   searchText: string;
   p: number;
   selectedSkill: any
+  quantity = 1;
+  cartProductSize: CartProductSize = new CartProductSize();
 
   constructor(private clientPortService: ClientPortService,
     private cataService: CategoryService,
+    private token: TokenStorageService,
+    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -70,12 +76,20 @@ export class ProductsComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  // onChangeSort(event) {
-  //   var value = event.target.value;
-  //   console.log(value)
-  // }
+  onChangeSort(event) {
+    var value = event.target.value;
+    this.quantity = value;
+  }
 
-  onsubmit() {
-    
+  addToCart() {
+    if (this.token.getUsername()) {
+      this.cartProductSize.count = this.quantity;
+      this.cartProductSize.productSizeId = this.productSize.id;
+      this.clientPortService.addToCart(this.cartProductSize).subscribe(data => {
+        window.location.href = "/shopping-cart";
+      }, error => console.log(error))
+    } else {
+      alert("Please login!")
+    }
   }
 }

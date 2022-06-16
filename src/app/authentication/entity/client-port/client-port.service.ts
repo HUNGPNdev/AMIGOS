@@ -35,4 +35,24 @@ export class ClientPortService {
   addToCart(cartProductSize:CartProductSize): Observable<ResponseApi> {
     return this.httpClient.post<ResponseApi>(`${this.baseUrl+"/cart-product-size/add-to-cart"}`, cartProductSize);
   }
+
+  getCartByUser(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/cart-product-size"}`);
+  }
+
+  deleteCart(cartId:number): Observable<ResponseApi> {
+    return this.httpClient.delete<ResponseApi>(`${this.baseUrl+"/cart-product-size"}/${cartId}`);
+  }
+
+  updateCart(cartProductSize:CartProductSize): Observable<ResponseApi> {
+    return this.httpClient.put<ResponseApi>(`${this.baseUrl+"/cart-product-size"}`, cartProductSize);
+  }
+
+  countCartByUserId(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/cart-product-size/count"}`);
+  }
+
+  getUserDetailByUserName(userName:String): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/user"}/${userName}`);
+  }
 }

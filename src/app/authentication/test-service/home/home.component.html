@@ -7,10 +7,10 @@
           tabindex="-1" aria-label="carousel" role="contentinfo">
           <ul class="slides" tabindex="-1">
 
-            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img
-                  src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a></li>
-            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img
-                  src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a></li>
+            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png"
+                  alt="" tabindex="-1" /></a></li>
+            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png"
+                  alt="" tabindex="-1" /></a></li>
 
           </ul>
         </div>
@@ -28,13 +28,15 @@
             <!-- <script class="slick-cloned"
               type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
             <li *ngFor="let p of productFeaturedProducts">
-              <div class="product-item" data-catalogid="1" data-ajaxcart="1"
-                data-addcart-callback="addcart_callback" data-categoryid="0">
+              <div class="product-item" data-catalogid="1" data-ajaxcart="1" data-addcart-callback="addcart_callback"
+                data-categoryid="0">
                 <div class="img">
                   <a href="details/{{p.id}}">
-                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;" class="img-responsive" />
+                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;"
+                      class="img-responsive" />
                   </a>
-                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
+                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal"
+                    data-target=".bd-example-modal-lg">QuickView</button>
 
                 </div>
                 <div class="product-content">
@@ -45,8 +47,7 @@
                     <span class="reviews-stars rating-5" role="presentation"></span>
                   </div>
                   <div class="action">
-                    <a href="details"
-                      class="add-to-cart btn btn-default">
+                    <a href="details" class="add-to-cart btn btn-default">
                       <span class="buyitlink-text"> Select Options</span>
                       <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
                       <span class="ajaxcart-added icon-ok"></span>
@@ -66,13 +67,15 @@
         <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
           <ul class="product-items slides" data-productcols="[product-cols-number]">
             <li *ngFor="let p of productNewReleases">
-              <div class="product-item" data-catalogid="9" data-ajaxcart="1"
-                data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+              <div class="product-item" data-catalogid="9" data-ajaxcart="1" data-addcart-callback="addcart_callback"
+                data-categoryid="[cat_id]">
                 <div class="img">
                   <a href="Corner-Top-Cacti_p_9.html">
-                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;" class="img-responsive" />
+                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;"
+                      class="img-responsive" />
                   </a>
-                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
+                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal"
+                    data-target=".bd-example-modal-lg">QuickView</button>
                 </div>
                 <div class="product-content">
                   <div class="name">
@@ -90,8 +93,7 @@
                     </a>
                   </div>
                   <div id="divPrevMessage_9" style="display: none; margin-bottom:15px;">
-                    <em>You previously purchased this item on&nbsp;<span
-                        id="spnPrevPurchDate_9"></span></em>
+                    <em>You previously purchased this item on&nbsp;<span id="spnPrevPurchDate_9"></span></em>
                     <br /><a href="#" id="lnkPrevPurchOrderTracking_9">View this order</a>
                   </div>
                   <script>
@@ -137,75 +139,73 @@
 
 <!-- Modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{productSize.title}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img *ngIf="productSize.image_1"
-                                    src="http://localhost:8081/images/{{productSize.image_1}}"
-                                    style="height: 270px; width: 262;" />
-                            </div>
-                            <div class="col-md-5">
-                                <h3 itemprop="name" class="name">{{productSize.name}}</h3>
-                                <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSize.discount}}</h4>
-                                <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSize.price}}
-                                </div>
-                                <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
-                                <div id="prodDetails">
-                                    <div id="divOptionsBlock" class="options sub-section">
-                                        <div class="header">
-                                            <h4 class="page_heading ">Choose Options</h4>
-                                        </div>
-                                        <div class="options-inner">
-                                            <div class="opt-regular">
-                                                <div class="opt-label">
-                                                    <label class="label">Size</label>
-                                                </div>
-                                                <div class="opt-field">
-                                                    <label class="radio-format" *ngFor="let p of productSizes">
-                                                        <label class="radio-option">
-                                                            <input type="radio" id="{{p.sizeName}}" name="size"
-                                                                class="customoption" value="{{p.sizeName}}"
-                                                                (click)="findProductSizeBySizeName(p.sizeName)">
-                                                            <span>{{p.sizeName}} </span>
-                                                        </label>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix add-cart-block">
-                                        <div class="qty">
-                                            <input type="text" name="qty-0" value="1" class="form-control">
-                                        </div>
-                                        <div class="addcart">
-                                            <button type="button" class="btn btn-primary"><i class="icon-basket"></i>
-                                                Add to Cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i class="icon-search"></i> More
-                                            Details</a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{productSize.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <img *ngIf="productSize.image_1" src="http://localhost:8081/images/{{productSize.image_1}}"
+                  style="height: 270px; width: 262;" />
+              </div>
+              <div class="col-md-5">
+                <h3 itemprop="name" class="name">{{productSize.name}}</h3>
+                <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSize.discount}}</h4>
+                <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSize.price}}
+                </div>
+                <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
+                <div id="prodDetails">
+                  <div id="divOptionsBlock" class="options sub-section">
+                    <div class="header">
+                      <h4 class="page_heading ">Choose Options</h4>
                     </div>
+                    <div class="options-inner">
+                      <div class="opt-regular">
+                        <div class="opt-label">
+                          <label class="label">Size</label>
+                        </div>
+                        <div class="opt-field">
+                          <label class="radio-format" *ngFor="let p of productSizes">
+                            <label class="radio-option">
+                              <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                value="{{p.sizeName}}" (click)="findProductSizeBySizeName(p.sizeName)">
+                              <span>{{p.sizeName}} </span>
+                            </label>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix add-cart-block">
+                    <label class="qty-input">
+                      <input type="number" class="form-control" name="qty-0" [value]="quantity" min="1"
+                        (change)="onChangeSort($event)">
+                    </label>
+                    <button (click)="addToCart()" type="button" class="btn btn-primary" data-dismiss="modal"><i
+                        class="icon-basket"></i>Add to Cart</button>
+                    <div class="clearfix"></div>
+                    <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i
+                        class="icon-search"></i> More
+                      Details</a>
+                  </div>
+                  <div class="clearfix"></div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

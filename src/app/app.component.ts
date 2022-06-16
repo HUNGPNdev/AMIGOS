@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from './authentication/entity/category/Category';
 import { CategoryService } from './authentication/entity/category/category.service';
+import { ClientPortService } from './authentication/entity/client-port/client-port.service';
 import { TokenStorageService } from './authentication/entity/token-storage.service';
 
 @Component({
@@ -12,18 +13,26 @@ import { TokenStorageService } from './authentication/entity/token-storage.servi
 export class AppComponent {
 
   categories: Category[];
-
+  count: number;
   constructor(private cataService: CategoryService,
+    private clientPortService: ClientPortService,
     private router: Router) { }
  
   ngOnInit() {
     this.getAllCata();
+    this.countCartByUserId();
   }
 
   getAllCata() {
     var limit = 5;
     this.cataService.listCategory(limit).subscribe( data => {
       this.categories = data.data;
+    }, error => console.log(error))
+  }
+
+  countCartByUserId() {
+    this.clientPortService.countCartByUserId().subscribe( data => {
+      this.count = data.data;
     }, error => console.log(error))
   }
 }

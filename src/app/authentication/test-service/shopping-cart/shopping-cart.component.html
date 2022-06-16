@@ -9,7 +9,7 @@
                 </li>
                 <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                     <meta itemprop="position" content="2">
-                    <a href="index.html?error=[id]" itemprop="name"><span itemprop="name">View Cart</span></a>
+                    <a itemprop="name"><span itemprop="name">View Cart</span></a>
                 </li>
             </ol>
         </div>
@@ -20,18 +20,88 @@
             <h1 class="page_heading">View Cart</h1>
         </div>
     </section>
-    <section id="message" class="page-content">
+    <section id="message" class="page-content" *ngIf="!cartEmpty">
         <div class="container">
             <div class="content-area">
-                <form method="post" action="https://branch-preview-com.3dcartstores.com/home.asp">
-                    <p class="notice"> <i class="icon-attention"></i>You don't have any products in your shopping cart.</p>
-
-                    <div class="button">
-                        <input type="button" value="Click here to continue" class="btn btn-default" onclick="location.href='index.html';" />
-                    </div>
-
-                </form>
+                <p class="notice"> <i class="icon-attention"></i>You don't have any products in your shopping cart.</p>
+                <div class="button">
+                    <input type="button" value="Click here to continue" class="btn btn-default" onclick="location.href='index.html';" />
+                </div>
             </div>
         </div>
+    </section>
+
+    <section class="cart-details" *ngIf="cartEmpty">
+        <form action="https://branch-preview-com.3dcartstores.com/recalculate.asp" method="post"
+            name="recalculate" id="recalculate" data-parsley-validate>
+            <div class="container">
+                <div class="row">
+                    <div class="cart-left col-lg-9 col-md-8">
+                        <div id="mobile-sticky-checkout" class="mobile-sticky-checkout order-summary">
+                            <div class="summary-totals">
+                                Cart Subtotal (1 items): <span class="summary-totals-colors">$14.99</span>
+                            </div>
+                            <div class="checkout-btns">
+                                <a class="btn btn-primary btn-checkout">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                        <ul class="cart-items">
+                            <li class="items-header">
+                                <span class="item-name">ITEMS</span>
+                                <span class="item-price">PRICE</span>
+                                <span class="item-qty">QTY</span>
+                                <span class="item-total">Total</span>
+                            </li>
+                            <li class="cart-item" *ngFor="let p of cartProductSizes">
+                                <span class="item-name clearfix">
+                                    <span class="item-thumb">
+                                        <a href="details/{{p.proId}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
+                                    </span>
+                                    <span class="item-name-right">
+                                        <span class="item-fullname"><a href="details/{{p.proId}}">{{p.proName}} - {{p.cartSizeName}}</a></span>
+                                        <span class="item-actions">
+                                            <span class="item-action">
+                                                <a class="removeItem" (click)="deleteCart(p.id)"><i class="icon-cancel"></i>Delete</a>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <span class="item-price">${{p.price}}</span>
+                                <span class="quantity item-qty">
+                                    <span class="quant-input">
+                                        <input type="number" value="{{p.count}}" min="1" class="form-control" (change)="updateCount($event, p.id)"/>
+                                    </span>
+                                    <a class="update-qty" (click)="updateCart(p.id)">Update</a>
+                                </span>
+                                <span class="item-total">${{p.price * p.count}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="cart-right" class="cart-right col-lg-3 col-md-4">
+                        <div id="cart-box" class="cart-box">
+                            <div class="cart-box-sticky">
+                                <div class="order-summary">
+                                    <h4>Order Summary</h4>
+                                </div>
+                                <div class="row subtotal-details carttotal-cols">
+                                    <div class="col-xs-6 carttotal-label">Item</div>
+                                    <div class="col-xs-6 carttotal-price">{{cartProductSizes.length}}</div>
+                                </div>
+                                <div class="row total-details carttotal-cols">
+                                    <div class="col-xs-6 carttotal-label">Subtotal: </div>
+                                    <div class="col-xs-6 carttotal-price">$ {{totalPrice}}</div>
+                                </div>
+                                <div class="checkout-btns">
+                                    <a routerLink="../cart-order" class="btn btn-primary btn-checkout">Proceed to Order</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continue-shopping">
+                            <a href="home"><i class="icon-left"></i> Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </section>
 </div>
