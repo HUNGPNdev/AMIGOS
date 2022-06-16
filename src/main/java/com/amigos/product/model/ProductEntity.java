@@ -58,7 +58,8 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "productId")
     private List<ProductSizeEntity> productSizes = new ArrayList<>();
-
+    @OneToMany(mappedBy = "productId")
+    private List<ProductSizeEntity> productCustomerReview = new ArrayList<>();
     private Date createAt;
 
     private Date updateAt;
