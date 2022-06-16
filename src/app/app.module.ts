@@ -21,6 +21,7 @@ import { ShoppingCartComponent } from './authentication/test-service/shopping-ca
 import { DetailsComponent } from './authentication/test-service/details/details.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CartOrderComponent } from './authentication/test-service/cart-order/cart-order.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BlogComponent,
     AccountComponent,
     ShoppingCartComponent,
-    DetailsComponent
+    DetailsComponent,
+    CartOrderComponent
   ],
   imports: [
     NgxPaginationModule,

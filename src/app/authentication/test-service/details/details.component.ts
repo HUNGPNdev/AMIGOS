@@ -16,8 +16,9 @@ export class DetailsComponent implements OnInit {
   productSizeModel: ProductSize = new ProductSize();
   productSizes: ProductSize[];
   productSizeModels: ProductSize[];
-  productId:number;
+  productId: number;
   quantity = 1;
+  quantityPopup = 1;
   products: Product[];
 
   constructor(private clientPortService: ClientPortService,
@@ -31,7 +32,7 @@ export class DetailsComponent implements OnInit {
   }
 
   findProductSizeByProductId() {
-    this.clientPortService.findProductSizeByProductId(this.productId).subscribe( data => {
+    this.clientPortService.findProductSizeByProductId(this.productId).subscribe(data => {
       this.productSizes = data.data;
       this.productSize = this.productSizes[0];
       this.getProductRelatedItem(this.productSize.cateId, this.productId);
@@ -39,43 +40,43 @@ export class DetailsComponent implements OnInit {
   }
 
   findProductSizeBySizeName(sizeName: String) {
-    for(var i=0; i<= this.productSizes.length; i++) {
-      if(this.productSizes[i].sizeName == sizeName) {
+    for (var i = 0; i <= this.productSizes.length; i++) {
+      if (this.productSizes[i].sizeName == sizeName) {
         this.productSize = this.productSizes[i];
         break;
       }
     }
   }
 
-  getProductRelatedItem(cateId:number, productId:number) {
+  getProductRelatedItem(cateId: number, productId: number) {
     var limit = 4;
-    this.clientPortService.getProductRelatedItem(limit, cateId, productId).subscribe( data => {
+    this.clientPortService.getProductRelatedItem(limit, cateId, productId).subscribe(data => {
       this.products = data.data;
     }, error => console.log(error))
   }
 
   findProductSizeByProductIdModel(id: number) {
-    this.clientPortService.findProductSizeByProductId(id).subscribe( data => {
+    this.clientPortService.findProductSizeByProductId(id).subscribe(data => {
       this.productSizeModels = data.data;
       this.productSizeModel = this.productSizeModels[0];
     }, error => console.log(error))
   }
 
   findProductSizeBySizeNameModel(sizeName: String) {
-    for(var i=0; i<= this.productSizeModels.length; i++) {
-      if(this.productSizeModels[i].sizeName == sizeName) {
+    for (var i = 0; i <= this.productSizeModels.length; i++) {
+      if (this.productSizeModels[i].sizeName == sizeName) {
         this.productSizeModel = this.productSizeModels[i];
         break;
       }
     }
   }
 
-  addToCart(productSizeId:number) {
-    if(this.token.getUsername()) {
+  addToCart(productSizeId: number) {
+    if (this.token.getUsername()) {
       this.cartProductSize.count = this.quantity;
       this.cartProductSize.productSizeId = productSizeId;
-      this.clientPortService.addToCart(this.cartProductSize).subscribe( data => {
-        this.router.navigate(['/shopping-cart']);
+      this.clientPortService.addToCart(this.cartProductSize).subscribe(data => {
+        window.location.href = "/shopping-cart";
       }, error => console.log(error))
     } else {
       alert("Please login!")
@@ -85,5 +86,22 @@ export class DetailsComponent implements OnInit {
   onChangeSort(event) {
     var value = event.target.value;
     this.quantity = value;
+  }
+
+  onChangeSortPopup(event) {
+    var value = event.target.value;
+    this.quantityPopup = value;
+  }
+
+  addToCartPopup() {
+    if (this.token.getUsername()) {
+      this.cartProductSize.count = this.quantity;
+      this.cartProductSize.productSizeId = this.productSizeModel.id;
+      this.clientPortService.addToCart(this.cartProductSize).subscribe(data => {
+        window.location.href = "/shopping-cart";
+      }, error => console.log(error))
+    } else {
+      alert("Please login!")
+    }
   }
 }

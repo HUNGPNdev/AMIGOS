@@ -4,6 +4,7 @@ import { AboutComponent } from './authentication/test-service/about/about.compon
 import { AccountComponent } from './authentication/test-service/account/account.component';
 import { AdminComponent } from './authentication/test-service/admin/admin.component';
 import { BlogComponent } from './authentication/test-service/blog/blog.component';
+import { CartOrderComponent } from './authentication/test-service/cart-order/cart-order.component';
 import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { DetailsComponent } from './authentication/test-service/details/details.component';
 import { HomeComponent } from './authentication/test-service/home/home.component';
@@ -66,6 +67,10 @@ const routes: Routes = [
 {
     path: 'details/:productId',
     component: DetailsComponent
+},
+{
+    path: 'cart-order',
+    component: CartOrderComponent
 },
 {
     path: '',

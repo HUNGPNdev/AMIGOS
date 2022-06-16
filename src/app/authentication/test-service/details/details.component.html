@@ -207,14 +207,10 @@
                                             </div>
                                         </div>
                                         <div class="clearfix add-cart-block">
-                                            <div class="qty">
-                                                <input type="text" name="qty-0" value="1" class="form-control">
-                                            </div>
-                                            <div class="addcart">
-                                                <button type="button" class="btn btn-primary"><i
-                                                        class="icon-basket"></i>
-                                                    Add to Cart</button>
-                                            </div>
+                                            <label class="qty-input">
+                                                <input type="number"  class="form-control" name="qty-0" [value]="quantityPopup" min="1" (change)="onChangeSortPopup($event)">
+                                            </label>
+                                            <button (click)="addToCartPopup()" type="button" class="btn btn-primary" data-dismiss="modal"><i class="icon-basket" data-dismiss="modal"></i>Add to Cart</button>
                                             <div class="clearfix"></div>
                                             <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i class="icon-search"></i> More
                                                 Details</a>

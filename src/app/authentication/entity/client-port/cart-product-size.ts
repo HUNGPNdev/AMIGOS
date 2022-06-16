@@ -11,4 +11,6 @@ export class CartProductSize {
     proName: String;
     productSizeDiscount: number;
     image_1: String;
+    cartSizeId: number;
+    cartSizeName: String;
 }

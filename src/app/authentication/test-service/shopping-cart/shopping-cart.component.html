@@ -9,7 +9,7 @@
                 </li>
                 <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                     <meta itemprop="position" content="2">
-                    <a href="index.html?error=[id]" itemprop="name"><span itemprop="name">View Cart</span></a>
+                    <a itemprop="name"><span itemprop="name">View Cart</span></a>
                 </li>
             </ol>
         </div>
@@ -55,15 +55,13 @@
                             <li class="cart-item" *ngFor="let p of cartProductSizes">
                                 <span class="item-name clearfix">
                                     <span class="item-thumb">
-                                        <a href="details/{{p.id}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
+                                        <a href="details/{{p.proId}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
                                     </span>
                                     <span class="item-name-right">
-                                        <span class="item-fullname"><a href="details/{{p.id}}">{{p.proName}}</a></span>
+                                        <span class="item-fullname"><a href="details/{{p.proId}}">{{p.proName}} - {{p.cartSizeName}}</a></span>
                                         <span class="item-actions">
                                             <span class="item-action">
-                                                <a class="removeItem" href="#"
-                                                    onclick="document.recalculate.qty0.value=0;document.recalculate.submit();"><i
-                                                        class="icon-cancel"></i>Delete</a>
+                                                <a class="removeItem" (click)="deleteCart(p.id)"><i class="icon-cancel"></i>Delete</a>
                                             </span>
                                         </span>
                                     </span>
@@ -71,16 +69,13 @@
                                 <span class="item-price">${{p.price}}</span>
                                 <span class="quantity item-qty">
                                     <span class="quant-input">
-                                        <input type="number" value="{{p.count}}" min="1" class="form-control" />
+                                        <input type="number" value="{{p.count}}" min="1" class="form-control" (change)="updateCount($event, p.id)"/>
                                     </span>
-                                    <a href="#" class="update-qty">Update</a>
+                                    <a class="update-qty" (click)="updateCart(p.id)">Update</a>
                                 </span>
                                 <span class="item-total">${{p.price * p.count}}</span>
                             </li>
                         </ul>
-                        <div class="left-subtotal summary-totals">
-                            Subtotal (1 items): <span class="summary-totals-colors">$14.99</span>
-                        </div>
                     </div>
                     <div id="cart-right" class="cart-right col-lg-3 col-md-4">
                         <div id="cart-box" class="cart-box">
@@ -89,22 +84,20 @@
                                     <h4>Order Summary</h4>
                                 </div>
                                 <div class="row subtotal-details carttotal-cols">
-                                    <div class="col-xs-6 carttotal-label">Subtotal</div>
-                                    <div class="col-xs-6 carttotal-price">$14.99</div>
+                                    <div class="col-xs-6 carttotal-label">Item</div>
+                                    <div class="col-xs-6 carttotal-price">{{cartProductSizes.length}}</div>
                                 </div>
                                 <div class="row total-details carttotal-cols">
-                                    <div class="col-xs-6 carttotal-label">Total</div>
-                                    <div class="col-xs-6 carttotal-price">$14.99</div>
+                                    <div class="col-xs-6 carttotal-label">Subtotal: </div>
+                                    <div class="col-xs-6 carttotal-price">$ {{totalPrice}}</div>
                                 </div>
                                 <div class="checkout-btns">
-                                    <a href="checkout_one.html?step=1"
-                                        class="btn btn-primary btn-checkout">Proceed to Checkout</a>
+                                    <a routerLink="../cart-order" class="btn btn-primary btn-checkout">Proceed to Order</a>
                                 </div>
                             </div>
                         </div>
                         <div class="continue-shopping">
-                            <a href="Cozy-Bloom-Shrub_p_2.html?itemid=2"><i class="icon-left"></i> Continue
-                                Shopping</a>
+                            <a href="home"><i class="icon-left"></i> Continue Shopping</a>
                         </div>
                     </div>
                 </div>

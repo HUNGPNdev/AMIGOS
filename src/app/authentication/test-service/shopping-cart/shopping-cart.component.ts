@@ -11,6 +11,8 @@ export class ShoppingCartComponent implements OnInit {
   cartProductSize: CartProductSize = new CartProductSize();
   cartProductSizes: CartProductSize[];
   cartEmpty = false;
+  totalPrice: number;
+
   constructor(private clientPortService: ClientPortService) { }
 
   ngOnInit(): void {
@@ -18,12 +20,38 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getCartByUser() {
-    this.clientPortService.getCartByUser().subscribe( data => {
+    this.clientPortService.getCartByUser().subscribe(data => {
       this.cartProductSizes = data.data;
-      console.log(this.cartProductSizes)
-      if(this.cartProductSizes.length > 0) {
+      if (this.cartProductSizes.length > 0) {
         this.cartEmpty = true;
       }
+      this.totalPrice = Number.parseFloat(data.message);
     }, error => console.log(error))
   }
+
+  deleteCart(cartId: number) {
+    this.clientPortService.deleteCart(cartId).subscribe(data => {
+      this.getCartByUser();
+    }, error => console.log(error))
+  }
+
+  updateCount(event, cartId: number) {
+    var value = event.target.value;
+    for (var i = 0; i <= this.cartProductSizes.length; i++) {
+      if (this.cartProductSizes[i].id == cartId) {
+        this.cartProductSizes[i].count = value;
+      }
+    }
+  }
+
+  updateCart(cartId: number) {
+    for (var i = 0; i <= this.cartProductSizes.length; i++) {
+      if (this.cartProductSizes[i].id == cartId) {
+        this.clientPortService.updateCart(this.cartProductSizes[i]).subscribe(data => {
+          this.getCartByUser();
+        }, error => console.log(error))
+      }
+    }
+  }
+
 }
