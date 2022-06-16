@@ -10,7 +10,7 @@
     <include file="/db/changelog/files/create-user-role.xml"/>
     <include file="/db/changelog/files/create-contact.xml"/>
     <include file="/db/changelog/files/create-blog.xml"/>
-    <include file="/db/changelog/files/create-cart.xml"/>
+    <include file="/db/changelog/files/create-orders.xml"/>
     <include file="/db/changelog/files/create-category.xml"/>
     <include file="/db/changelog/files/create-product.xml"/>
     <include file="/db/changelog/files/create-size.xml"/>
@@ -18,8 +18,5 @@
     <include file="/db/changelog/files/create-cart_product_size.xml"/>
     <include file="/db/changelog/files/create-customer_review.xml"/>
     <include file="/db/changelog/files/product-drop-foreign-key-update-by.xml"/>
-    <include file="/db/changelog/files/update-cart-product-size-update-foreign-key-product.xml"/>
-    <include file="/db/changelog/files/update-cart-product-size-drop-foreign-key-user-id.xml"/>
-    <include file="/db/changelog/files/drop-table-cart.xml"/>
 
 </databaseChangeLog>

@@ -5,4 +5,5 @@ import com.amigos.common.ResponseApi;
 
 public interface UserService {
     ResponseApi registerUser(SignUpForm signUpRequest);
+    ResponseApi findByUserName(String userName);
 }

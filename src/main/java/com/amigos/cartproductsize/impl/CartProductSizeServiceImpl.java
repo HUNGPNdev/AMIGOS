@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
 
@@ -83,7 +84,53 @@ public class CartProductSizeServiceImpl implements CartProductSizeService
             return rs;
         }
         List<CartProductSizeDTO> cartProductSizes = cartProductSizeRepository.findCartByUserIdAndStatus(createBy.getId(), EnumStatusCart.SHOPPING_CART);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cartProductSizes);
+        Double totalPrice = 0.0;
+        for (CartProductSizeDTO c: cartProductSizes) {
+            totalPrice += c.getCount() * c.getPrice();
+        }
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), String.valueOf(totalPrice), cartProductSizes);
+        return rs;
+    }
+
+    @Override
+    @Transactional
+    public ResponseApi deleteCart(UUID cartId)
+    {
+        Optional<CartProductSizeEntity> cartProductSize = cartProductSizeRepository.findById(cartId);
+        if(cartProductSize.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        cartProductSizeRepository.delete(cartProductSize.get());
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+        return rs;
+    }
+
+    @Override
+    public ResponseApi updateCart(CartProductSizeDTO cartProductSize)
+    {
+        CartProductSizeEntity cartProductSizeEntity = cartProductSizeRepository.findCartByProductSizeAndUserId(cartProductSize.getProductSizeId(),
+                cartProductSize.getUserId(), EnumStatusCart.SHOPPING_CART);
+        if(cartProductSizeEntity == null) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        cartProductSizeEntity.setCount(cartProductSize.getCount());
+        cartProductSizeRepository.save(cartProductSizeEntity);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+        return rs;
+    }
+
+    @Override
+    public ResponseApi countCartByUserId(HttpServletRequest httpServletRequest)
+    {
+        User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
+        if(createBy == null) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        int count = cartProductSizeRepository.countAllByUserId_IdAndStatus(createBy.getId(), EnumStatusCart.SHOPPING_CART);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), count);
         return rs;
     }
 }

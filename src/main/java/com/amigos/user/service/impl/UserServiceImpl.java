@@ -2,6 +2,7 @@ package com.amigos.user.service.impl;
 
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.common.ResponseApi;
+import com.amigos.dto.UserCartDTO;
 import com.amigos.dto.UserDTO;
 import com.amigos.errors.handle.ObjectDuplicateException;
 import com.amigos.role.model.Role;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -80,6 +82,15 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = modelMapper.map(u, UserDTO.class);
         ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
 
+        return responseApi;
+    }
+
+    @Override
+    public ResponseApi findByUserName(String userName)
+    {
+        Optional<User> u = userRepository.findByUserName(userName);
+        UserCartDTO userDTO = modelMapper.map(u.get(), UserCartDTO.class);
+        ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
         return responseApi;
     }
 }
