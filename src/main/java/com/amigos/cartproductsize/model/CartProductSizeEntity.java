@@ -36,13 +36,11 @@ public class CartProductSizeEntity
 
     private int count;
 
-    private String address;
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private EnumStatusCart status;
 
-    private Boolean isDeleted;
-
     private Date createAt;
+
+    private double price;
 }
