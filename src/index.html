@@ -39,6 +39,49 @@
         .errorRequired {
             color: red !important;
         }
+        
+        .reviews-stars-one {
+            position: relative;
+            display: inline-block;
+            line-height: 1;
+            color: #ffd700;
+            overflow: hidden;
+            vertical-align: middle;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .reviews-stars-one:before {
+            font-family: fontello;
+            content: "\e803";
+            color: #b8b8b8;
+        }
+        
+        .reviews-stars-one:after {
+            font-family: "fontello";
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 0;
+            overflow: hidden;
+        }
+        
+        .rating:hover .rating-star:hover,
+        .rating:hover .rating-star:hover~.rating-star,
+        .rating-input:checked~.rating-star,
+        .reviews-stars,
+        .reviews-stars-one {
+            color: #ffd800;
+            font-size: 16px;
+        }
+        
+        .star-active::before {
+            color: #ffd800 !important;
+        }
+        
+        .reviews-stars.star-active:after {
+            width: 100%;
+        }
     </style>
 </head>
 
