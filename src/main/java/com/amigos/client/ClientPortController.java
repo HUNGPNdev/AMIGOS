@@ -4,6 +4,8 @@ import com.amigos.cartproductsize.CartProductSizeService;
 import com.amigos.category.CategoryService;
 import com.amigos.common.ResponseApi;
 import com.amigos.dto.CartProductSizeDTO;
+import com.amigos.dto.OrderCartDTO;
+import com.amigos.orders.OrderService;
 import com.amigos.product.ProductService;
 import com.amigos.productsize.ProductSizeService;
 import com.amigos.productsize.repository.ProductSizeRepository;
@@ -36,7 +38,11 @@ public class ClientPortController {
     @Autowired
     CartProductSizeService cartProductSizeService;
 
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/categories/limit/{limit}")
     public ResponseEntity<ResponseApi> getLimit(@NotEmpty @PathVariable("limit") int limit) {
@@ -102,5 +108,10 @@ public class ClientPortController {
     @GetMapping("/user/{userName}")
     public ResponseEntity<ResponseApi> getUserDetailByUserName(@NotEmpty @PathVariable("userName") String userName) {
         return ResponseEntity.ok(userService.findByUserName(userName));
+    }
+
+    @PostMapping("/orders")
+    public ResponseEntity<ResponseApi> goToOrders(@RequestBody OrderCartDTO orderCartDTO, HttpServletRequest httpServletRequest) {
+        return ResponseEntity.ok(orderService.goToOrders(orderCartDTO, httpServletRequest));
     }
 }

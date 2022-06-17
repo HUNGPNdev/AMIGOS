@@ -20,4 +20,6 @@ public interface CartProductSizeRepository extends JpaRepository<CartProductSize
     List<CartProductSizeDTO> findCartByUserIdAndStatus(UUID userId, EnumStatusCart status);
 
     int countAllByUserId_IdAndStatus(UUID userId, EnumStatusCart status);
+
+    List<CartProductSizeEntity> findAllByUserId_IdAndStatus(UUID userId, EnumStatusCart status);
 }

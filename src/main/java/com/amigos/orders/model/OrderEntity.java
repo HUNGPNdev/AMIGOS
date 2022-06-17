@@ -1,7 +1,6 @@
-package com.amigos.cartproductsize.model;
+package com.amigos.orders.model;
 
-import com.amigos.orders.model.OrderEntity;
-import com.amigos.productsize.model.ProductSizeEntity;
+import com.amigos.cartproductsize.model.CartProductSizeEntity;
 import com.amigos.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,16 +9,18 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "cart_product_size")
+@Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CartProductSizeEntity
+public class OrderEntity
 {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -28,25 +29,23 @@ public class CartProductSizeEntity
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "product_size_id")
-    private ProductSizeEntity productSizeId;
-
-    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
-    private int count;
+    private String username;
 
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private EnumStatusCart status;
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
 
     private Date createAt;
 
-    private double price;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private OrderEntity orderId;
-
+    @OneToMany(mappedBy = "orderId")
+    private List<CartProductSizeEntity> cartProductSizes = new ArrayList<>();
 }

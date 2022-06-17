@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCartDTO
+public class OrderCartDTO
 {
     private UUID id;
+
+    private UUID userId;
 
     private String username;
 
@@ -24,4 +27,6 @@ public class UserCartDTO
     private String phone;
 
     private String address;
+
+    private Date createAt;
 }
