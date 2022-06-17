@@ -14,7 +14,6 @@ import com.amigos.product.model.ProductEntity;
 import com.amigos.product.repository.ProductRepository;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
     @Autowired
     ProductRepository productRepository;
     @Override
-    public ResponseApi addCustomerReview(@NotNull CustomerReviewDto customerRv, HttpServletRequest httpServletRequest) {
+    public ResponseApi addCustomerReview(CustomerReviewDto customerRv, HttpServletRequest httpServletRequest) {
         CustomerReviewEntity customerReviewEntity = new CustomerReviewEntity();
         customerReviewEntity.setComment (customerRv.getComment());
         customerReviewEntity.setIsDeleted(Boolean.FALSE);
