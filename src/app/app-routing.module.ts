@@ -5,6 +5,7 @@ import { AdminComponent } from './authentication/test-service/admin/admin.compon
 import { CreateBlogComponent } from './authentication/test-service/blog/create-blog/create-blog.component';
 import { ListBlogComponent } from './authentication/test-service/blog/list-blog/list-blog.component';
 import { CategoryComponent } from './authentication/test-service/category/category.component';
+import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { HomeComponent } from './authentication/test-service/home/home.component';
 import { LoginComponent } from './authentication/test-service/login/login.component';
 import { PmComponent } from './authentication/test-service/pm/pm.component';
@@ -53,6 +54,10 @@ const routes: Routes = [
     {
         path: 'create-product',
         component: CreateProductComponent
+    },
+    {
+        path: 'contact',
+        component: ContactComponent
     },
     {
         path: 'list-product',
