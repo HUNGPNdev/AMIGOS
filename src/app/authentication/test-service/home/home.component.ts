@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   getProductFeaturedProducts() {
     var limit = 8;
-    this.clientPortService.getProductNewReleases(limit).subscribe(data => {
+    this.clientPortService.getProductFeaturedProducts(limit).subscribe(data => {
       this.productFeaturedProducts = data.data;
     }, error => console.log(error))
   }

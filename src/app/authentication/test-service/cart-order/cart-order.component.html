@@ -113,12 +113,9 @@
                                 </div>
                             </div>
                             <div id="spanCheckout" class="checkout-section clearfix">
-                                <a routerLink="../shopping-cart" class="btn btn-link"><i class="icon-left"></i> Return
-                                    to Cart</a>
+                                <a routerLink="../shopping-cart" class="btn btn-link"><i class="icon-left"></i> Return to Cart</a>
                                 <div class="pull-right">
-                                    <button type="button" onclick="doCheckout(this.form,'checkoutButton');"
-                                        class="btn btn-lg btn-primary" id="submit-button"><i class="icon-basket"></i>
-                                        Check out</button>
+                                    <button (click)="goToOrders()" type="button" class="btn btn-lg btn-primary" id="submit-button"><i class="icon-basket"></i>Check out</button>
                                 </div>
                             </div>
                         </div>

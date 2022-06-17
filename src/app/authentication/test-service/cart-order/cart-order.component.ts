@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartProductSize } from '../../entity/client-port/cart-product-size';
-import { ClientPortService } from '../../entity/client-port/client-port.service';
-import { UserCart } from '../../entity/client-port/user-cart';
+import { ClientPortService } from '../../entity/client-port/client-port.service'; import { OrderCart } from '../../entity/client-port/user-cart';
 import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
@@ -11,15 +10,15 @@ import { TokenStorageService } from '../../entity/token-storage.service';
 export class CartOrderComponent implements OnInit {
   cartProductSizes: CartProductSize[];
   totalPrice: number;
-  userCart: UserCart = new UserCart();
-  
+  userCart: OrderCart = new OrderCart();
+
   constructor(private clientPortService: ClientPortService,
     private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getCartByUser();
     this.getUserDetailByUserName();
-    
+
   }
 
   getCartByUser() {
@@ -33,7 +32,17 @@ export class CartOrderComponent implements OnInit {
     var userName = this.token.getUsername();
     this.clientPortService.getUserDetailByUserName(userName).subscribe(data => {
       this.userCart = data.data;
-      console.log(data)
     }, error => console.log(error))
+  }
+
+  goToOrders() {
+    console.log("goToOrders")
+    if (this.token.getUsername()) {
+      this.clientPortService.goToOrders(this.userCart).subscribe(data => {
+        window.location.href = "/shopping-cart";
+      }, error => console.log(error))
+    } else {
+      alert("Please login!")
+    }
   }
 }
