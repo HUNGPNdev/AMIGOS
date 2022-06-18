@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section><br>
 
     <section class="cart-details" *ngIf="cartEmpty">
         <form action="https://branch-preview-com.3dcartstores.com/recalculate.asp" method="post"
@@ -103,5 +103,42 @@
                 </div>
             </div>
         </form>
+    </section>
+    <section class="cart-details">
+        <div class="container">
+            <div class="row">
+                <div class="cart-left col-lg-9 col-md-8">
+                    <ul class="cart-items">
+                        <li class="items-header">
+                            <span class="item-name">ITEMS</span>
+                            <span class="item-price">PRICE</span>
+                            <span class="item-qty">QTY</span>
+                            <span class="item-total">Total</span>
+                        </li>
+                        <li class="cart-item" *ngFor="let p of cartProductOrdered">
+                            <span class="item-name clearfix">
+                                <span class="item-thumb">
+                                    <a href="details/{{p.proId}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
+                                </span>
+                                <span class="item-name-right">
+                                    <span class="item-fullname"><a href="details/{{p.proId}}"><b>{{p.proName}}</b></a></span>
+                                    <span class="item-actions">
+                                        <span class="item-action">{{p.status}}</span>
+                                    </span>
+                                    <span class="item-action"><strong>Size</strong>: {{p.cartSizeName}}</span>
+                                </span>
+                            </span>
+                            <span class="item-price">${{p.price}}</span>
+                            <span class="quantity item-qty">
+                                <span class="quant-input">
+                                    {{p.count}}
+                                </span>
+                            </span>
+                            <span class="item-total">${{p.price * p.count}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 </div>

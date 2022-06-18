@@ -60,4 +60,8 @@ export class ClientPortService {
   goToOrders(userCart: OrderCart): Observable<ResponseApi> {
     return this.httpClient.post<ResponseApi>(`${this.baseUrl+"/orders"}`, userCart);
   }
+
+  getCartOrderedByUser(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/cart-product-size/ordered"}`);
+  }
 }

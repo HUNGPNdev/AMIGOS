@@ -2,125 +2,157 @@
     <div class="container">
         <div class="row">
             <div class="content-area col-lg-12 clearfix">
-                <form name="billing" id="billing">
-                    <input type="hidden" name="tknio" value="g74xbncTgXvWGz0ebSHTyTuUQ3d3QPgL">
-                    <div id="ab-content" class="row ab-content">
-                        <div class="col-md-5 col-xs-12 bg-alternative showcart-md col-height pull-right rightCol">
-                            <div class="row hidden-xs order-summary-header">
-                                <div class="col-xs-6">
-                                    <h3>Order Summary</h3>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <a routerLink="../shopping-cart">Edit Cart</a>
+                <div id="ab-content" class="row ab-content">
+                    <div class="col-md-5 col-xs-12 bg-alternative showcart-md col-height pull-right rightCol">
+                        <div class="row hidden-xs order-summary-header">
+                            <div class="col-xs-6">
+                                <h3>Order Summary</h3>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <a routerLink="../shopping-cart">Edit Cart</a>
+                            </div>
+                        </div>
+                        <div id="chkShoppingCartCollapse" class="collapse in">
+                            <div id="chkShoppingCart" class="chkShoppingCart scrollbox scrollbox_delayed">
+                                <div class="scrollbox-content">
+                                    <div class="row cart-items" *ngFor="let p of cartProductSizes">
+                                        <div class="main">
+                                            <div class="col-sm-2 col-xs-3 vcenter">
+                                                <div class="product-image">
+                                                    <a href="Porcelain-Succulent_p_3.html">
+                                                        <img src="http://localhost:8081/images/{{p.image_1}}"
+                                                            height="40" width="40" id="tl" />
+                                                    </a>
+                                                    <span>{{p.count}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8 col-xs-6 vcenter">
+                                                <div class="product-name">
+                                                    <span><a
+                                                            href="Porcelain-Succulent_p_3.html">{{p.proName}}</a></span>
+                                                    <div class="base-price">${{p.price}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-3 vcenter">
+                                                <div class="product-info text-right">${{p.price * p.count}}</div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="chkShoppingCartCollapse" class="collapse in">
-                                <div id="chkShoppingCart" class="chkShoppingCart scrollbox scrollbox_delayed">
-                                    <div class="scrollbox-content">
-                                        <div class="row cart-items" *ngFor="let p of cartProductSizes">
-                                            <div class="main">
-                                                <div class="col-sm-2 col-xs-3 vcenter">
-                                                    <div class="product-image">
-                                                        <a href="Porcelain-Succulent_p_3.html">
-                                                            <img src="http://localhost:8081/images/{{p.image_1}}" height="40" width="40" id="tl" />
-                                                        </a>
-                                                        <span>{{p.count}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-8 col-xs-6 vcenter">
-                                                    <div class="product-name">
-                                                        <span><a href="Porcelain-Succulent_p_3.html">{{p.proName}}</a></span>
-                                                        <div class="base-price">${{p.price}}</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2 col-xs-3 vcenter">
-                                                    <div class="product-info text-right">${{p.price * p.count}}</div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </div>
+                            <div id="total_div">
+                                <div class="row cart-tally">
+                                    <div id="divApplyCoupon" class="applyCoupon clearfix">
+                                        <div name="divInvalidCoupon" id="divInvalidCoupon" style="display:none;"
+                                            class="col-xs-12">
+                                            <div class="alert alert-danger">Invalid Coupon</div>
+                                        </div>
+                                        <div class="coupon-applied col-xs-12"></div>
+                                    </div>
+                                    <div class="clearfix total_div">
+                                        <div class="total_items col-xs-6">ITEM</div>
+                                        <div class="total_subtotal col-xs-6 text-right">{{cartProductSizes.length}}
                                         </div>
                                     </div>
                                 </div>
-                                <div id="total_div">
-                                    <div class="row cart-tally">
-                                        <div id="divApplyCoupon" class="applyCoupon clearfix">
-                                            <div name="divInvalidCoupon" id="divInvalidCoupon" style="display:none;"
-                                                class="col-xs-12">
-                                                <div class="alert alert-danger">Invalid Coupon</div>
-                                            </div>
-                                            <div class="coupon-applied col-xs-12"></div>
-                                        </div>
-                                        <div class="clearfix total_div">
-                                            <div class="total_items col-xs-6">ITEM</div>
-                                            <div class="total_subtotal col-xs-6 text-right">{{cartProductSizes.length}}</div>
+                                <div class="row cart-grandtotal">
+                                    <div class="clearfix total_div remaining-balance">
+                                        <div class="total_cart-total col-xs-6">SUBTOTAL</div>
+                                        <div class="total_total col-xs-6 text-right total_due_amount">$ {{totalPrice}}
                                         </div>
                                     </div>
-                                    <div class="row cart-grandtotal">
-                                        <div class="clearfix total_div remaining-balance">
-                                            <div class="total_cart-total col-xs-6">SUBTOTAL</div>
-                                            <div class="total_total col-xs-6 text-right total_due_amount">$ {{totalPrice}}</div>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="hdnBalance" id="hdnBalance" value="44.98">
                                 </div>
                             </div>
                         </div>
-                        <div id="checkout-left" class="col-md-7 col-xs-12 col-height leftCol">
-                            <div class="quickpay checkout-section">
-                                <button class="pay-button apple-pay-button pay-hidden hidden"></button>
-                                <button class="pay-button google-pay-button pay-hidden hidden"></button>
-                            </div>
+                    </div>
+                    <div id="checkout-left" class="col-md-7 col-xs-12 col-height leftCol">
+                        <form (ngSubmit)="f.valid && onSubmit()" enctype="multipart/form-data" #f="ngForm">
                             <div id="billing_info" class="checkout-section">
                                 <div class="header clearfix">
                                     <h3 class="page_heading">Billing Information</h3>
                                 </div>
                                 <div class="row">
                                     <div class="chkField col-sm-6 clearfix">
-                                        <label for="billing_firstname" class="validation-field labelholder">
-                                            <input name="billing_firstname" type="text" id="billing_firstname" value="{{userCart.firstName}}"
-                                                placeholder="First Name" class="form-control txtBoxStyle" required />
-                                            <span class="required-indicator"></span>
+                                        <label for="firstname" class="validation-field labelholder">
+                                            <input name="firstname" type="text" id="firstname"
+                                                [(ngModel)]="userCart.firstName" placeholder="First Name"
+                                                class="form-control txtBoxStyle" #firstname="ngModel" required />
+                                            <div *ngIf="f.submitted && firstname.invalid">
+                                                <div *ngIf="firstname.errors?.required" style="color: red;">First Name
+                                                    is required
+                                                </div>
+                                            </div>
                                         </label>
                                     </div>
                                     <div class="chkField col-sm-6 clearfix">
-                                        <label for="billing_lastname" class="validation-field labelholder">
-                                            <input name="billing_lastname" type="text" id="billing_lastname" value="{{userCart.lastName}}"
-                                                placeholder="Last Name" size="15" class="form-control txtBoxStyle" required />
-                                            <span class="required-indicator"></span>
+                                        <label for="lastName" class="validation-field labelholder">
+                                            <input name="lastName" type="text" id="lastName"
+                                                [(ngModel)]="userCart.lastName" placeholder="Last Name" size="15"
+                                                class="form-control txtBoxStyle" #lastName="ngModel" required />
+                                            <div *ngIf="f.submitted && lastName.invalid">
+                                                <div *ngIf="lastName.errors?.required" style="color: red;">Last Name is
+                                                    required
+                                                </div>
+                                            </div>
                                         </label>
                                     </div>
                                     <div class="chkField col-sm-12 clearfix">
-                                        <label for="billing_address" class="validation-field labelholder">
-                                            <textarea name="billing_address" class="form-control txtBoxStyle" value="{{userCart.address}}"
-                                                placeholder="Address" required></textarea>
-                                            <span class="required-indicator"></span>
+                                        <label for="address" class="validation-field labelholder">
+                                            <textarea name="address" class="form-control txtBoxStyle"
+                                                [(ngModel)]="userCart.address" placeholder="Address" #address="ngModel"
+                                                required></textarea>
+                                            <div *ngIf="f.submitted && address.invalid">
+                                                <div *ngIf="address.errors?.required" style="color: red;">Address is
+                                                    required
+                                                </div>
+                                            </div>
                                         </label>
                                     </div>
                                     <div class="chkField col-sm-12 clearfix">
-                                        <label for="billing_phone" class="validation-field labelholder">
-                                            <input name="billing_phone" type="text" id="billing_phone" value="{{userCart.phone}}"
-                                                placeholder="Phone" class="form-control txtBoxStyle" required />
-                                            <span class="required-indicator"></span>
+                                        <label for="phone" class="validation-field labelholder">
+                                            <input name="phone" type="text" id="phone" [(ngModel)]="userCart.phone"
+                                                placeholder="Phone" class="form-control txtBoxStyle" #phone="ngModel"
+                                                required pattern="(84|0[3|5|7|8|9])+([0-9]{8})$"/>
+                                            <div *ngIf="f.submitted && phone.invalid">
+                                                <div *ngIf="phone.errors?.required" style="color: red;">
+                                                    Phone is required
+                                                </div>
+                                                <div *ngIf="phone.errors && phone.errors.pattern" style="color: red;">
+                                                    Invalid phone
+                                                </div>
+                                            </div>
                                         </label>
                                     </div>
                                     <div class="chkField col-sm-12 clearfix">
-                                        <label for="billing_phone" class="validation-field labelholder">
-                                            <input name="billing_phone" type="text" id="billing_phone" value="{{userCart.email}}"
-                                                placeholder="Email" class="form-control txtBoxStyle" required />
-                                            <span class="required-indicator"></span>
+                                        <label for="email" class="validation-field labelholder">
+                                            <input name="email" type="text" id="email" [(ngModel)]="userCart.email"
+                                                placeholder="Email" class="form-control txtBoxStyle" #email="ngModel"
+                                                required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                            <div *ngIf="f.submitted && email.invalid">
+                                                <div *ngIf="email.errors?.required" style="color: red;">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="email.errors && email.errors.pattern" style="color: red;">
+                                                    Invalid Email
+                                                </div>
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div id="spanCheckout" class="checkout-section clearfix">
-                                <a routerLink="../shopping-cart" class="btn btn-link"><i class="icon-left"></i> Return to Cart</a>
+                                <a routerLink="../shopping-cart" class="btn btn-link"><i class="icon-left"></i> Return
+                                    to
+                                    Cart</a>
                                 <div class="pull-right">
-                                    <button (click)="goToOrders()" type="button" class="btn btn-lg btn-primary" id="submit-button"><i class="icon-basket"></i>Check out</button>
+                                    <button type="submit" class="btn btn-lg btn-primary" id="submit-button"><i
+                                            class="icon-basket"></i>Check out</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

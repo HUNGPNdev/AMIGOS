@@ -35,8 +35,8 @@ export class CartOrderComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  goToOrders() {
-    console.log("goToOrders")
+  onSubmit() {
+    console.log(this.userCart)
     if (this.token.getUsername()) {
       this.clientPortService.goToOrders(this.userCart).subscribe(data => {
         window.location.href = "/shopping-cart";
