@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@DynamicUpdate
 public class CartProductSizeEntity
 {
     @Id
@@ -27,7 +29,7 @@ public class CartProductSizeEntity
     @Column(columnDefinition = "BINARY(16)", length = 16, unique = true, nullable = false)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_size_id")
     private ProductSizeEntity productSizeId;
 
@@ -45,8 +47,8 @@ public class CartProductSizeEntity
 
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private OrderEntity orderId;
 
 }

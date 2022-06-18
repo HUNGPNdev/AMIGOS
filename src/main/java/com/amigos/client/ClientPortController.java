@@ -9,7 +9,6 @@ import com.amigos.orders.OrderService;
 import com.amigos.product.ProductService;
 import com.amigos.productsize.ProductSizeService;
 import com.amigos.productsize.repository.ProductSizeRepository;
-import com.amigos.user.repository.UserRepository;
 import com.amigos.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -113,5 +112,10 @@ public class ClientPortController {
     @PostMapping("/orders")
     public ResponseEntity<ResponseApi> goToOrders(@RequestBody OrderCartDTO orderCartDTO, HttpServletRequest httpServletRequest) {
         return ResponseEntity.ok(orderService.goToOrders(orderCartDTO, httpServletRequest));
+    }
+
+    @GetMapping("/cart-product-size/ordered")
+    public ResponseEntity<ResponseApi> getCartOrderedByUser(HttpServletRequest httpServletRequest) {
+        return ResponseEntity.ok(cartProductSizeService.getCartOrderedByUser(httpServletRequest));
     }
 }

@@ -7,11 +7,11 @@ import com.amigos.cartproductsize.repository.CartProductSizeRepository;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
-import com.amigos.dto.CartProductSizeDTO;
 import com.amigos.dto.OrderCartDTO;
 import com.amigos.orders.OrderService;
 import com.amigos.orders.model.OrderEntity;
 import com.amigos.orders.repository.OrderRepository;
+import com.amigos.productsize.model.ProductSizeEntity;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-
 import java.util.Date;
 import java.util.List;
 
@@ -58,20 +57,29 @@ public class OrderServiceImpl implements OrderService
             ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
             return rs;
         }
-        Double totalPrice = 0.0;
         OrderEntity orderEntity = new OrderEntity();
         modelMapper.map(orderCartDTO, orderEntity);
         orderEntity.setUserId(createBy);
         orderEntity.setCreateAt(new Date());
         for (CartProductSizeEntity c: cartProductSizes) {
-            totalPrice += c.getCount() * c.getProductSizeId().getPrice();
-            c.setPrice(c.getProductSizeId().getDiscount());
+            ProductSizeEntity productSize = c.getProductSizeId();
+            c.setPrice(productSize.getDiscount());
             c.setCreateAt(new Date());
             c.setOrderId(orderEntity);
             c.setStatus(EnumStatusCart.WAITING_FOR_CONFIRMATION);
+            int proCount = productSize.getCount();
+            if(c.getCount() > proCount) {
+                c.setCount(proCount);
+            }
+            proCount = productSize.getCount() - c.getCount();
+            productSize.setCount(proCount);
+            if(proCount == 0) {
+                productSize.setIsDeleted(Boolean.TRUE);
+            }
         }
-
-
-        return null;
+        orderRepository.save(orderEntity);
+        cartProductSizeRepository.saveAll(cartProductSizes);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+        return rs;
     }
 }
