@@ -25,15 +25,16 @@
             <div class="content-area">
                 <p class="notice"> <i class="icon-attention"></i>You don't have any products in your shopping cart.</p>
                 <div class="button">
-                    <input type="button" value="Click here to continue" class="btn btn-default" onclick="location.href='index.html';" />
+                    <input type="button" value="Click here to continue" class="btn btn-default"
+                        onclick="location.href='index.html';" />
                 </div>
             </div>
         </div>
     </section><br>
 
     <section class="cart-details" *ngIf="cartEmpty">
-        <form action="https://branch-preview-com.3dcartstores.com/recalculate.asp" method="post"
-            name="recalculate" id="recalculate" data-parsley-validate>
+        <form action="https://branch-preview-com.3dcartstores.com/recalculate.asp" method="post" name="recalculate"
+            id="recalculate" data-parsley-validate>
             <div class="container">
                 <div class="row">
                     <div class="cart-left col-lg-9 col-md-8">
@@ -55,13 +56,16 @@
                             <li class="cart-item" *ngFor="let p of cartProductSizes">
                                 <span class="item-name clearfix">
                                     <span class="item-thumb">
-                                        <a href="details/{{p.proId}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
+                                        <a href="details/{{p.proId}}"><img
+                                                src="http://localhost:8081/images/{{p.image_1}}" /></a>
                                     </span>
                                     <span class="item-name-right">
-                                        <span class="item-fullname"><a href="details/{{p.proId}}">{{p.proName}} - {{p.cartSizeName}}</a></span>
+                                        <span class="item-fullname"><a href="details/{{p.proId}}">{{p.proName}} -
+                                                {{p.cartSizeName}}</a></span>
                                         <span class="item-actions">
                                             <span class="item-action">
-                                                <a class="removeItem" (click)="deleteCart(p.id)"><i class="icon-cancel"></i>Delete</a>
+                                                <a class="removeItem" (click)="deleteCart(p.id)"><i
+                                                        class="icon-cancel"></i>Delete</a>
                                             </span>
                                         </span>
                                     </span>
@@ -69,7 +73,8 @@
                                 <span class="item-price">${{p.price}}</span>
                                 <span class="quantity item-qty">
                                     <span class="quant-input">
-                                        <input type="number" value="{{p.count}}" min="1" class="form-control" (change)="updateCount($event, p.id)"/>
+                                        <input type="number" value="{{p.count}}" min="1" class="form-control"
+                                            (change)="updateCount($event, p.id)" />
                                     </span>
                                     <a class="update-qty" (click)="updateCart(p.id)">Update</a>
                                 </span>
@@ -92,7 +97,8 @@
                                     <div class="col-xs-6 carttotal-price">$ {{totalPrice}}</div>
                                 </div>
                                 <div class="checkout-btns">
-                                    <a routerLink="../cart-order" class="btn btn-primary btn-checkout">Proceed to Order</a>
+                                    <a routerLink="../cart-order" class="btn btn-primary btn-checkout">Proceed to
+                                        Order</a>
                                 </div>
                             </div>
                         </div>
@@ -103,25 +109,32 @@
                 </div>
             </div>
         </form>
-    </section>
-    <section class="cart-details">
+    </section><br><br>
+    <section class="cart-details" *ngIf="orderEmpty">
+        <section class="page_header">
+            <div class="container">
+                <h1 class="page_heading">Your Ordered</h1>
+            </div>
+        </section>
         <div class="container">
             <div class="row">
                 <div class="cart-left col-lg-9 col-md-8">
-                    <ul class="cart-items">
+                    <ul class="cart-items" *ngFor="let o of ordered">
                         <li class="items-header">
-                            <span class="item-name">ITEMS</span>
-                            <span class="item-price">PRICE</span>
-                            <span class="item-qty">QTY</span>
-                            <span class="item-total">Total</span>
+                            <span class="item-name" style="width: 40%;">{{o.firstName}} {{o.lastName}}</span>
+                            <span class="item-price" style="width: 20%;">{{o.phone}}</span>
+                            <span class="item-qty" style="width: 20%;">{{o.email}}</span>
+                            <span class="item-total" style="width: 20%;">Total Price: {{o.totalPrice}}</span>
                         </li>
-                        <li class="cart-item" *ngFor="let p of cartProductOrdered">
+                        <li class="cart-item" *ngFor="let p of o.cartProductSizes">
                             <span class="item-name clearfix">
                                 <span class="item-thumb">
-                                    <a href="details/{{p.proId}}"><img src="http://localhost:8081/images/{{p.image_1}}"  /></a>
+                                    <a href="details/{{p.proId}}"><img
+                                            src="http://localhost:8081/images/{{p.image_1}}" /></a>
                                 </span>
                                 <span class="item-name-right">
-                                    <span class="item-fullname"><a href="details/{{p.proId}}"><b>{{p.proName}}</b></a></span>
+                                    <span class="item-fullname"><a
+                                            href="details/{{p.proId}}"><b>{{p.proName}}</b></a></span>
                                     <span class="item-actions">
                                         <span class="item-action">{{p.status}}</span>
                                     </span>
@@ -131,7 +144,7 @@
                             <span class="item-price">${{p.price}}</span>
                             <span class="quantity item-qty">
                                 <span class="quant-input">
-                                    {{p.count}}
+                                    X{{p.count}}
                                 </span>
                             </span>
                             <span class="item-total">${{p.price * p.count}}</span>

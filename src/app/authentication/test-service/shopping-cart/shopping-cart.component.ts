@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartProductSize } from '../../entity/client-port/cart-product-size';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
+import { Orders } from '../../entity/client-port/Orders';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,8 +11,11 @@ export class ShoppingCartComponent implements OnInit {
   cartProductSize: CartProductSize = new CartProductSize();
   cartProductSizes: CartProductSize[];
   cartEmpty = false;
+  orderEmpty = false;
   totalPrice: number;
   cartProductOrdered: CartProductSize[];
+  ordered: Orders[];
+  orderTotalPrice: number;
 
   constructor(private clientPortService: ClientPortService) { }
 
@@ -57,8 +61,12 @@ export class ShoppingCartComponent implements OnInit {
 
   getCartOrderedByUser() {
     this.clientPortService.getCartOrderedByUser().subscribe(data => {
-      this.cartProductOrdered = data.data;
-      console.log(this.cartProductOrdered);
+      this.ordered = data.data;
+      if (this.ordered) {
+        this.orderEmpty = true;
+      console.log(this.ordered)
+
+      }
     }, error => console.log(error))
   }
 
