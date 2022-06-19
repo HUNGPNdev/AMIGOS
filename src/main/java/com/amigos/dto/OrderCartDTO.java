@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -15,8 +16,6 @@ public class OrderCartDTO
     private UUID id;
 
     private UUID userId;
-
-    private String username;
 
     private String firstName;
 
@@ -29,4 +28,10 @@ public class OrderCartDTO
     private String address;
 
     private Date createAt;
+
+    private List<CartProductSizeDTO> cartProductSizes;
+
+    private Double totalPrice = 0.0;
+
+    private Boolean isDeleted;
 }

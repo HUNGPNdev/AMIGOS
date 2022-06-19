@@ -17,7 +17,7 @@ public interface CartProductSizeRepository extends JpaRepository<CartProductSize
 
     @Query("select new com.amigos.dto.CartProductSizeDTO(c.id, c.productSizeId.id, c.userId.id, c.count, c.status, c.createAt, c.productSizeId.price , c.productSizeId.productId.id, "
             + "c.productSizeId.productId.name, c.productSizeId.discount, c.productSizeId.productId.image_1, c.productSizeId.sizeId.id, c.productSizeId.sizeId.name)"
-            + " from CartProductSizeEntity c where c.userId.id = ?1 and c.status = ?2")
+            + " from CartProductSizeEntity c where c.userId.id = ?1 and c.status = ?2 and c.orderId is null")
     List<CartProductSizeDTO> findCartByUserIdAndStatus(UUID userId, EnumStatusCart status);
 
     int countAllByUserId_IdAndStatus(UUID userId, EnumStatusCart status);
@@ -27,9 +27,4 @@ public interface CartProductSizeRepository extends JpaRepository<CartProductSize
     @Override
     @Query("select c from CartProductSizeEntity c where c.id = ?1")
     Optional<CartProductSizeEntity> findById(UUID uuid);
-
-    @Query("select new com.amigos.dto.CartProductSizeDTO(c.id, c.productSizeId.id, c.userId.id, c.count, c.status, c.createAt, c.productSizeId.price , c.productSizeId.productId.id, "
-            + "c.productSizeId.productId.name, c.productSizeId.discount, c.productSizeId.productId.image_1, c.productSizeId.sizeId.id, c.productSizeId.sizeId.name)"
-            + " from CartProductSizeEntity c where c.userId.id = ?1 and c.status <> ?2")
-    List<CartProductSizeDTO> findCartByUserIdAndStatusDifferent(UUID userId, EnumStatusCart status);
 }

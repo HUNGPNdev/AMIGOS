@@ -18,5 +18,4 @@ public interface CartProductSizeService
 
     ResponseApi countCartByUserId(HttpServletRequest httpServletRequest);
 
-    ResponseApi getCartOrderedByUser(HttpServletRequest httpServletRequest);
 }

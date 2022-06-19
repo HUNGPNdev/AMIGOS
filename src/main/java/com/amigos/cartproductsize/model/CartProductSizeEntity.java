@@ -45,7 +45,7 @@ public class CartProductSizeEntity
 
     private Date createAt;
 
-    private double price;
+    private double price = 0.0;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

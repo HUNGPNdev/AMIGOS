@@ -44,6 +44,8 @@ public class OrderEntity
 
     private Date createAt;
 
-    @OneToMany(mappedBy = "orderId")
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartProductSizeEntity> cartProductSizes = new ArrayList<>();
+
+    private Boolean isDeleted;
 }

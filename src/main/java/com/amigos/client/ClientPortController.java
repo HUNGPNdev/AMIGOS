@@ -116,6 +116,7 @@ public class ClientPortController {
 
     @GetMapping("/cart-product-size/ordered")
     public ResponseEntity<ResponseApi> getCartOrderedByUser(HttpServletRequest httpServletRequest) {
-        return ResponseEntity.ok(cartProductSizeService.getCartOrderedByUser(httpServletRequest));
+        return ResponseEntity.ok(orderService.findAllByUserId(httpServletRequest));
     }
+
 }
