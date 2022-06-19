@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Orders</h1>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Orders</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
+                </div>
+                <div class="bootstrap-table">
+                    <div class="table-responsive">
+                        <a (click)="findByStatus()" class="btn btn-secondary"><i class="fa fa-trash"
+                                aria-hidden="true"></i> Find By Status</a>
+                        <table class="table table-bordered" style="margin-top:20px;">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let p of orders | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
+                                    <td>{{p.firstName}}</td>
+                                    <td>{{p.lastName}}</td>
+                                    <td>{{p.email}}</td>
+                                    <td>{{p.phone}}</td>
+                                    <td>{{p.address}}</td>
+                                    <td>{{p.isDeleted}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target=".bd-example-modal-lg" (click)="viewOrders(p)">view
+                                        </button>
+                                        <a (click)="deleteById()"
+                                            onclick="return confirm('Are you sure you want to delete?')"
+                                            class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Email: </strong>{{orderDetail.email}}</p>
+                        <p><strong>phone: </strong>{{orderDetail.phone}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Total Price: </strong>${{orderDetail.totalPrice}}</p>
+                    </div>
+                </div>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;"></th>
+                        <th style="width: 30%;"></th>
+                        <th>Address</th>
+                        <th>Price</th>
+                        <th>TT price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of orderDetail.cartProductSizes">
+                        <td>
+                            <img *ngIf="p.image_1" width="70px" src="http://localhost:8081/images/{{p.image_1}}"
+                                class="thumbnail">
+                        </td>
+                        <td>
+                            <p>{{p.status}}</p>
+                            <p>{{p.proName}}&nbsp;-&nbsp;X{{p.count}}</p>
+                            <p>
+                                <strong>Size</strong>: {{p.cartSizeName}}
+                            </p>
+                        </td>
+                        <td class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                            title="{{orderDetail.address}}">
+                            <button style="color: blueviolet;">...</button>
+                        </td>
+                        <td>
+                            ${{p.price}}
+                        </td>
+                        <td>
+                            ${{p.price * p.count}}
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="cars" class="form-control" [(ngModel)]="orderStatus">
+                            <option value="SHOPPING_CART">SHOPPING_CART</option>
+                            <option value="WAITING_FOR_CONFIRMATION">WAITING_FOR_CONFIRMATION</option>
+                            <option value="DELIVERING">DELIVERING</option>
+                            <option value="DELIVERED">DELIVERED</option>
+                            <option value="DELIVERED">DELIVERED</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" (click)="orderUpdateStatus(orderDetail.id)">Save
+                            changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
