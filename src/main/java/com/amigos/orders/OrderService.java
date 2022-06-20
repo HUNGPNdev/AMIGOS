@@ -16,4 +16,6 @@ public interface OrderService
     ResponseApi getAlls(boolean isDeleted);
 
     ResponseApi orderUpdateStatus(UUID orderId, EnumStatusCart status);
+
+    ResponseApi deleteById(UUID orderId);
 }
