@@ -43,7 +43,7 @@
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target=".bd-example-modal-lg" (click)="viewOrders(p)">view
                                         </button>
-                                        <a (click)="deleteById()"
+                                        <a (click)="deleteById(p.id)"
                                             onclick="return confirm('Are you sure you want to delete?')"
                                             class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>delete
                                         </a>
@@ -76,6 +76,8 @@
                     <div class="col-md-6">
                         <p><strong>Email: </strong>{{orderDetail.email}}</p>
                         <p><strong>phone: </strong>{{orderDetail.phone}}</p>
+                        <p class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                        title="{{orderDetail.address}}">Address: <button style="color: blueviolet;">...</button></p>
                     </div>
                     <div class="col-md-6">
                         <p><strong>Total Price: </strong>${{orderDetail.totalPrice}}</p>
@@ -83,16 +85,15 @@
                 </div>
                 <thead>
                     <tr>
-                        <th style="width: 20%;"></th>
                         <th style="width: 30%;"></th>
-                        <th>Address</th>
-                        <th>Price</th>
-                        <th>TT price</th>
+                        <th style="width: 40%;"></th>
+                        <th style="width: 25%;">Price</th>
+                        <th style="width: 25%;">TT price</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let p of orderDetail.cartProductSizes">
-                        <td>
+                        <td style="width: 30%;">
                             <img *ngIf="p.image_1" width="70px" src="http://localhost:8081/images/{{p.image_1}}"
                                 class="thumbnail">
                         </td>
@@ -102,10 +103,6 @@
                             <p>
                                 <strong>Size</strong>: {{p.cartSizeName}}
                             </p>
-                        </td>
-                        <td class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
-                            title="{{orderDetail.address}}">
-                            <button style="color: blueviolet;">...</button>
                         </td>
                         <td>
                             ${{p.price}}
@@ -130,7 +127,8 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-primary" (click)="orderUpdateStatus(orderDetail.id)">Save
+                        <button type="button" class="btn btn-primary" 
+                        (click)="orderUpdateStatus(orderDetail.id)">Save
                             changes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>

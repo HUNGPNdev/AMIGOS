@@ -13,6 +13,8 @@ export class OrderComponent implements OnInit {
   status = false;
   cartProductSizes: CartProductSize[];
   orderStatus: String;
+  p:number;
+  searchText: string;
 
   constructor(private orderService: OrderServiceService) { }
 
@@ -23,7 +25,6 @@ export class OrderComponent implements OnInit {
   getAllByStatus() {
     this.orderService.getAllByStatus(this.status).subscribe(data => {
       this.orders = data.data;
-      console.log(this.orders)
     }, error => console.log(error))
   }
 
@@ -36,15 +37,18 @@ export class OrderComponent implements OnInit {
 
   viewOrders(order: any) {
     this.orderDetail = order;
-    console.log(this.orderDetail)
   }
 
-  deleteById() {
-    console.log(this.orderDetail)
+  deleteById(id:number) {
+    this.orderService.deleteById(id).subscribe(data => {
+      this.getAllByStatus();
+    }, error => console.log(error))
   }
 
   orderUpdateStatus(id:number) {
-    console.log(id)
-    console.log(this.orderStatus)
+    this.orderService.orderUpdateStatus(id, this.orderStatus).subscribe(data => {
+      this.orderDetail = data.data;
+      this.getAllByStatus();
+    }, error => console.log(error))
   }
 }
