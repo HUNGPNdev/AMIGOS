@@ -22,8 +22,6 @@ public class CartProductSizeDTO
 
     private int count;
 
-    private String address;
-
     @Enumerated(EnumType.STRING)
     private EnumStatusCart status;
 
@@ -38,5 +36,9 @@ public class CartProductSizeDTO
     private float productSizeDiscount;
 
     private String image_1;
+
+    private UUID cartSizeId;
+
+    private String cartSizeName;
 
 }

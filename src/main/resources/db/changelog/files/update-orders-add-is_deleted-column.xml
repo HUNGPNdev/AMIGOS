@@ -5,11 +5,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
-    <changeSet id="update-foreign-key-fk_product_size_id" author="hungpn">
+    <changeSet id="update-orders-add-is_deleted-column" author="hungpn">
         <preConditions onFail="MARK_RAN">
-            <foreignKeyConstraintExists foreignKeyName="fk_cart_product_size_product_id" foreignKeyTableName="cart_product_size"/>
+            <tableExists tableName="orders"/>
         </preConditions>
-        <dropForeignKeyConstraint baseTableName="cart_product_size" constraintName="fk_cart_product_size_product_id" />
-        <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="product_id" constraintName="fk_cart_product_size_product_size_id" referencedTableName="product_size" referencedColumnNames="id"/>
+        <addColumn tableName="orders">
+            <column name="is_deleted" type="bit(1)" defaultValue="false"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>

@@ -2,6 +2,7 @@ package com.amigos.user.service.impl;
 
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.common.ResponseApi;
+import com.amigos.dto.OrderCartDTO;
 import com.amigos.config.ModelMapperConfig;
 import com.amigos.dto.UserDTO;
 import com.amigos.dto.UserInputDto;
@@ -18,6 +19,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.*;
 
 import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
@@ -85,6 +90,15 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = modelMapper.map(u, UserDTO.class);
         ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
 
+        return responseApi;
+    }
+
+    @Override
+    public ResponseApi findByUserName(String userName)
+    {
+        Optional<User> u = userRepository.findByUserName(userName);
+        OrderCartDTO userDTO = modelMapper.map(u.get(), OrderCartDTO.class);
+        ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
         return responseApi;
     }
 

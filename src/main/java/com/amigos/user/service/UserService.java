@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface UserService {
     ResponseApi registerUser(SignUpForm signUpRequest);
+    ResponseApi findByUserName(String userName);
 
     ResponseApi updateUser(User user);
 

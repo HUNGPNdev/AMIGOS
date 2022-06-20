@@ -1,11 +1,13 @@
 package com.amigos.cartproductsize.model;
 
+import com.amigos.orders.model.OrderEntity;
 import com.amigos.productsize.model.ProductSizeEntity;
 import com.amigos.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,6 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@DynamicUpdate
 public class CartProductSizeEntity
 {
     @Id
@@ -26,7 +29,7 @@ public class CartProductSizeEntity
     @Column(columnDefinition = "BINARY(16)", length = 16, unique = true, nullable = false)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_size_id")
     private ProductSizeEntity productSizeId;
 
@@ -36,13 +39,16 @@ public class CartProductSizeEntity
 
     private int count;
 
-    private String address;
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private EnumStatusCart status;
 
     private Date createAt;
 
-    private double price;
+    private double price = 0.0;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private OrderEntity orderId;
+
 }

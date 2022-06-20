@@ -1,6 +1,7 @@
 package com.amigos.user.model;
 
 import com.amigos.cartproductsize.model.CartProductSizeEntity;
+import com.amigos.orders.model.OrderEntity;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.role.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -79,4 +80,7 @@ public class User {
 
     @OneToMany(mappedBy = "userId")
     private List<CartProductSizeEntity> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userId")
+    private List<OrderEntity> orders = new ArrayList<>();
 }
