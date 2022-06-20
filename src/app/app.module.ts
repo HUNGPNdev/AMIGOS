@@ -23,6 +23,7 @@ import { CreateProductSizeComponent } from './authentication/test-service/produc
 import { ListProductSizeComponent } from './authentication/test-service/product-size/list-product-size/list-product-size.component';
 import { ListUserComponent } from './authentication/test-service/user/list-user/list-user.component';
 import { UpdateUserComponent } from './authentication/test-service/user/update-user/update-user.compose';
+import { OrderComponent } from './authentication/test-service/order/order.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { UpdateUserComponent } from './authentication/test-service/user/update-u
     CreateProductSizeComponent,
     ListProductSizeComponent,
     ListUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    OrderComponent
   ],
   imports: [
    NgxPaginationModule,
