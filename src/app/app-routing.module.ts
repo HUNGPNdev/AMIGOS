@@ -12,6 +12,8 @@ import { CreateProductComponent } from './authentication/test-service/product/cr
 import { ListProductComponent } from './authentication/test-service/product/list-product/list-product.component';
 import { RegisterComponent } from './authentication/test-service/register/register.component';
 import { SizeComponent } from './authentication/test-service/size/size.component';
+import { UpdateUserComponent } from './authentication/test-service/user/update-user/update-user.compose';
+import { ListUserComponent } from './authentication/test-service/user/list-user/list-user.component';
 import { UserComponent } from './authentication/test-service/user/user.component';
 
 const routes: Routes = [
@@ -79,7 +81,15 @@ const routes: Routes = [
     {
         path: 'update-product-size/:id',
         component: CreateProductSizeComponent
-    }
+    },
+    {
+        path: 'list-user',
+        component: ListUserComponent
+    },
+    {
+        path: 'update-user/:id',
+        component: UpdateUserComponent
+    },
 
 ];
 

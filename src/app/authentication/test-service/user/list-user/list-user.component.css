@@ -1,0 +1,8 @@
+.btn-edit {
+    margin-right: 10px;
+}
+.action-user {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
