@@ -1,5 +1,7 @@
 package com.amigos.client;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +14,21 @@ import java.nio.file.Files;
 @RequestMapping("/images/")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ImageController {
+    @Autowired
+    private Environment properties;
 
     @GetMapping("{images}")
     public byte[] getImages(@NotEmpty @PathVariable("images") String images) throws IOException {
-        File file = ResourceUtils.getFile("/images/" + images);
-        System.out.println("File:"+file.getName());
+        String env = properties.getProperty("spring.datasource.url");
+        String rootPath = "";
+        if(env.equals("jdbc:mysql://localhost:3306/amigos?useSSL=false")) {
+            rootPath = "D:/amigos/images/";
+        } else if (env.equals("jdbc:mysql://mysqldb/amigos?allowPublicKeyRetrieval=true&useSSL=false")){
+            rootPath = "/images/";
+        } else {
+            return null;
+        }
+        File file = ResourceUtils.getFile(rootPath + images);
         if(file.exists()) {
             byte[] fileData = Files.readAllBytes(file.toPath());
             return fileData;
