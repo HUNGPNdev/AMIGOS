@@ -22,6 +22,8 @@ services:
       - mysqldb
     links:
       - mysqldb:mysqldb
+    volumes:
+      - D:\amigos\images:/images
 #    restart: always
 
 
