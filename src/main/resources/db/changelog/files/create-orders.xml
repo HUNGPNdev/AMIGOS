@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="create-new-table-cart" author="hungpn">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
+        <createTable tableName="orders">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(250)" defaultValue="Null"/>
+            <column name="last_name" type="varchar(250)" defaultValue="Null"/>
+            <column name="phone" type="varchar(250)" defaultValue="Null"/>
+            <column name="address" type="varchar(250)" defaultValue="Null"/>
+            <column name="create_at" type="DATETIME" defaultValue="now()"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add-foreignkey-to-cart" author="hungpn">
+        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="user_id" constraintName="fk_cart_user" referencedTableName="user" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

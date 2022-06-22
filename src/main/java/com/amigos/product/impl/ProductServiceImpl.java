@@ -129,7 +129,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseApi getProductNewReleases(int limit)
     {
-        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false order by p.createAt desc").setMaxResults(limit).getResultList();
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false and p.productSizes.size > 0 order by p.createAt desc").setMaxResults(limit).getResultList();
         List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;
@@ -147,7 +147,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseApi getProductFeaturedProducts(int limit) {
-        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false").setMaxResults(limit).getResultList();
+        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false and p.productSizes.size > 0").setMaxResults(limit).getResultList();
         List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;

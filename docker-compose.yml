@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mysqldb:
+    image: mysql:8
+    container_name: mysqldb
+    networks:
+      - amigos-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=amigos
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./var:/var/lib/mysql
+  amigos:
+    image: amigos
+    ports:
+      - "8081:8081"
+    networks:
+      - amigos-mysql
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb:mysqldb
+#    restart: always
+
+
+networks:
+  amigos-mysql:
+    driver: bridge

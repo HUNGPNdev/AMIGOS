@@ -15,26 +15,25 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="id" type="BINARY(16)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="product_id" type="BINARY(16)">
+            <column name="product_size_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cart_id" type="BINARY(16)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="order_id" type="BINARY(16)"></column>
             <column name="count" type="INT" defaultValue="0"/>
             <column name="status" type="ENUM('SHOPPING_CART', 'WAITING_FOR_CONFIRMATION', 'DELIVERING', 'DELIVERED', 'CANCELLED')" defaultValue="WAITING_FOR_CONFIRMATION">
                 <constraints nullable="false"/>
             </column>
+            <column name="price" type="DOUBLE" defaultValue="0.0"/>
             <column name="is_deleted" type="bit(1)" defaultValue="false"/>
             <column name="create_at" type="DATETIME" defaultValue="now()"/>
         </createTable>
     </changeSet>
     <changeSet id="add-foreignkey-to-cart_product_size" author="hungpn">
-        <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="product_id" constraintName="fk_cart_product_size_product_id" referencedTableName="product" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="product_size_id" constraintName="fk_cart_product_size_product_id" referencedTableName="product_size" referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="user_id" constraintName="fk_cart_product_size_user_id" referencedTableName="user" referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="cart_id" constraintName="fk_cart_product_size_cart_id" referencedTableName="cart" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="cart_product_size" baseColumnNames="order_id" constraintName="fk_cart_product_size_cart_id" referencedTableName="orders" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

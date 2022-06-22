@@ -10,4 +10,12 @@ public interface CartProductSizeService
 {
     ResponseApi addToCart(HttpServletRequest httpServletRequest, CartProductSizeDTO cartProductSize);
 
+    ResponseApi getCartByUser(HttpServletRequest httpServletRequest);
+
+    ResponseApi deleteCart(UUID cartId);
+
+    ResponseApi updateCart(CartProductSizeDTO cartProductSize);
+
+    ResponseApi countCartByUserId(HttpServletRequest httpServletRequest);
+
 }
