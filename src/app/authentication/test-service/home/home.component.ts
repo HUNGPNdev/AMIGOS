@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   productSizes: ProductSize[];
   quantity = 1;
   cartProductSize: CartProductSize = new CartProductSize();
+  message = false;
 
   constructor(private token: TokenStorageService,
     private router: Router,
@@ -45,9 +46,9 @@ export class HomeComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeName(sizeName: String) {
+  findProductSizeBySizeName(id: number) {
     for (var i = 0; i <= this.productSizes.length; i++) {
-      if (this.productSizes[i].sizeName == sizeName) {
+      if (this.productSizes[i].id == id) {
         this.productSize = this.productSizes[i];
         break;
       }
@@ -63,14 +64,19 @@ export class HomeComponent implements OnInit {
 
   getProductFeaturedProducts() {
     var limit = 8;
-    this.clientPortService.getProductNewReleases(limit).subscribe(data => {
+    this.clientPortService.getProductFeaturedProducts(limit).subscribe(data => {
       this.productFeaturedProducts = data.data;
     }, error => console.log(error))
   }
 
   onChangeSort(event) {
     var value = event.target.value;
-    this.quantity = value;
+    if(value > this.productSize.count) {
+      this.message = true;
+    } else {
+      this.message = false;
+      this.quantity = value;
+    }
   }
 
   addToCart() {

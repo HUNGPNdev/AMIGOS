@@ -32,7 +32,7 @@
 
         <a class="header-cart" href="shopping-cart" aria-label="view cart link">
           <span class="icon-basket" role="presentation"></span>
-          <span class="minicart-items">{{count}}</span>
+          <span class="minicart-items" *ngIf="count">{{count}}</span>
         </a>
 
         <a class="header-menu" href="#" id="mobile-menu-trigger" aria-label="menu trigger">

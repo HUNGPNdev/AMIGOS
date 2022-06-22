@@ -174,16 +174,28 @@
                         </div>
                         <div class="opt-field">
                           <label class="radio-format" *ngFor="let p of productSizes">
-                            <label class="radio-option">
+                            <label class="radio-option" *ngIf="p.id == productSize.id; else notShow">
                               <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
-                                value="{{p.sizeName}}" (click)="findProductSizeBySizeName(p.sizeName)">
-                              <span>{{p.sizeName}} </span>
+                                value="{{p.sizeName}}" checked="checked" (click)="findProductSizeBySizeName(p.id)">
+                              <span>{{p.sizeName}}</span>
                             </label>
+                            <ng-template #notShow>
+                              <label class="radio-option">
+                                <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                  value="{{p.sizeName}}" (click)="findProductSizeBySizeName(p.id)">
+                                <span>{{p.sizeName}}</span>
+                              </label>
+                            </ng-template>
                           </label>
+                          <span>&nbsp;{{productSize.count}} sản phẩm sẵn có</span>
                         </div>
                       </div>
+                      <div style="height: 17px;">
+                        <span style="color: red;" *ngIf="message">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm
+                          này</span>
+                      </div>
                     </div>
-                  </div>
+                  </div><br>
                   <div class="clearfix add-cart-block">
                     <label class="qty-input">
                       <input type="number" class="form-control" name="qty-0" [value]="quantity" min="1"

@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CartProductSize } from '../../entity/client-port/cart-product-size';
 import { ClientPortService } from '../../entity/client-port/client-port.service';
+import { Orders } from '../../entity/client-port/Orders';
 
 @Component({
   selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css']
+  templateUrl: './shopping-cart.component.html'
 })
 export class ShoppingCartComponent implements OnInit {
   cartProductSize: CartProductSize = new CartProductSize();
   cartProductSizes: CartProductSize[];
   cartEmpty = false;
+  orderEmpty = false;
   totalPrice: number;
+  cartProductOrdered: CartProductSize[];
+  ordered: Orders[];
+  orderTotalPrice: number;
 
   constructor(private clientPortService: ClientPortService) { }
 
   ngOnInit(): void {
     this.getCartByUser();
+    this.getCartOrderedByUser();
   }
 
   getCartByUser() {
@@ -52,6 +57,17 @@ export class ShoppingCartComponent implements OnInit {
         }, error => console.log(error))
       }
     }
+  }
+
+  getCartOrderedByUser() {
+    this.clientPortService.getCartOrderedByUser().subscribe(data => {
+      this.ordered = data.data;
+      if (this.ordered) {
+        this.orderEmpty = true;
+      console.log(this.ordered)
+
+      }
+    }, error => console.log(error))
   }
 
 }

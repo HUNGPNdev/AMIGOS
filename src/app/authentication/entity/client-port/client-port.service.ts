@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseApi } from '../ResponseApi';
 import { CartProductSize } from './cart-product-size';
+import { OrderCart } from './user-cart';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,13 @@ export class ClientPortService {
 
   getUserDetailByUserName(userName:String): Observable<ResponseApi> {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/user"}/${userName}`);
+  }
+
+  goToOrders(userCart: OrderCart): Observable<ResponseApi> {
+    return this.httpClient.post<ResponseApi>(`${this.baseUrl+"/orders"}`, userCart);
+  }
+
+  getCartOrderedByUser(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl+"/cart-product-size/ordered"}`);
   }
 }

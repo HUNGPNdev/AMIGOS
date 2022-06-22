@@ -24,6 +24,7 @@ export class DetailsComponent implements OnInit {
   quantity = 1;
   quantityPopup = 1;
   products: Product[];
+
 /**customer review */
   elementWriteComment = false;
   txtwritecontent = "Write content";
@@ -36,6 +37,10 @@ export class DetailsComponent implements OnInit {
   countTotalStar:number = 0;
   avgStart:number;
   /**end customer review */
+
+  message = false;
+  messageModel = false;
+
 
   constructor(private clientPortService: ClientPortService,
     private route: ActivatedRoute,
@@ -53,14 +58,17 @@ export class DetailsComponent implements OnInit {
     this.clientPortService.findProductSizeByProductId(this.productId).subscribe(data => {
       this.productSizes = data.data;
       this.productSize = this.productSizes[0];
+      console.log(this.productSizes)
+      console.log(this.productSize)
       this.getProductRelatedItem(this.productSize.cateId, this.productId);
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeName(sizeName: String) {
+  findProductSizeBySizeName(id: number) {
     for (var i = 0; i <= this.productSizes.length; i++) {
-      if (this.productSizes[i].sizeName == sizeName) {
+      if (this.productSizes[i].id == id) {
         this.productSize = this.productSizes[i];
+        this.message = false;
         break;
       }
     }
@@ -80,10 +88,11 @@ export class DetailsComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeNameModel(sizeName: String) {
+  findProductSizeBySizeNameModel(id: number) {
     for (var i = 0; i <= this.productSizeModels.length; i++) {
-      if (this.productSizeModels[i].sizeName == sizeName) {
+      if (this.productSizeModels[i].id == id) {
         this.productSizeModel = this.productSizeModels[i];
+        this.message = false;
         break;
       }
     }
@@ -103,7 +112,12 @@ export class DetailsComponent implements OnInit {
 
   onChangeSort(event) {
     var value = event.target.value;
-    this.quantity = value;
+    if(value > this.productSize.count) {
+      this.message = true;
+    } else {
+      this.message = false;
+      this.quantity = value;
+    }
   }
 
 
@@ -200,7 +214,12 @@ console.log(width);
 
   onChangeSortPopup(event) {
     var value = event.target.value;
-    this.quantityPopup = value;
+    if(value > this.productSizeModel.count) {
+      this.messageModel = true;
+    } else {
+      this.messageModel = false;
+      this.quantity = value;
+    }
   }
 
   addToCartPopup() {

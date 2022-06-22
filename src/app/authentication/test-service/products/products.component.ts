@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
   selectedSkill: any
   quantity = 1;
   cartProductSize: CartProductSize = new CartProductSize();
+  message = false;
 
   constructor(private clientPortService: ClientPortService,
     private cataService: CategoryService,
@@ -54,9 +55,9 @@ export class ProductsComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeName(sizeName: String) {
+  findProductSizeBySizeName(id: number) {
     for (var i = 0; i <= this.productSizes.length; i++) {
-      if (this.productSizes[i].sizeName == sizeName) {
+      if (this.productSizes[i].id == id) {
         this.productSize = this.productSizes[i];
         break;
       }
@@ -78,7 +79,12 @@ export class ProductsComponent implements OnInit {
 
   onChangeSort(event) {
     var value = event.target.value;
-    this.quantity = value;
+    if(value > this.productSize.count) {
+      this.message = true;
+    } else {
+      this.message = false;
+      this.quantity = value;
+    }
   }
 
   addToCart() {
