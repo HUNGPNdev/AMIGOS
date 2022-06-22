@@ -2,7 +2,7 @@ package com.amigos.user.service.impl;
 
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.common.ResponseApi;
-import com.amigos.dto.UserCartDTO;
+import com.amigos.dto.OrderCartDTO;
 import com.amigos.dto.UserDTO;
 import com.amigos.errors.handle.ObjectDuplicateException;
 import com.amigos.role.model.Role;
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
     public ResponseApi findByUserName(String userName)
     {
         Optional<User> u = userRepository.findByUserName(userName);
-        UserCartDTO userDTO = modelMapper.map(u.get(), UserCartDTO.class);
+        OrderCartDTO userDTO = modelMapper.map(u.get(), OrderCartDTO.class);
         ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
         return responseApi;
     }

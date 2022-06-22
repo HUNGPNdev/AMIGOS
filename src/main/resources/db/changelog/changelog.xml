@@ -18,5 +18,6 @@
     <include file="/db/changelog/files/create-cart_product_size.xml"/>
     <include file="/db/changelog/files/create-customer_review.xml"/>
     <include file="/db/changelog/files/product-drop-foreign-key-update-by.xml"/>
-
+    <include file="/db/changelog/files/update-orders-add-email-column.xml"/>
+    <include file="/db/changelog/files/update-orders-add-is_deleted-column.xml"/>
 </databaseChangeLog>

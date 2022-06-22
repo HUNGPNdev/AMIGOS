@@ -115,7 +115,11 @@ public class CartProductSizeServiceImpl implements CartProductSizeService
             ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
             return rs;
         }
+        int proCount = cartProductSizeEntity.getProductSizeId().getCount();
         cartProductSizeEntity.setCount(cartProductSize.getCount());
+        if(cartProductSize.getCount() > proCount) {
+            cartProductSizeEntity.setCount(proCount);
+        }
         cartProductSizeRepository.save(cartProductSizeEntity);
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
         return rs;
