@@ -8,6 +8,7 @@ import { CategoryComponent } from './authentication/test-service/category/catego
 import { ContactComponent } from './authentication/test-service/contact/contact.component';
 import { HomeComponent } from './authentication/test-service/home/home.component';
 import { LoginComponent } from './authentication/test-service/login/login.component';
+import { OrderComponent } from './authentication/test-service/order/order.component';
 import { PmComponent } from './authentication/test-service/pm/pm.component';
 import { CreateProductSizeComponent } from './authentication/test-service/product-size/create-product-size/create-product-size.component';
 import { ListProductSizeComponent } from './authentication/test-service/product-size/list-product-size/list-product-size.component';
@@ -97,6 +98,10 @@ const routes: Routes = [
         component: CreateBlogComponent
     },
 
+    {
+        path: 'order',
+        component: OrderComponent
+    }
 ];
 
 @NgModule({
