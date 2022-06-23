@@ -24,6 +24,7 @@ import { ListProductSizeComponent } from './authentication/test-service/product-
 import { CreateBlogComponent } from './authentication/test-service/blog/create-blog/create-blog.component';
 import { ListBlogComponent } from './authentication/test-service/blog/list-blog/list-blog.component';
 import { OrderComponent } from './authentication/test-service/order/order.component';
+import { CustomerReviewComponent } from './authentication/test-service/customer-review/customer-review.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { OrderComponent } from './authentication/test-service/order/order.compon
 
     CreateBlogComponent,
     ListBlogComponent,
-    OrderComponent
+    OrderComponent,
+    CustomerReviewComponent
 
   ],
   imports: [

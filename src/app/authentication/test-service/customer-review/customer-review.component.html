@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Customer review</h1>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Customer Review</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
+                </div>
+                <div class="bootstrap-table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="margin-top:20px;">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Title</th>
+                                    <th>User full name</th>
+                                    <th>productName</th>
+                                    <th>Content</th>
+                                    <th>rating</th>
+
+
+                                    <th style="width: 15px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of customerReviews | filter:searchText | paginate: {itemsPerPage: 6,currentPage: p}">
+                                    <td>{{p.title}}</td>
+                                    <td>{{p.userName}}</td>
+                                    <td>{{p.productName}}</td>
+                                    <td>{{p.comment}}</td>
+                                    <td>{{p.rating}} sao</td>
+
+
+                                    <td>
+
+                                        <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                                        Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->

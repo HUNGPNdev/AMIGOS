@@ -18,6 +18,7 @@ export class ListBlogComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllByStatus(this.status);
   }
 
 
@@ -40,6 +41,9 @@ export class ListBlogComponent implements OnInit {
 
   findByStatus() {
     this.status = !this.status;
+    this.getAllByStatus(this.status)
+  }
+  private getAllByStatus(status:boolean){
     this.BlogService.getAllBlog(this.status).subscribe( data => {
       this.Blogs = data.data;
     }, error => console.log(error))
