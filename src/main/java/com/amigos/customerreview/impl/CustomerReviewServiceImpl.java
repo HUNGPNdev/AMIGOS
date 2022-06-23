@@ -1,6 +1,7 @@
 package com.amigos.customerreview.impl;
 
 import com.amigos.authentication.jwt.JwtProvider;
+import com.amigos.category.model.CategoryEntity;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
@@ -93,13 +94,57 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
 
             CustomerReviewOuputDto customerReviewOuputDto = new CustomerReviewOuputDto(listCustomerReview,result,avg);
             ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), customerReviewOuputDto);
-            AvgStarCustomerReviewByList(listCustomerReview);
+
             return rs;
         }catch (Exception e){
             throw  e;
         }
 
     }
+
+    @Override
+    public ResponseApi getCustomerReview() {
+        try {
+            var listCustomerReview = customerReviewRepository.getCustomerReview()
+                    .stream().map(el -> new CustomerReviewDto(
+                            el.getId(),
+                            el.getTitle(),
+                            el.getUserId().getId(),
+                            el.getProductId().getId(),
+                            el.getRating(),
+                            el.getComment(),
+                            el.getIsDeleted(),
+                            el.getCreateAt(),
+                            el.getProductId().getName(),
+                            el.getUserId().getUserName()
+                    )).collect(Collectors.toList());
+
+
+
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), listCustomerReview);
+
+            return rs;
+        }catch (Exception e){
+            throw  e;
+        }
+    }
+
+    @Override
+    public ResponseApi delete(UUID id) {
+        Optional<CustomerReviewEntity> customerReviewEntity = customerReviewRepository.findById(id);
+        if(!customerReviewEntity.isEmpty()) {
+            CustomerReviewEntity entity = customerReviewEntity.get();
+            entity.setIsDeleted(true);
+            customerReviewRepository.save(entity);
+
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), entity);
+            return rs;
+        } else {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+    }
+
     private Integer AvgStarCustomerReviewByList(List<CustomerReviewDto> list){
 
        try {

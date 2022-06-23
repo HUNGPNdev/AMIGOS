@@ -34,5 +34,16 @@ public class CustomerReviewController {
     public ResponseEntity<ResponseApi> getCustomerReviewByProduct(@NotEmpty @PathVariable("proId") UUID proId) {
         return ResponseEntity.ok(service.getCustomerReviewByProduct(proId));
     }
+    @GetMapping("/getAll")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> getListCustomerReviews() {
+        return  ResponseEntity.ok(service.getCustomerReview());
+    }
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> delete(@NotEmpty @PathVariable("id") UUID id) {
+        return ResponseEntity.ok(service.delete(id));
+    }
+
 
 }

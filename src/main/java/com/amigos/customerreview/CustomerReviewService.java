@@ -9,10 +9,9 @@ import java.util.UUID;
 
 public interface CustomerReviewService {
     ResponseApi addCustomerReview(CustomerReviewDto customerReviewDto, HttpServletRequest httpServletRequest);
-//    ResponseApi updateCategory(CategoryDTO category);
-   ResponseApi getCustomerReviewByProduct(UUID proId);
-//    ResponseApi delete(UUID id);
-//    ResponseApi getLimit(int limit);
-//    ResponseApi getCateByCondition();
 
+   ResponseApi getCustomerReviewByProduct(UUID proId);
+
+    ResponseApi getCustomerReview();
+    ResponseApi delete(UUID id);
 }

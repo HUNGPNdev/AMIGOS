@@ -10,9 +10,9 @@ import java.util.UUID;
 
 @Repository
 public interface CustomerReviewRepository extends JpaRepository<com.amigos.customerreview.model.CustomerReviewEntity, UUID> {
-//    @Query(value = "select c.id, c.name, c.is_deleted from category c where c.is_deleted = ?1 order by c.id asc limit ?2", nativeQuery = true)
-//    List<com.amigos.customerreview.model.CategoryEntity> getLimit(Boolean isDelete, int limit);
-//
+
    @Query("select c from CustomerReviewEntity c where c.productId.id = ?1")
    List<CustomerReviewEntity> getCustomerReviewByCondition(UUID productId);
+   @Query("select c from CustomerReviewEntity c where c.isDeleted = false ")
+   List<CustomerReviewEntity> getCustomerReview();
 }
