@@ -30,7 +30,7 @@ public class BlogController {
         return new ResponseEntity<>(service.addBlogUpdateBlog(image,blog,httpServletRequest), HttpStatus.OK);
     }
     @GetMapping("/status/{status}")
-    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseApi> getListBlog(@PathVariable("status") String status) {
         return new ResponseEntity<>(service.getListBlog(Boolean.valueOf(status)), HttpStatus.OK);
     }
