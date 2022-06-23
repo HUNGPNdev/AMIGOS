@@ -66,8 +66,8 @@ public class BlogServiceImpl implements BlogService {
                 return rs;
             }
             entityCreate.setUserId(createBy.getId());
-
-            setProductImages(image, entityCreate);
+            String fileNameUpload = setProductImages(image, entityCreate);
+            entityCreate.setImage(fileNameUpload);
             entityCreate.setIs_deleted(false);
             entityCreate = blogRepository.save(entityCreate);
             blD = modelMapper.map(entityCreate, BlogDTO.class);
@@ -77,7 +77,7 @@ public class BlogServiceImpl implements BlogService {
             throw e;
         }
     }
-    private void setProductImages(MultipartFile image,  Blog entity) throws IOException
+    private String setProductImages(MultipartFile image,  Blog entity) throws IOException
     {
         Date date = new Date();
         if(image != null) {
@@ -85,8 +85,9 @@ public class BlogServiceImpl implements BlogService {
             String photoPath = context.getRealPath("images/" + fileName);
             image.transferTo(new File(photoPath));
             entity.setImage(fileName);
+            return fileName;
         }
-
+        return  null;
     }
     @Override
     public ResponseApi updateBlog(Blog b) {
