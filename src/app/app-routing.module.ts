@@ -53,6 +53,10 @@ const routes: Routes = [
     component: ContactComponent
 },
 {
+    path: 'blog/:blogId',
+    component: BlogComponent
+},
+{
     path: 'blog',
     component: BlogComponent
 },
