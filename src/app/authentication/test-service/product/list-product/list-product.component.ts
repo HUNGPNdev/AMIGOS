@@ -5,7 +5,8 @@ import { ProductService } from 'src/app/authentication/entity/product/product.se
 
 @Component({
   selector: 'app-list-product',
-  templateUrl: './list-product.component.html'
+  templateUrl: './list-product.component.html',
+  styleUrls: ['./list-product.component.css']
 })
 export class ListProductComponent implements OnInit {
   src = "./assets/admin/img/new_seo-10-512.png";

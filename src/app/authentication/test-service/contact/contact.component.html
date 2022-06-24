@@ -47,13 +47,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Status</label><br>
-                                <label for="status">true: </label>
-                                <input type="radio" [(ngModel)]="contact.isDeleted" id="status" name="isDeleted"
-                                    [value]="true">
-                                &nbsp;
-                                <label for="status1">false: </label>
+                                <div class="status">
+                                    <div class="true">
+                                        <label for="status">true: </label>
+                                        <input type="radio" [(ngModel)]="contact.isDeleted" id="status" name="isDeleted"
+                                            [value]="true">
+                                    </div>
+                                    <div class="false">
+                                        <label for="status1">false: </label>
                                 <input type="radio" [(ngModel)]="contact.isDeleted" checked id="status1"
                                     name="isDeleted" [value]="false">
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
@@ -89,20 +94,21 @@
                                 <td>{{c.phone}}</td>
                                 <td>{{c.title}}</td>
                                 <td>{{c.isDeleted}}</td>
-                                <td class="action-contact">
-                                    <a (click)="getContactById(c.id)" class="btn btn-warning btn-edit"><span
+                                <td class="action">
+                                    <div class="action-contact">
+                                        <a (click)="getContactById(c.id)" class="btn btn-warning btn-edit"><span
                                             class="glyphicon glyphicon-edit"></span>
                                         Update</a>
                                     <a (click)="deleteById(c.id)"
                                         onclick="return confirm('Are you sure you want to delete?')"
                                         class="btn btn-danger btn-delete"><span class="glyphicon glyphicon-trash"></span>
                                         Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <br><br>
-                    <pagination-controls (pageChange)="c = $event"></pagination-controls>
+                    <pagination-controls class="pagination" (pageChange)="c = $event"></pagination-controls>
                 </div>
                 <div class="clearfix"></div>
             </div>

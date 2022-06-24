@@ -53,14 +53,18 @@
                                         <img *ngIf="p.image_3" width="70px" src="http://localhost:8081/images/{{p.image_3}}" class="thumbnail">
                                     </td>
                                     <td>{{p.isDeleted}}</td>
-                                    <td>
-                                        <a class="btn btn-warning" (click)="goToUpdate(p.id)"><i class="fa fa-pencil" aria-hidden="true"></i> update</a>
-                                        <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> delete</a>
+                                    <td class="action">
+                                        <div class="action-product-size">
+                                            <a class="btn btn-warning btn-update" (click)="goToUpdate(p.id)"><span
+                                                class="glyphicon glyphicon-edit"></span> Update</a>
+                                            <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>				
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>			
+                        <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>			
                     </div>
                 </div>
                 <div class="clearfix"></div>

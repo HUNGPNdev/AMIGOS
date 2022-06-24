@@ -1,0 +1,10 @@
+.login-panel {
+    margin: auto;
+    width: 50%;
+}
+.panel-heading {
+    text-align: center;
+    background-color: #8ad919;
+    border-color: #8ad919;
+    color: aliceblue;
+}

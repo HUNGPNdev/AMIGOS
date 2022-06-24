@@ -9,7 +9,8 @@ import { SizeService } from 'src/app/authentication/entity/size/size.service';
 
 @Component({
   selector: 'app-create-product-size',
-  templateUrl: './create-product-size.component.html'
+  templateUrl: './create-product-size.component.html',
+  styleUrls: ['./create-product-size.component.css']
 })
 export class CreateProductSizeComponent implements OnInit {
   productSize : ProductSize = new ProductSize();

@@ -5,7 +5,8 @@ import { Orders } from '../../entity/cart/Orders';
 
 @Component({
   selector: 'app-order',
-  templateUrl: './order.component.html'
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
   orders: Orders[];

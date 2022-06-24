@@ -58,17 +58,24 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Status</label><br>
-                                <label for="status">true: </label>
-                                <input type="radio" [(ngModel)]="productSize.isDeleted" id="status" name="isDeleted"
-                                    [value]="true">
-                                &nbsp;
-                                <label for="status1">false: </label>
-                                <input type="radio" [(ngModel)]="productSize.isDeleted" checked id="status1"
-                                    name="isDeleted" [value]="false">
+                                <label>Status</label>
+                                <div class="status">
+                                    <div class="true">
+                                        <label for="status">true: </label>
+                                        <input type="radio" [(ngModel)]="productSize.isDeleted" id="status" name="isDeleted"
+                                        [value]="true">
+                                    </div>
+                                    <div class="false">
+                                        <label for="status1">false: </label>
+                                        <input type="radio" [(ngModel)]="productSize.isDeleted" checked id="status1"
+                                        name="isDeleted" [value]="false">
+                                    </div>
+                                </div>
                             </div>
-                            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-                            <a href="../../list-product-size" class="btn btn-danger">Cancel</a>
+                            <div class="button-create">
+                                <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-create">
+                                <a href="../../list-product-size" class="btn btn-danger">Cancel</a>
+                            </div>
                         </div>
                     </div>
                 </form>

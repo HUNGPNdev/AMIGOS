@@ -1,0 +1,31 @@
+.status {
+    display: flex;
+}
+.status .true {
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+}
+.status .false {
+    display: flex;
+    justify-content: center;
+}
+.action-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-update {
+    margin-right: 10px;
+}
+.action {
+    width: 10%;
+}
+td, th {
+    text-align: center;
+}
+.pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}

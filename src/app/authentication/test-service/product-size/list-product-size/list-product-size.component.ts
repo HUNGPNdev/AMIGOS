@@ -5,7 +5,8 @@ import { ProductSizeService } from 'src/app/authentication/entity/product-size/p
 
 @Component({
   selector: 'app-list-product-size',
-  templateUrl: './list-product-size.component.html'
+  templateUrl: './list-product-size.component.html',
+  styleUrls: ['./list-product-size.component.css']
 })
 export class ListProductSizeComponent implements OnInit {
   productSize: ProductSize[];

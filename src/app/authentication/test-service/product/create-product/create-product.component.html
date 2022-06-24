@@ -9,11 +9,11 @@
     <div class="col-xs-12 col-md-12 col-lg-12">
 
         <div class="panel panel-primary">
-            <div class="panel-heading">Product</div>
+            <div class="panel-heading"> Create Product</div>
             <div class="panel-body">
                 <form (ngSubmit)="f.valid && onSubmit()" enctype="multipart/form-data" #f="ngForm">
                     <div class="row" style="margin-bottom:40px">
-                        <div class="col-xs-8">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label>Product Name</label>
                                 <input type="text" name="name" class="form-control" [(ngModel)]="product.name" #name="ngModel" required>
@@ -41,29 +41,8 @@
                                 <input type="text" name="part" class="form-control" [(ngModel)]="product.part">
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" [(ngModel)]="product.description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Image 1</label>
-                                <input required (change)="onChangeImage1($event)" [required]="true" id="img1"
-                                    type="file" class="hidden" onchange="changeImg1(this)" >
-                                <img id="avatar1" onclick="getElementById('img1').click()" class="thumbnail"
-                                    width="100px" [src]="image1">
-                            </div>
-                            <div class="form-group">
-                                <label>Image 2</label>
-                                <input (change)="onChangeImage2($event)" [required]="true" id="img2" type="file"
-                                    class="hidden" onchange="changeImg2(this)">
-                                <img id="avatar2" onclick="getElementById('img2').click()" class="thumbnail"
-                                    width="100px" [src]="image2">
-                            </div>
-                            <div class="form-group">
-                                <label>Image 3</label>
-                                <input (change)="onChangeImage3($event)" [required]="true" id="img3" type="file"
-                                    class="hidden" onchange="changeImg3(this)">
-                                <img id="avatar3" onclick="getElementById('img3').click()" class="thumbnail"
-                                    width="100px" [src]="image3">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" rows="3" name="description" [(ngModel)]="product.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
@@ -75,17 +54,47 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Status</label><br>
-                                <label for="status">true: </label>
-                                <input type="radio" [(ngModel)]="product.isDeleted" id="status" name="isDeleted"
-                                    [value]="true">
-                                &nbsp;
-                                <label for="status1">false: </label>
-                                <input type="radio" [(ngModel)]="product.isDeleted" checked id="status1"
-                                    name="isDeleted" [value]="false">
+                                <label>Status</label>
+                                <div class="status">
+                                    <div class="true">
+                                        <label for="status">true: </label>
+                                        <input type="radio" [(ngModel)]="product.isDeleted" id="status" name="isDeleted"
+                                        [value]="true">
+                                    </div>
+                                    <div class="false">
+                                        <label for="status1">false: </label>
+                                        <input type="radio" [(ngModel)]="product.isDeleted" checked id="status1"
+                                        name="isDeleted" [value]="false">
+                                    </div>
+                                </div>
                             </div>
-                            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-                            <a routerLink="../../list-product" class="btn btn-danger">Cancel</a>
+                            <div class="button-create">
+                                <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-create">
+                                <a routerLink="../../list-product" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+                        <div class="col-md-5 image">
+                            <div class="form-group">
+                                <label>Image 1</label>
+                                <input required (change)="onChangeImage1($event)" [required]="true" id="img1"
+                                    type="file" class="hidden" onchange="changeImg1(this)" >
+                                <img id="avatar1" onclick="getElementById('img1').click()" class="thumbnail"
+                                    width="125px" [src]="image1">
+                            </div>
+                            <div class="form-group">
+                                <label>Image 2</label>
+                                <input (change)="onChangeImage2($event)" [required]="true" id="img2" type="file"
+                                    class="hidden" onchange="changeImg2(this)">
+                                <img id="avatar2" onclick="getElementById('img2').click()" class="thumbnail"
+                                    width="125px" [src]="image2">
+                            </div>
+                            <div class="form-group">
+                                <label>Image 3</label>
+                                <input (change)="onChangeImage3($event)" [required]="true" id="img3" type="file"
+                                    class="hidden" onchange="changeImg3(this)">
+                                <img id="avatar3" onclick="getElementById('img3').click()" class="thumbnail"
+                                    width="125px" [src]="image3">
+                            </div>
                         </div>
                     </div>
                 </form>

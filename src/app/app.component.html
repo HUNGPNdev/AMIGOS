@@ -47,27 +47,27 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
   <ul class="nav menu">
     <li role="presentation" class="divider"></li>
-    <li class="active"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
           <use xlink:href="#stroked-dashboard-dial"></use>
         </svg> Home</a></li>
-    <li><a routerLink="list-product"><svg class="glyph stroked calendar">
+    <li [routerLinkActive]="['active']"><a routerLink="list-product"><svg class="glyph stroked calendar">
           <use xlink:href="#stroked-calendar"></use>
         </svg> Product</a></li>
-    <li><a routerLink="category"><svg class="glyph stroked line-graph">
+    <li [routerLinkActive]="['active']"><a routerLink="category"><svg class="glyph stroked line-graph">
           <use xlink:href="#stroked-line-graph"></use>
         </svg> Category</a></li>
-    <li><a routerLink="contact"><svg class="glyph stroked line-graph">
+    <li [routerLinkActive]="['active']"><a routerLink="contact"><svg class="glyph stroked line-graph">
           <use xlink:href="#stroked-line-graph"></use>
         </svg> Contact</a></li>
-    <li><a routerLink="size"><svg class="glyph stroked plus sign">
+    <li [routerLinkActive]="['active']"><a routerLink="size"><svg class="glyph stroked plus sign">
           <use xlink:href="#stroked-plus-sign"></use>
         </svg> Size</a></li>
-    <li><a routerLink="list-product-size"><svg class="glyph stroked calendar">
+    <li [routerLinkActive]="['active']"><a routerLink="list-product-size"><svg class="glyph stroked calendar">
           <use xlink:href="#stroked-calendar"></use>
         </svg> Product Size</a></li>
-        <li><a routerLink="order"><svg class="glyph stroked bag">
-          <use xlink:href="#stroked-bag"></use>
-        </svg> Orders</a></li>
+    <li [routerLinkActive]="['active']"><a routerLink="order"><svg class="glyph stroked bag">
+      <use xlink:href="#stroked-bag"></use>
+    </svg> Orders</a></li>
     <li role="presentation" class="divider"></li>
   </ul>
 </div>

@@ -1,21 +1,9 @@
-.status {
-    display: flex;
-}
-.status .true {
-    margin-right: 20px;
-    display: flex;
-    justify-content: center;
-}
-.status .false {
-    display: flex;
-    justify-content: center;
-}
-.action-contact {
+.action-product-size {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.btn-edit {
+.btn-update {
     margin-right: 10px;
 }
 .action {
@@ -23,6 +11,11 @@
 }
 td, th {
     text-align: center;
+}
+.thumbnail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .pagination {
     display: flex;

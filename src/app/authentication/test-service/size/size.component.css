@@ -1,0 +1,13 @@
+.action-size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.action {
+    width: 10%;
+}
+.pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}

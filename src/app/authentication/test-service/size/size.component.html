@@ -47,16 +47,17 @@
                             <tr
                                 *ngFor="let p of sizes | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
                                 <td>{{p.name}}</td>
-                                <td>
-                                    <a (click)="getSizeById(p.id)" class="btn btn-warning"><span
+                                <td class="action">
+                                    <div class="action-size">
+                                        <a (click)="getSizeById(p.id)" class="btn btn-warning"><span
                                             class="glyphicon glyphicon-edit"></span>
                                         Update</a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <br><br>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
                 </div>
                 <div class="clearfix"></div>
             </div>
