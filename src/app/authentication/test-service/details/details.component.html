@@ -2,8 +2,7 @@
 
     <section class="breadcrumnb">
         <div class="container">
-            <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation"
-                aria-label="breadcrumbs">
+            <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation" aria-label="breadcrumbs">
                 <li>
                     <a routerLink="home">Home</a>
                 </li>
@@ -22,16 +21,13 @@
             <div class="product-cols row">
                 <div class="col-md-6">
                     <div id="main-image" class="main-image text-center">
-                        <img src="http://localhost:8081/images/{{productSize.image_1}}"
-                            style="width: 570px; height: 554px;" />
+                        <img *ngIf="productSize.image_1" src="http://localhost:8081/images/{{productSize.image_1}}" style="width: 570px; height: 554px;" />
                     </div>
                     <div class="col-md-3 ">
-                        <img src="http://localhost:8081/images/{{productSize.image_2}}"
-                            style="width: 108px; height: 108px;" />
+                        <img *ngIf="productSize.image_2" src="http://localhost:8081/images/{{productSize.image_2}}" style="width: 108px; height: 108px;" />
                     </div>
                     <div class="col-md-3">
-                        <img src="http://localhost:8081/images/{{productSize.image_3}}"
-                            style="width: 108px; height: 108px;" />
+                        <img *ngIf="productSize.image_3" src="http://localhost:8081/images/{{productSize.image_3}}" style="width: 108px; height: 108px;" />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -39,18 +35,21 @@
                         <h1 itemprop="name" class="page_headers" aria-label="productname" role="main">
                             {{productSize.name}}</h1>
                         <div class="product-reviews">
-                            <span class="reviews" itemprop="aggregateRating" itemscope
-                                itemtype="http://schema.org/AggregateRating">
-                                <span class="reviews-stars rating-0"></span>
-                                <span class="reviews-count">
-                                    <a id="review_count" href="#tab-4"><span itemprop="reviewCount">0</span>
-                                        Review(s)</a>
-                                </span>
-                                <span class="hidden review-meta">
+                            <span class="reviews" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <span [className]="avgStart >= 1 ? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                            <span [className]="avgStart >= 2? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                            <span [className]="avgStart >= 3? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                            <span [className]="avgStart >= 4? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                            <span [className]="avgStart >= 5? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                            <span class="reviews-count">
+                                    <a id="review_count" href="#tab-4"><span itemprop="reviewCount">{{countTotalStar}}</span> Review(s)
+                            </a>
+                            </span>
+                            <span class="hidden review-meta">
                                     <span itemprop="ratingValue">0</span>
-                                    <span itemprop="worstRating">0</span>
-                                    <span itemprop="bestRating">5</span>
-                                </span>
+                            <span itemprop="worstRating">0</span>
+                            <span itemprop="bestRating">5</span>
+                            </span>
                             </span>
                         </div>
 
@@ -61,14 +60,14 @@
                                 <span id="price">${{productSize.discount}}</span>
                                 <meta itemprop="price" content="14.99" />
                             </div>
-                            <div class="retailprice" aria-label="retail price">Retail
-                                Price:<span>$${{productSize.price}}</span>
+                            <div class="retailprice" aria-label="retail price">Retail Price:
+                                <span>$${{productSize.price}}</span>
                             </div>
                         </div>
-                        <div class="product-id"><strong>Parts:</strong> {{productSize.part}}</div>
-                        <div class="product-id"><strong>Guarantee:</strong> {{productSize.guarantee}}</div>
-                        <div class="product-id"><strong>Provider:</strong> {{productSize.provider}}</div>
-                        <div class="product-id"><strong>Title:</strong> {{productSize.title}}</div>
+                        <div class="product-id" *ngIf="productSize.part"><strong>Parts:</strong> {{productSize.part}}</div>
+                        <div class="product-id" *ngIf="productSize.guarantee"><strong>Guarantee:</strong> {{productSize.guarantee}}</div>
+                        <div class="product-id" *ngIf="productSize.provider"><strong>Provider:</strong> {{productSize.provider}}</div>
+                        <div class="product-id" *ngIf="productSize.title"><strong>Title:</strong> {{productSize.title}}</div>
                         <div id="divOptionsBlock" class="options sub-section">
                             <div class="header">
                                 <h4 class="page_heading ">Choose Options</h4>
@@ -81,14 +80,26 @@
                                     </div>
                                     <div class="opt-field">
                                         <label class="radio-format" *ngFor="let p of productSizes">
-                                            <label class="radio-option">
+                                            <label class="radio-option" *ngIf="p.id == productSize.id; else notShow">
                                                 <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
-                                                    value="{{p.sizeName}}"
-                                                    (click)="findProductSizeBySizeName(p.sizeName)">
+                                                    value="{{p.sizeName}}" checked="checked"
+                                                    (click)="findProductSizeBySizeName(p.id)">
                                                 <span>{{p.sizeName}} </span>
                                             </label>
+                                        <ng-template #notShow>
+                                            <label class="radio-option">
+                                                    <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                                        value="{{p.sizeName}}"
+                                                        (click)="findProductSizeBySizeName(p.id)">
+                                                    <span>{{p.sizeName}}</span>
+                                                </label>
+                                        </ng-template>
                                         </label>
+                                        <span>&nbsp;{{productSize.count}} sản phẩm sẵn có</span>
                                     </div>
+                                </div>
+                                <div style="height: 17px;">
+                                    <span style="color: red;" *ngIf="message">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này</span>
                                 </div>
                             </div>
                         </div>
@@ -115,18 +126,169 @@
                         <p>{{productSize.description}}</p>
                     </blockquote>
                 </div>
-            </div><br><br><br>
+            </div>
+            <div class="rTabs">
+                <div class="card-header">
+                    <h3>Customers Review</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="reviews-snapshot-header">
+                                    <h4>Rating Snapshot</h4>
+
+                                </div>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-3 text-right rating-filter-label"><a>5 Stars</a></div>
+                                        <div class="col-sm-8 col-xs-7">
+                                            <span class="bv-content-secondary-ratings-container">
+                                    <a ><span class="bv-content-secondary-ratings-value" [style.width.%]="customerReviewCountStar.widthcountStar5" ></span></a>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">{{customerReviewCountStar.countStar5}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-3 text-right rating-filter-label"><a>4 Stars</a></div>
+                                        <div class="col-sm-8 col-xs-7 ">
+                                            <span class="bv-content-secondary-ratings-container ">
+                                        <a><span class="bv-content-secondary-ratings-value" [style.width.%]="customerReviewCountStar.widthcountStar4"></span></a>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">{{customerReviewCountStar.countStar4}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-3 text-right rating-filter-label"><a>3 Stars</a></div>
+                                        <div class="col-sm-8 col-xs-7">
+                                            <span class="bv-content-secondary-ratings-container">
+                            <a ><span class="bv-content-secondary-ratings-value" [style.width.%]="customerReviewCountStar.widthcountStar3"></span></a>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">{{customerReviewCountStar.countStar3}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-3 text-right rating-filter-label"><a>2 Stars</a></div>
+                                        <div class="col-sm-8 col-xs-7">
+                                            <span class="bv-content-secondary-ratings-container">
+                            <a ><span class="bv-content-secondary-ratings-value" [style.width.%]="customerReviewCountStar.widthcountStar2"></span></a>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">{{customerReviewCountStar.countStar2}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-3 text-right rating-filter-label"><a>1 Stars</a></div>
+                                        <div class="col-sm-8 col-xs-7">
+                                            <span class="bv-content-secondary-ratings-container">
+                            <a ><span class="bv-content-secondary-ratings-value" [style.width.%]="customerReviewCountStar.widthcountStar1"></span></a>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-2">{{customerReviewCountStar.countStar1}}</div>
+                                    </div>
+                                </section>
+                                <div id="filteredSearchResults" style="display: block;">
+                                    <span (click)="WriteReview()" class="btn btn-primary filterRemover" data-filtertype="1"><b id="StarRating">Write a review</b></span>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 average-customer-rating-sm">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="reviews-snapshot-header reviews-snapshot-header-right">
+                                            <h4>Average Customer Ratings</h4>
+                                            <p>
+                                                <span [className]="avgStart >= 1 ? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                                <span [className]="avgStart >= 2? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                                <span [className]="avgStart >= 3? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                                <span [className]="avgStart >= 4? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                                <span [className]="avgStart >= 5? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span> {{avgStart}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <hr *ngIf="elementWriteComment == true">
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmitCustomerRV()" #f="ngForm">
+
+
+
+                            <div class="row" *ngIf="elementWriteComment == true">
+                                <div class="crmField col-md-6">
+                                    <label for="content">Write content </label>
+                                    <!-- <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" #firstName="ngModel" required /> -->
+                                    <textarea name="content" id="content" [(ngModel)]="formCustomerReview.comment" [placeholder]="txtwritecontent" rows="6" cols="70" class="form-control"> </textarea>
+                                </div>
+                                <div class="crmField col-md-6">
+                                    <label for="title">Title  <span class="errorRequired">*</span></label>
+                                    <input name="title" id="title" [(ngModel)]="formCustomerReview.title" placeholder="Tile" class="form-control" />
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="hidden" [value]="SttStart" name="rating" [(ngModel)]="formCustomerReview.rating">
+                                            <span [className]="SttStart >= 1 ? 'reviews-stars-one star-active' : 'reviews-stars-one'" (click)="ClickStart(1)"></span>
+                                            <span [className]="SttStart >= 2? 'reviews-stars-one star-active' : 'reviews-stars-one'" (click)="ClickStart(2)"></span>
+                                            <span [className]="SttStart >= 3? 'reviews-stars-one star-active' : 'reviews-stars-one'" (click)="ClickStart(3)"></span>
+                                            <span [className]="SttStart >= 4? 'reviews-stars-one star-active' : 'reviews-stars-one'" (click)="ClickStart(4)"></span>
+                                            <span [className]="SttStart >= 5? 'reviews-stars-one star-active' : 'reviews-stars-one'" (click)="ClickStart(5)"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary filterRemover" data-filtertype="1"><b id="StarRating">Send Review</b></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div id="reviewsBlock" class="reviewsBlock" itemprop="review" itemscope="" itemtype="http://schema.org/Review">
+
+
+                                <div class="user_reviews clearfix" *ngFor="let p of listCustomerReviewByProId">
+                                    <div class="star-rating">
+                                        <span class="reviews-stars rating-{{p.rating}}"></span>
+                                    </div>
+
+                                    <div class="review-info">
+                                        <div class="review-shortDesc" itemprop="name">{{p.title}}</div>
+                                        <div class="review-longDesc" itemprop="description">{{p.comment}}</div>
+                                        <div class="review-images">
+
+                                        </div>
+
+
+                                        <em class="reviewed-by">
+                                            Reviewed by:&nbsp;<span itemprop="author">Online Reviewer</span> from {{p.userName}} on {{p.createAt | date}}
+                                            </em>
+                                        <div style="display: none;" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"> <span itemprop="ratingValue">5</span></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </blockquote>
+                </div>
+            </div>
+
+
+
+            <br><br><br>
             <div class="relatedBlock sub-section">
                 <div class="header">
                     <h2 class="page_heading">Related Items</h2>
                 </div>
                 <div class="product-items product-items-4">
-                    <div *ngFor="let p of products" class="product-item" data-catalogid="1" data-ajaxcart="1"
-                        data-addcart-callback="addcart_callback" data-categoryid="0">
+                    <div *ngFor="let p of products" class="product-item" data-catalogid="1" data-ajaxcart="1" data-addcart-callback="addcart_callback" data-categoryid="0">
                         <div class="img">
                             <a href="details/{{p.id}}">
-                                <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}"
-                                    style="height: 270px; width: 262;" class="img-responsive" />
+                                <img *ngIf="p.image_1" src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;" class="img-responsive" />
                             </a>
                             <button (click)="findProductSizeByProductIdModel(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
                         </div>
@@ -141,8 +303,7 @@
                                 <span class="regular-price">$13.99</span>
                             </div>
                             <div class="action">
-                                <a href="Mezzanine-Houseplant_p_1.html?quick=1&amp;item_id=1&amp;cat_id=0"
-                                    class="add-to-cart btn btn-default">
+                                <a href="Mezzanine-Houseplant_p_1.html?quick=1&amp;item_id=1&amp;cat_id=0" class="add-to-cart btn btn-default">
                                     <span class="buyitlink-text"> Select Options</span>
                                     <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
                                     <span class="ajaxcart-added icon-ok"></span>
@@ -157,8 +318,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,15 +332,12 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img *ngIf="productSizeModel.image_1"
-                                        src="http://localhost:8081/images/{{productSizeModel.image_1}}"
-                                        style="height: 270px; width: 262;" />
+                                    <img *ngIf="productSizeModel.image_1" src="http://localhost:8081/images/{{productSizeModel.image_1}}" style="height: 270px; width: 262;" />
                                 </div>
                                 <div class="col-md-5">
                                     <h3 itemprop="name" class="name">{{productSizeModel.name}}</h3>
                                     <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSizeModel.discount}}</h4>
-                                    <div style="text-decoration: line-through;">Retail
-                                        Price:&nbsp;${{productSizeModel.price}}
+                                    <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSizeModel.price}}
                                     </div>
                                     <h4><b>Provider:</b>&nbsp;{{productSizeModel.provider}}</h4><br>
                                     <div id="prodDetails">
@@ -195,24 +352,36 @@
                                                     </div>
                                                     <div class="opt-field">
                                                         <label class="radio-format" *ngFor="let p of productSizeModels">
-                                                            <label class="radio-option">
-                                                                <input type="radio" id="{{p.sizeName}}" name="size"
-                                                                    class="customoption" value="{{p.sizeName}}"
-                                                                    (click)="findProductSizeBySizeNameModel(p.sizeName)">
-                                                                <span>{{p.sizeName}} </span>
+                                                            <label class="radio-option" *ngIf="p.id == productSizeModel.id; else notShow">
+                                                                <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                                                    value="{{p.sizeName}}" checked="checked"
+                                                                    (click)="findProductSizeBySizeNameModel(p.id)">
+                                                                <span>{{p.sizeName}}</span>
                                                             </label>
+                                                        <ng-template #notShow>
+                                                            <label class="radio-option">
+                                                                    <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
+                                                                        value="{{p.sizeName}}"
+                                                                        (click)="findProductSizeBySizeNameModel(p.id)">
+                                                                    <span>{{p.sizeName}}</span>
+                                                                </label>
+                                                        </ng-template>
                                                         </label>
+                                                        <span>&nbsp;{{productSizeModel.count}} sản phẩm sẵn có</span>
                                                     </div>
                                                 </div>
+                                                <div style="height: 17px;">
+                                                    <span style="color: red;" *ngIf="messageModel">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này</span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </div><br>
                                         <div class="clearfix add-cart-block">
                                             <label class="qty-input">
                                                 <input type="number"  class="form-control" name="qty-0" [value]="quantityPopup" min="1" (change)="onChangeSortPopup($event)">
                                             </label>
                                             <button (click)="addToCartPopup()" type="button" class="btn btn-primary" data-dismiss="modal"><i class="icon-basket" data-dismiss="modal"></i>Add to Cart</button>
                                             <div class="clearfix"></div>
-                                            <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i class="icon-search"></i> More
+                                            <a class="btn btn-link qv-moredetails" href="details/{{productSizeModel.productId}}"><i class="icon-search"></i> More
                                                 Details</a>
                                         </div>
                                         <div class="clearfix"></div>

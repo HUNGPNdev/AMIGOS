@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartProductSize } from '../../entity/client-port/cart-product-size';
+
 import { ClientPortService } from '../../entity/client-port/client-port.service';
 import { Product } from '../../entity/client-port/product';
 import { ProductSize } from '../../entity/client-port/product-size';
+import { CustomerReviewService } from '../../entity/CustomerReview/customerReview.service';
+import { CustomerReview } from '../../entity/CustomerReview/CustomerReviewEntity';
+import { cutomerReviewCountStar } from '../../entity/CustomerReview/cutomerReviewCountStar';
 import { TokenStorageService } from '../../entity/token-storage.service';
 
 @Component({
@@ -21,28 +25,50 @@ export class DetailsComponent implements OnInit {
   quantityPopup = 1;
   products: Product[];
 
+/**customer review */
+  elementWriteComment = false;
+  txtwritecontent = "Write content";
+  SttStart:number =0; 
+  formCustomerReview: any = {};
+  customerReviewEntity : CustomerReview;
+  listCustomerReviewByProId : CustomerReview[];
+ 
+  customerReviewCountStar : cutomerReviewCountStar = new cutomerReviewCountStar() ;
+  countTotalStar:number = 0;
+  avgStart:number;
+  /**end customer review */
+
+  message = false;
+  messageModel = false;
+
+
   constructor(private clientPortService: ClientPortService,
     private route: ActivatedRoute,
-    private router: Router,
-    private token: TokenStorageService) { }
+    private token: TokenStorageService,
+    private customerReviewService : CustomerReviewService
+    ) { }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.params['productId'];
     this.findProductSizeByProductId();
+    this.LoadAllCustomerReview();
   }
 
   findProductSizeByProductId() {
     this.clientPortService.findProductSizeByProductId(this.productId).subscribe(data => {
       this.productSizes = data.data;
       this.productSize = this.productSizes[0];
+      console.log(this.productSizes)
+      console.log(this.productSize)
       this.getProductRelatedItem(this.productSize.cateId, this.productId);
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeName(sizeName: String) {
+  findProductSizeBySizeName(id: number) {
     for (var i = 0; i <= this.productSizes.length; i++) {
-      if (this.productSizes[i].sizeName == sizeName) {
+      if (this.productSizes[i].id == id) {
         this.productSize = this.productSizes[i];
+        this.message = false;
         break;
       }
     }
@@ -62,10 +88,11 @@ export class DetailsComponent implements OnInit {
     }, error => console.log(error))
   }
 
-  findProductSizeBySizeNameModel(sizeName: String) {
+  findProductSizeBySizeNameModel(id: number) {
     for (var i = 0; i <= this.productSizeModels.length; i++) {
-      if (this.productSizeModels[i].sizeName == sizeName) {
+      if (this.productSizeModels[i].id == id) {
         this.productSizeModel = this.productSizeModels[i];
+        this.message = false;
         break;
       }
     }
@@ -85,12 +112,114 @@ export class DetailsComponent implements OnInit {
 
   onChangeSort(event) {
     var value = event.target.value;
-    this.quantity = value;
+    if(value > this.productSize.count) {
+      this.message = true;
+    } else {
+      this.message = false;
+      this.quantity = value;
+    }
   }
+
+
+
+/** Customer review  */
+  WriteReview(){
+    if(this.token.getUsername()) {
+      if(this.elementWriteComment){
+        this.elementWriteComment = false;
+      }else{
+        this.elementWriteComment = true;
+      }
+      }else
+        alert("Please login!")
+  }
+  ClickStart(starId:number){
+    if(starId ==  this.SttStart ){
+      this.SttStart = starId -1;
+    }else{
+      this.SttStart = starId;
+    }
+  }
+  LoadAllCustomerReview(){
+    this.customerReviewService.getCustomerReviewByProId(this.productId).subscribe(data=>{
+      if(data.code == 200){
+        this.listCustomerReviewByProId =  data.data.listCustomerReview;
+        this.countTotalStar =  data.data.listCustomerReview.length;
+        // let starCount = 0;
+        // let activeStar = 0;
+        // let countactiveStar = 0;
+       for (let value  of Object.values(data.data.coutStarts)) {
+          let object :any = value;
+          if(object[0] == 1){
+            // activeStar +=1;
+            // countactiveStar++;
+            // starCount += (1 *  object.length);
+            this.customerReviewCountStar.countStar1 = object.length;
+            this.customerReviewCountStar.widthcountStar1 =(object.length /this.countTotalStar) * 100;
+          }else if(object[0] == 2){
+            // activeStar +=2;
+            // starCount += (2 *  object.length);
+            // countactiveStar++;
+            this.customerReviewCountStar.countStar2 = object.length;
+            this.customerReviewCountStar.widthcountStar2 =(object.length /this.countTotalStar) * 100;
+          }else if(object[0] == 3){
+            // activeStar +=3;
+            // starCount += (3 *  object.length);
+            // countactiveStar++;
+            this.customerReviewCountStar.countStar3 = object.length;
+            this.customerReviewCountStar.widthcountStar3 = (object.length /this.countTotalStar) * 100;
+          }else if(object[0] == 4){
+            // activeStar +=4;
+            // starCount += (4 *  object.length);
+            // countactiveStar++;
+            this.customerReviewCountStar.countStar4 = object.length;
+            this.customerReviewCountStar.widthcountStar4 = (object.length /this.countTotalStar) * 100;
+          }else if(object[0] == 5){
+            // activeStar +=5;
+            // starCount += (5 *  object.length);
+            // countactiveStar++;
+            this.customerReviewCountStar.countStar5 = object.length;
+            this.customerReviewCountStar.widthcountStar5 = (object.length /this.countTotalStar) * 100;
+          }
+        }
+
+       this.avgStart = data.data.avgStar;
+
+      }
+    })
+  }
+  onSubmitCustomerRV(){
+    // let a = this.formCustomerReview ;
+    // this.formCustomerReview.rating = this.SttStart;
+    this.customerReviewEntity = new CustomerReview(
+      this.formCustomerReview.title,
+      this.formCustomerReview.comment,
+      this.SttStart,
+      this.productId
+    );
+   
+    this.customerReviewService.AddCustomerReview(this.customerReviewEntity).subscribe((data:any)=>{
+      if(data.code == 200){
+        this.LoadAllCustomerReview();
+      }
+    })
+  }
+  styleWith(width:number){
+console.log(width);
+    return'50'
+    
+  }
+
+  /**end */
 
   onChangeSortPopup(event) {
     var value = event.target.value;
-    this.quantityPopup = value;
+    if(value > this.productSizeModel.count) {
+      this.messageModel = true;
+    } else {
+      this.messageModel = false;
+      this.quantity = value;
+    }
   }
 
   addToCartPopup() {
@@ -104,4 +233,5 @@ export class DetailsComponent implements OnInit {
       alert("Please login!")
     }
   }
+
 }

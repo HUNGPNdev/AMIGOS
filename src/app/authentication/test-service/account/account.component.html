@@ -4,8 +4,7 @@
 
         <section class="breadcrumnb" aria-label="breadcrumb" role="main">
             <div class="container">
-                <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation"
-                    aria-label="breadcrumbs">
+                <ol itemscope="" itemtype="http://schema.org/BreadcrumbList" class="clearfix" role="navigation" aria-label="breadcrumbs">
                     <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                         <meta itemprop="position" content="1">
                         <a href="index.html" itemprop="item"><span itemprop="name">Home</span></a>
@@ -36,16 +35,14 @@
                         <div class="createNewAccount pad10">
                             <div class="height">
                                 <div class="loginField">
-                                    <div>If you don't have an account, please proceed by clicking the following
-                                        button to continue first-time registration.
+                                    <div>If you don't have an account, please proceed by clicking the following button to continue first-time registration.
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="submit-button">
-                                <button type="button" onclick="window.location='register3008.html?cg=0';"
-                                    class="btn btn-primary"><i class="icon-pencil" role="presentation"
-                                        aria-label="pencil icon"></i> Create Account</button>
+                                <a [routerLink]="['/signup']" class="btn btn-primary"><i class="icon-pencil" role="presentation"
+                                        aria-label="pencil icon"></i> Create Account</a>
                             </div>
                         </div>
                     </div>
@@ -54,33 +51,26 @@
                             <h2 class="headerTitle">Returning Customers</h2>
                         </div>
                         <div *ngIf="isLoggedIn; else loggedOut">
-                          <button class="btn btn-primary" (click)="logout()">Logout</button>
-                            Logged in as: <b style="color: red;"> {{name}} </b>
+                            <button class="btn btn-primary" (click)="logout()">Logout</button> Logged in as: <b style="color: red;"> {{name}} </b>
                         </div>
                         <ng-template #loggedOut>
                             <div class="myaccountLogin pad10">
                                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                                     <div class="form-group">
                                         <label for="username">Username</label>
-                                        <input type="text" class="form-control" name="username"
-                                            [(ngModel)]="form.username" #username="ngModel" required />
+                                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required />
                                         <div *ngIf="f.submitted && username.invalid">
-                                            <div *ngIf="username.errors?.required" style="color: red;">Username is
-                                                required
+                                            <div *ngIf="username.errors?.required" style="color: red;">Username is required
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" class="form-control" name="password"
-                                            [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+                                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
                                         <div *ngIf="f.submitted && password.invalid">
-                                            <div *ngIf="password.errors?.required" style="color: red;">Password is
-                                                required
+                                            <div *ngIf="password.errors?.required" style="color: red;">Password is required
                                             </div>
-                                            <div *ngIf="password.errors?.minlength" style="color: red;">Password must be
-                                                at
-                                                least 6 characters</div>
+                                            <div *ngIf="password.errors?.minlength" style="color: red;">Password must be at least 6 characters</div>
                                         </div>
                                     </div>
                                     <hr>
@@ -93,8 +83,7 @@
                                     </div>
                                 </form>
                                 <div class="loginField">
-                                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal"
-                                        data-target="#resetPW"><i class="icon-cw" role="presentation"
+                                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#resetPW"><i class="icon-cw" role="presentation"
                                             aria-label="reset password"></i>Reset my password</button>
                                 </div>
                             </div>
@@ -119,13 +108,10 @@
                     <h4 class="modal-title" id="resetPWLabel">Reset My Password</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="forgotPass" name="forgotPass"
-                        action="https://branch-preview-com.3dcartstores.com/login.asp?action=forgotpass&amp;ordertracking=1"
-                        method="post" class="bt-flabels js-flabels">
+                    <form id="forgotPass" name="forgotPass" action="https://branch-preview-com.3dcartstores.com/login.asp?action=forgotpass&amp;ordertracking=1" method="post" class="bt-flabels js-flabels">
                         <div class="loginField bt-flabels__wrapper">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="Email4Password" value="" placeholder="Email" size="30"
-                                tabindex="1" class="form-control txtBoxStyle" aria-label="Email4Password" required />
+                            <input type="email" name="email" id="Email4Password" value="" placeholder="Email" size="30" tabindex="1" class="form-control txtBoxStyle" aria-label="Email4Password" required />
                             <div class="clearfix"></div>
                         </div>
                     </form>
