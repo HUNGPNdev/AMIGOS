@@ -21,6 +21,11 @@ import { ContactComponent } from './authentication/test-service/contact/contact.
 import { SizeComponent } from './authentication/test-service/size/size.component';
 import { CreateProductSizeComponent } from './authentication/test-service/product-size/create-product-size/create-product-size.component';
 import { ListProductSizeComponent } from './authentication/test-service/product-size/list-product-size/list-product-size.component';
+import { CreateBlogComponent } from './authentication/test-service/blog/create-blog/create-blog.component';
+import { ListBlogComponent } from './authentication/test-service/blog/list-blog/list-blog.component';
+import { OrderComponent } from './authentication/test-service/order/order.component';
+import { CustomerReviewComponent } from './authentication/test-service/customer-review/customer-review.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +42,13 @@ import { ListProductSizeComponent } from './authentication/test-service/product-
     ContactComponent,
     SizeComponent,
     CreateProductSizeComponent,
-    ListProductSizeComponent
+    ListProductSizeComponent,
+
+    CreateBlogComponent,
+    ListBlogComponent,
+    OrderComponent,
+    CustomerReviewComponent
+
   ],
   imports: [
    NgxPaginationModule,

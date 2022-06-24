@@ -18,7 +18,7 @@
                                 <label>Product Name</label>
                                 <input type="text" name="name" class="form-control" [(ngModel)]="product.name" #name="ngModel" required>
                                 <div *ngIf="f.submitted && name.invalid">
-                                    <div *ngIf="name.errors?.required" style="color: red;">Product Name</div>
+                                    <div *ngIf="name.errors?.required" style="color: red;">Product Name is required</div>
                                 </div>
                             </div>
                             <div class="form-group">
