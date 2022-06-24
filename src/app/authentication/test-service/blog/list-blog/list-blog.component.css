@@ -1,0 +1,24 @@
+.action-blog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-update {
+    margin-right: 10px;
+}
+.action {
+    width: 10%;
+}
+th {
+    text-align: center;
+}
+.pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.thumbnail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

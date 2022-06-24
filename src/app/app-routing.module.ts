@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogsService } from './authentication/entity/blog/blog.service';
 import { AdminComponent } from './authentication/test-service/admin/admin.component';
+import { CreateBlogComponent } from './authentication/test-service/blog/create-blog/create-blog.component';
+import { ListBlogComponent } from './authentication/test-service/blog/list-blog/list-blog.component';
 import { CategoryComponent } from './authentication/test-service/category/category.component';
 import { ContactComponent } from './authentication/test-service/contact/contact.component';
+import { CustomerReviewComponent } from './authentication/test-service/customer-review/customer-review.component';
 import { HomeComponent } from './authentication/test-service/home/home.component';
 import { LoginComponent } from './authentication/test-service/login/login.component';
 import { OrderComponent } from './authentication/test-service/order/order.component';
@@ -81,9 +85,27 @@ const routes: Routes = [
         path: 'update-product-size/:id',
         component: CreateProductSizeComponent
     },
+    /**Dunv Blog */
+    {
+        path: 'list-blog',
+        component: ListBlogComponent
+    },
+    {
+        path: 'create-blog',
+        component: CreateBlogComponent
+    },
+    {
+        path: 'update-blog/:id',
+        component: CreateBlogComponent
+    },
+
     {
         path: 'order',
         component: OrderComponent
+    },
+    {
+        path: 'customer-review',
+        component: CustomerReviewComponent
     }
 ];
 
