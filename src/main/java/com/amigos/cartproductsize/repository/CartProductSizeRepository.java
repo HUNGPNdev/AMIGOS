@@ -27,4 +27,7 @@ public interface CartProductSizeRepository extends JpaRepository<CartProductSize
     @Override
     @Query("select c from CartProductSizeEntity c where c.id = ?1")
     Optional<CartProductSizeEntity> findById(UUID uuid);
+
+    @Query("select case when sum(c.count) > 0 then sum(c.count) else 0 end from CartProductSizeEntity c where c.productSizeId.productId.id = ?1 and c.status <> 'SHOPPING_CART'")
+    long countReportByProductId(UUID uuid);
 }
