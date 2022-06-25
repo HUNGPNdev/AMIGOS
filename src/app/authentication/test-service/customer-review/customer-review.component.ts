@@ -10,6 +10,8 @@ import { CustomerReview } from '../../entity/customer-review/CustomerReviewEntit
 })
 export class CustomerReviewComponent implements OnInit {
   customerReviews : CustomerReview[];
+  searchText: string;
+  p:number;
   constructor(
     private  customerReviewService :CustomerReviewService ,
     private router: Router
