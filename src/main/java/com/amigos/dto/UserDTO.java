@@ -14,7 +14,7 @@ import java.util.UUID;
 public class UserDTO {
     private UUID id;
 
-    private String username;
+    private String userName;
 
     private String firstName;
 
@@ -26,7 +26,7 @@ public class UserDTO {
 
     private String address;
 
-    @JsonIgnore
+
     private String password;
 
     private List<RoleDTO> roles;

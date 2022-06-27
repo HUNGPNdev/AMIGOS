@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
     public ResponseApi getDetailUser(UUID id) {
         Optional<User> userEntity = userRepository.findById(id);
         if(!userEntity.isEmpty()) {
-            UserInputDto map = modelMapperConfig.map(userEntity.get(), UserInputDto.class);
+            UserDTO map = modelMapperConfig.map(userEntity.get(), UserDTO.class);
             ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), map);
             return rs;
         } else {

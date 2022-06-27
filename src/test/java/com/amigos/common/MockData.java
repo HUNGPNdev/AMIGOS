@@ -9,7 +9,7 @@ public class MockData {
     public UserDTO getUserAssignDTO() {
         UserDTO use = new UserDTO();
         use.setId(UUID.randomUUID());
-        use.setUsername("userName");
+        use.setUserName("userName");
         use.setFirstName("first name");
         use.setLastName("last name");
         use.setEmail("admin@gmail.com");

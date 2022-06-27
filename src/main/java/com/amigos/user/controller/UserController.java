@@ -3,6 +3,7 @@ package com.amigos.user.controller;
 import com.amigos.authentication.request.SignUpForm;
 import com.amigos.common.ResponseApi;
 import com.amigos.config.ModelMapperConfig;
+import com.amigos.dto.UserDTO;
 import com.amigos.dto.UserInputDto;
 import com.amigos.user.model.User;
 import com.amigos.user.service.UserService;
@@ -27,9 +28,10 @@ public class UserController {
 
     @PatchMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> updateUser(@RequestBody UserInputDto userDto) {
+    public ResponseEntity<ResponseApi> updateUser(@RequestBody UserDTO userDto) {
          try {
              User user =  modelMapper.map(userDto,User.class);
+             user.setIs_deleted(false);
              ResponseApi userDTO = service.updateUser(user);
              return new ResponseEntity<>(userDTO, HttpStatus.OK);
          }catch (Exception e){
@@ -51,4 +53,6 @@ public class UserController {
     public ResponseEntity<ResponseApi> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
+
+
 }
