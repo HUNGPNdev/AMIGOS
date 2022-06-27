@@ -45,8 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="text" name="phone" class="form-control" [(ngModel)]="user.phone" #phone="ngModel" 
-                                pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" required>
+                                <input type="text" name="phone" class="form-control" [(ngModel)]="user.phone" #phone="ngModel" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" required>
                                 <div *ngIf="f.submitted && phone.invalid">
                                     <div *ngIf="phone.errors?.required" style="color: red;">Please enter your phone</div>
                                     <div *ngIf="phone.errors?.pattern" style="color: red;">Phone must be a valid Phone address</div>
@@ -60,18 +59,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>Address</label>
+                                <select class="form-control" multiple [(ngModel)]="user.roleId" name="roleId">
+
+                                    <option *ngFor="let r of roles" value="{{r.id}}">{{r.name}}</option>
+                                </select>
+                                <div *ngIf="f.submitted && address.invalid">
+                                    <div *ngIf="address.errors?.required" style="color: red;">Please enter your address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Status</label><br>
                                 <label for="status">true: </label>
-                                <input type="radio" id="status" name="is_deleted"
-                                    [value]="true">
-                                &nbsp;
+                                <input type="radio" id="status" name="is_deleted" [value]="true"> &nbsp;
                                 <label for="status1">false: </label>
-                                <input type="radio" checked id="status1"
-                                    name="is_deleted" [value]="false">
+                                <input type="radio" checked id="status1" name="is_deleted" [value]="false">
                             </div>
                             <div *ngIf="f.submitted && isUpdateFailed" class="alert alert-danger">
                                 Update failed: {{error}}
-                              </div>
+                            </div>
                             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                             <a routerLink="../../list-user" class="btn btn-danger">Cancel</a>
                         </div>

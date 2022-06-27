@@ -1,3 +1,5 @@
+import { Role } from "../role/role";
+
 export class User {
     id: number;
     userName: string;
@@ -10,4 +12,6 @@ export class User {
     is_deleted: boolean;
     create_at: Date;
     update_at: Date;
+    roles?:Role[] =[];
+    roleId?:number[];
 }
