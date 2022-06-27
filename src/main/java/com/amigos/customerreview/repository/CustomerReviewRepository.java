@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface CustomerReviewRepository extends JpaRepository<com.amigos.customerreview.model.CustomerReviewEntity, UUID> {
 
-   @Query("select c from CustomerReviewEntity c where c.productId.id = ?1")
+   @Query("select c from CustomerReviewEntity c where c.productId.id = ?1 and  c.isDeleted = false ")
    List<CustomerReviewEntity> getCustomerReviewByCondition(UUID productId);
    @Query("select c from CustomerReviewEntity c where c.isDeleted = false ")
    List<CustomerReviewEntity> getCustomerReview();
