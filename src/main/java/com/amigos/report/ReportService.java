@@ -1,11 +1,13 @@
 package com.amigos.report;
 
 import com.amigos.common.ResponseApi;
-import com.amigos.dto.OrderCartDTO;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 public interface ReportService {
-    ResponseApi createReport();
-
+    ResponseApi createReport() throws IOException;
+    ResponseApi countUser();
+    ResponseApi countComment();
+    ResponseApi countProduct();
+    ResponseApi countCategory();
 }

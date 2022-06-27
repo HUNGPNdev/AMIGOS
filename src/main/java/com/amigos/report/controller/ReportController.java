@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/reports")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ReportController {
     @Autowired
@@ -20,7 +22,31 @@ public class ReportController {
 
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> createReport() {
+    public ResponseEntity<ResponseApi> createReport() throws IOException {
         return new ResponseEntity<>(reportService.createReport(), HttpStatus.OK);
+    }
+
+    @GetMapping("/users")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> countUser() {
+        return new ResponseEntity<>(reportService.countUser(), HttpStatus.OK);
+    }
+
+    @GetMapping("/comments")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> countComment() {
+        return new ResponseEntity<>(reportService.countComment(), HttpStatus.OK);
+    }
+
+    @GetMapping("/products")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> countProduct() {
+        return new ResponseEntity<>(reportService.countProduct(), HttpStatus.OK);
+    }
+
+    @GetMapping("/categories")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> countCategory() {
+        return new ResponseEntity<>(reportService.countCategory(), HttpStatus.OK);
     }
 }
