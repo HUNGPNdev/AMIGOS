@@ -132,8 +132,6 @@ public class UserServiceImpl implements UserService {
                     && !find.get().getEmail().equals(user.getEmail())) {
                 throw new ObjectDuplicateException("Email", user.getEmail(), user);
             }
-            String password = encoder.encode(user.getPassword());
-            user.setPassword(password);
             user.setUpdate_at(new Date());
             User userEntity = userRepository.save(user);
             UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
