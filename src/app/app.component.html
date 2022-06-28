@@ -30,11 +30,11 @@
               <use xlink:href="#stroked-male-user"></use>
             </svg> User <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li *ngIf="!authority"><a href="auth/login"><svg class="glyph stroked lock">
+            <li *ngIf="!isLoggedIn"><a href="auth/login"><svg class="glyph stroked lock">
                   <use xlink:href="#stroked-lock"></use>
                 </svg> Login</a>
             </li>
-            <li *ngIf="authority"><a href="" (click)="logout()"><svg class="glyph stroked cancel">
+            <li *ngIf="isLoggedIn"><a href="" (click)="logout()"><svg class="glyph stroked cancel">
                   <use xlink:href="#stroked-cancel"></use>
                 </svg> Logout</a>
             </li>
@@ -46,7 +46,7 @@
   <!-- /.container-fluid -->
 </nav>
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-  <ul class="nav menu">
+  <ul class="nav menu" *ngIf="authority">
     <li role="presentation" class="divider"></li>
     <li class="active"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
           <use xlink:href="#stroked-dashboard-dial"></use>

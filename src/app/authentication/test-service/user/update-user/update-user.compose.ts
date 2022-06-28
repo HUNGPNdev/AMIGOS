@@ -51,7 +51,7 @@ export class UpdateUserComponent implements OnInit {
       for(let d of data.data.roles){
         idRoles.push(d.id)
       }
-
+      console.log(data.data)
       this.user.roleId = idRoles;
       this.id = id;
     })

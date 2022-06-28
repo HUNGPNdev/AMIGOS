@@ -9,7 +9,9 @@ import { TokenStorageService } from './authentication/entity/token-storage.servi
 export class AppComponent {
   title = 'ngtestSecurity';
   private roles: string[];
-   authority: string;
+  authority = false;
+  isLoggedIn = false;
+
  
   constructor(private tokenStorage: TokenStorageService) { }
  
@@ -17,15 +19,10 @@ export class AppComponent {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
-          this.authority = 'admin';
-          return false;
-        } else if (role === 'ROLE_PM') {
-          this.authority = 'pm';
-          return false;
+        if (role === 'ROLE_ADMIN' || role === 'ROLE_PM') {
+          this.authority = true;
         }
-        this.authority = 'user';
-        return true;
+        this.isLoggedIn = true;
       });
     }
   }
