@@ -109,8 +109,35 @@ public class OrderServiceImpl implements OrderService
 
     @Override
     public ResponseApi orderUpdateStatus(UUID orderId, EnumStatusCart status) {
-        
-        return null;
+        Optional<OrderEntity> order = orderRepository.findById(orderId);
+        if(order.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        OrderEntity orderEntity = order.get();
+        for (CartProductSizeEntity cart: orderEntity.getCartProductSizes()) {
+            cart.setStatus(status);
+        }
+        orderRepository.save(orderEntity);
+        OrderCartDTO orderCartDTO = new OrderCartDTO();
+        modelMapper.map(orderEntity, orderCartDTO);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), orderCartDTO);
+        return rs;
+    }
+
+    @Override
+    public ResponseApi deleteById(UUID orderId)
+    {
+        Optional<OrderEntity> order = orderRepository.findById(orderId);
+        if(order.isEmpty()) {
+            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
+            return rs;
+        }
+        OrderEntity orderEntity = order.get();
+        orderEntity.setIsDeleted(Boolean.TRUE);
+        orderRepository.save(orderEntity);
+        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+        return rs;
     }
 
     private void orderSetParameter(List<OrderEntity> orders, List<OrderCartDTO> orderCartDTOS) {

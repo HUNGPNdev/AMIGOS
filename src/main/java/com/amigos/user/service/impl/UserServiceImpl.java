@@ -47,15 +47,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseApi registerUser(SignUpForm signUpRequest) {
+
+        boolean isDuplicateUser = false,isDuplicateEmail =false;
+        String mess = "";
         if (userRepository.existsByUserName(signUpRequest.getUserName())) {
-            throw new ObjectDuplicateException("Fail -> Username", signUpRequest.getUserName(), signUpRequest);
+            mess += " Duplicate user name";
+            isDuplicateUser = true;
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            throw new ObjectDuplicateException("Fail -> Email", signUpRequest.getEmail(), signUpRequest);
+            mess += " Duplicate email";
+            isDuplicateEmail = true;
+
+        }
+        if (isDuplicateUser || isDuplicateEmail){
+            ResponseApi responseApi = new ResponseApi(HttpStatus.BAD_REQUEST.value(), mess, null);
+            return  responseApi;
         }
 
         // Creating user's account
+        try {
+
+
         User user = new User(signUpRequest.getUserName(), signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getEmail(), signUpRequest.getPhone(), signUpRequest.getAddress(),
                 encoder.encode(signUpRequest.getPassword()), false);
@@ -91,6 +104,10 @@ public class UserServiceImpl implements UserService {
         ResponseApi responseApi = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), userDTO);
 
         return responseApi;
+
+        }catch (Exception e){
+            throw  e;
+        }
     }
 
     @Override

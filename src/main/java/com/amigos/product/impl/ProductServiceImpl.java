@@ -14,6 +14,7 @@ import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +23,11 @@ import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,6 +63,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    private Environment properties;
 
     @Override
     @Transactional
@@ -155,24 +162,64 @@ public class ProductServiceImpl implements ProductService {
 
     private void setProductImages(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, ProductEntity entity) throws IOException
     {
+        String env = properties.getProperty("spring.datasource.url");
+        String rootPath = "";
+        if(env.equals("jdbc:mysql://localhost:3306/amigos?useSSL=false")) {
+            rootPath = "D:/amigos/images/";
+        } else if (env.equals("jdbc:mysql://mysqldb/amigos?allowPublicKeyRetrieval=true&useSSL=false")){
+            rootPath = "images/";
+        } else {
+            return;
+        }
         Date date = new Date();
+        createFolderIfNotExit();
         if(image_1 != null) {
             String fileName = date.getTime()+"1"+image_1.getOriginalFilename();
-            String photoPath = context.getRealPath("images/" + fileName);
-            image_1.transferTo(new File(photoPath));
+            Path location = Paths.get(rootPath + fileName);
+            try {
+                Files.copy(image_1.getInputStream(),
+                        location,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
             entity.setImage_1(fileName);
         }
         if(image_2 != null) {
             String fileName = date.getTime()+"2"+image_2.getOriginalFilename();
-            String photoPath = context.getRealPath("images/" + fileName);
-            image_2.transferTo(new File(photoPath));
+            Path location = Paths.get(rootPath + fileName);
+            try {
+                Files.copy(image_2.getInputStream(),
+                        location,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
             entity.setImage_2(fileName);
         }
         if(image_3 != null) {
             String fileName = date.getTime()+"3"+image_3.getOriginalFilename();
-            String photoPath = context.getRealPath("images/" + fileName);
-            image_3.transferTo(new File(photoPath));
+            Path location = Paths.get(rootPath + fileName);
+            try {
+                Files.copy(image_3.getInputStream(),
+                        location,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
             entity.setImage_3(fileName);
+        }
+    }
+
+    private void createFolderIfNotExit() {
+        Path path = Paths.get("D:/amigos/images");
+        if(!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+                System.out.format("Create folder %s", path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

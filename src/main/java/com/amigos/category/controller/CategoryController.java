@@ -21,9 +21,15 @@ public class CategoryController {
     @Autowired
     CategoryService service;
 
-    @PostMapping("")
+   @PostMapping("")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryDTO category) {
+
+    public ResponseEntity<ResponseApi> addCategory(@RequestBody CategoryDTO categoryDto) {
+
+       CategoryDTO category = new CategoryDTO();
+       category.setName(categoryDto.getName());
+       category.setIsDeleted(Boolean.FALSE);
+
         return new ResponseEntity<>(service.addCategory(category), HttpStatus.OK);
     }
 

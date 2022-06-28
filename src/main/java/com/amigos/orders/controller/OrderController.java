@@ -29,4 +29,10 @@ public class OrderController {
     public ResponseEntity<ResponseApi> orderUpdateStatus(@PathVariable("id") UUID orderId, @PathVariable("status") EnumStatusCart status) {
         return new ResponseEntity<>(orderService.orderUpdateStatus(orderId, status), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ResponseApi> deleteById(@PathVariable("id") UUID orderId) {
+        return new ResponseEntity<>(orderService.deleteById(orderId), HttpStatus.OK);
+    }
 }
