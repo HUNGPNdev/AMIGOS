@@ -11,12 +11,12 @@ import { TokenStorageService } from './authentication/entity/token-storage.servi
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   categories: Category[];
   count: number;
   constructor(private cataService: CategoryService,
     private clientPortService: ClientPortService,
-    private router: Router) { }
+    private router: Router,
+    private tokenStorage: TokenStorageService) { }
  
   ngOnInit() {
     this.getAllCata();
@@ -31,8 +31,10 @@ export class AppComponent {
   }
 
   countCartByUserId() {
-    this.clientPortService.countCartByUserId().subscribe( data => {
-      this.count = data.data;
-    }, error => console.log(error))
+    if (this.tokenStorage.getToken()) {
+      this.clientPortService.countCartByUserId().subscribe( data => {
+        this.count = data.data;
+      }, error => console.log(error))
+    }
   }
 }
