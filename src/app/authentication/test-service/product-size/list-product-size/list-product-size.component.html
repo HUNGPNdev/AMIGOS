@@ -52,7 +52,12 @@
                                     <td>
                                         <img *ngIf="p.image_3" width="70px" src="http://localhost:8081/images/{{p.image_3}}" class="thumbnail">
                                     </td>
-                                    <td>{{p.isDeleted}}</td>
+                                    <td *ngIf="p.isDeleted == false">
+                                        <img class="ant-image-img" src="./assets/admin/img/success-status.png" style="height: 35px;">
+                                    </td>
+                                    <td *ngIf="p.isDeleted == true">
+                                        <img class="ant-image-img" src="./assets/admin/img/false-status.png" style="height: 22px;">
+                                    </td>
                                     <td class="action">
                                         <div class="action-product-size">
                                             <a class="btn btn-warning btn-update" (click)="goToUpdate(p.id)"><span

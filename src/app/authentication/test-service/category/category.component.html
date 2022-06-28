@@ -59,7 +59,12 @@
                         <tbody>
                                 <tr *ngFor="let p of categories | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
                                     <td>{{p.name}}</td>
-                                    <td>{{p.isDeleted}}</td>
+                                    <td *ngIf="p.isDeleted == false">
+                                        <img class="ant-image-img" src="./assets/admin/img/success-status.png" style="height: 35px;">
+                                    </td>
+                                    <td *ngIf="p.isDeleted == true">
+                                        <img class="ant-image-img" src="./assets/admin/img/false-status.png" style="height: 22px;">
+                                    </td>
                                     <td class="action">
                                         <div class="action-category">
                                             <a (click)="getCateById(p.id)" class="btn btn-warning btn-update"><span

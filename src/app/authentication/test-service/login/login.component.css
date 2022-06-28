@@ -8,3 +8,29 @@
     border-color: #8ad919;
     color: aliceblue;
 }
+.roles {
+    color: #ffff;
+    border-radius: 10px;
+    -webkit-transition: .5s;
+    transition: .5s;
+    padding: 43px 30px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}

@@ -1,0 +1,7 @@
+.report {
+    background: #7531FA;
+    border: none;
+}
+.report:focus {
+    outline: none;
+}

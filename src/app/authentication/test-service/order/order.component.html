@@ -38,15 +38,22 @@
                                     <td>{{p.email}}</td>
                                     <td>{{p.phone}}</td>
                                     <td>{{p.address}}</td>
-                                    <td>{{p.isDeleted}}</td>
+                                    <td *ngIf="p.isDeleted == false">
+                                        <img class="ant-image-img" src="./assets/admin/img/success-status.png" style="height: 35px;">
+                                    </td>
+                                    <td *ngIf="p.isDeleted == true">
+                                        <img class="ant-image-img" src="./assets/admin/img/false-status.png" style="height: 22px;">
+                                    </td>
                                     <td class="action">
                                         <div class="action-order">
                                             <button type="button" class="btn btn-primary btn-view" data-toggle="modal"
-                                            data-target=".bd-example-modal-lg" (click)="viewOrders(p)">view
+                                            data-target=".bd-example-modal-lg" (click)="viewOrders(p)"><span
+                                            class="glyphicon glyphicon-share"></span>View
                                         </button>
                                         <a (click)="deleteById(p.id)"
                                             onclick="return confirm('Are you sure you want to delete?')"
-                                            class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>delete
+                                            class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span>
+                                            Delete
                                         </a>
                                         </div>
                                     </td>

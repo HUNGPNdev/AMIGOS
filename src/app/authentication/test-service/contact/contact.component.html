@@ -23,18 +23,21 @@
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input required type="text" [(ngModel)]="contact.email" name="email" #email="ngModel"
+                                <input required email type="text" [(ngModel)]="contact.email" name="email" #email="ngModel"
                                     class="form-control">
                                     <div *ngIf="f.submitted && email.invalid">
                                         <div *ngIf="email.errors?.required" style="color: red;">Please enter your email</div>
+                                        <div *ngIf="email.errors?.email" style="color: red;">Email must be a valid email address</div>
                                     </div>
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
                                 <input required type="number" [(ngModel)]="contact.phone" name="phone" #phone="ngModel"
+                                pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$"
                                     class="form-control">
                                     <div *ngIf="f.submitted && phone.invalid">
                                         <div *ngIf="phone.errors?.required" style="color: red;">Please enter your phone</div>
+                                        <div *ngIf="phone.errors?.pattern" style="color: red;">Phone must be a valid Phone address</div>
                                     </div>
                             </div>
                             <div class="form-group">
@@ -93,7 +96,12 @@
                                 <td>{{c.email}}</td>
                                 <td>{{c.phone}}</td>
                                 <td>{{c.title}}</td>
-                                <td>{{c.isDeleted}}</td>
+                                <td *ngIf="c.isDeleted == false">
+                                    <img class="ant-image-img" src="./assets/admin/img/success-status.png" style="height: 35px;">
+                                </td>
+                                <td *ngIf="c.isDeleted == true">
+                                    <img class="ant-image-img" src="./assets/admin/img/false-status.png" style="height: 22px;">
+                                </td>
                                 <td class="action">
                                     <div class="action-contact">
                                         <a (click)="getContactById(c.id)" class="btn btn-warning btn-edit"><span

@@ -1,6 +1,11 @@
 <hr>
 <div *ngIf="isLoggedIn; else loggedOut">
-  Logged in as {{roles}}.
+  <div class="roles">
+    <div class="title">Welcome to the admin app AMIGOS</div>
+    <div class="content">
+      You are logged in as administrator : {{roles}}
+    </div>
+  </div>
 </div>
 
 <ng-template #loggedOut>
