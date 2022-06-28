@@ -1,6 +1,7 @@
 package com.amigos.product.model;
 
 import com.amigos.category.model.CategoryEntity;
+import com.amigos.customerreview.model.CustomerReviewEntity;
 import com.amigos.productsize.model.ProductSizeEntity;
 import com.amigos.size.model.SizeEntity;
 import com.amigos.user.model.User;
@@ -59,7 +60,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productId")
     private List<ProductSizeEntity> productSizes = new ArrayList<>();
     @OneToMany(mappedBy = "productId")
-    private List<ProductSizeEntity> productCustomerReview = new ArrayList<>();
+    private List<CustomerReviewEntity> productCustomerReview = new ArrayList<>();
     private Date createAt;
 
     private Date updateAt;
