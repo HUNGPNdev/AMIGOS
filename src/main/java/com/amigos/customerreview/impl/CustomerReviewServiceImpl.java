@@ -1,6 +1,7 @@
 package com.amigos.customerreview.impl;
 
 import com.amigos.authentication.jwt.JwtProvider;
+import com.amigos.cartproductsize.repository.CartProductSizeRepository;
 import com.amigos.category.model.CategoryEntity;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
@@ -30,7 +31,8 @@ import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
 public class CustomerReviewServiceImpl implements CustomerReviewService {
     @Autowired
     CustomerReviewRepository customerReviewRepository;
-
+    @Autowired
+    CartProductSizeRepository cartProductSizeRepository;
     @Autowired
     ModelMapperConfig modelMapper;
     @Autowired
@@ -145,6 +147,19 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
         }
     }
 
+    @Override
+    public ResponseApi CheckCustomerReview(UUID productId) {
+        try {
+         //   CartProductSizeRepository.existsByUserId_IdAndStatusAndProductSizeId(productId,)
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), true);
+            return  rs;
+        }catch (Exception e){
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), false);
+            return rs;
+        }
+
+    }
+
     private Integer AvgStarCustomerReviewByList(List<CustomerReviewDto> list){
 
        try {
@@ -188,64 +203,6 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
        }
 
     }
-//
-//    @Override
-//    public ResponseApi updateCategory(CategoryDTO category) {
-//        Optional<CategoryEntity> find = categoryRepository.findById(category.getId());
-//        if(!find.isEmpty()) {
-//            CategoryEntity model = modelMapper.map(category, CategoryEntity.class);
-//            CategoryEntity categoryEntity = categoryRepository.save(model);
-//            CategoryDTO categoryDTO = modelMapper.map(categoryEntity, CategoryDTO.class);
-//            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTO);
-//            return rs;
-//        } else {
-//            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-//            return rs;
-//        }
-//    }
-//
-//    @Override
-//    public ResponseApi getDetailCategory(UUID id) {
-//        Optional<CategoryEntity> categoryEntity = categoryRepository.findById(id);
-//        if(!categoryEntity.isEmpty()) {
-//            CategoryDTO map = modelMapper.map(categoryEntity.get(), CategoryDTO.class);
-//            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), map);
-//            return rs;
-//        } else {
-//            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-//            return rs;
-//        }
-//    }
-//
-//    @Override
-//    public ResponseApi delete(UUID id) {
-//        Optional<CategoryEntity> categoryEntity = categoryRepository.findById(id);
-//        if(!categoryEntity.isEmpty()) {
-//            CategoryEntity entity = categoryEntity.get();
-//            entity.setIsDeleted(true);
-//            categoryRepository.save(entity);
-//            CategoryDTO map = modelMapper.map(entity, CategoryDTO.class);
-//            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), map);
-//            return rs;
-//        } else {
-//            ResponseApi rs = new ResponseApi(HttpStatus.NOT_FOUND.value(), ENTITY_NOT_FOUND);
-//            return rs;
-//        }
-//    }
-//
-//    @Override
-//    public ResponseApi getLimit(int limit) {
-//        List<CategoryEntity> categoryEntity = categoryRepository.getLimit(Boolean.FALSE, limit);
-//        List<CategoryDTO> categoryDTOS = modelMapper.mapAll(categoryEntity, CategoryDTO.class);
-//        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), categoryDTOS);
-//        return rs;
-//    }
-//
-//    @Override
-//    public ResponseApi getCateByCondition() {
-//        List<CategoryDTO> cateByCondition = categoryRepository.getCateByCondition();
-//        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), cateByCondition);
-//        return rs;
-//    }
+
 
 }

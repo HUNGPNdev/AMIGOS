@@ -5,7 +5,9 @@ import com.amigos.category.repository.CategoryRepository;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
+import com.amigos.customerreview.model.CustomerReviewEntity;
 import com.amigos.dto.ProductDTO;
+import com.amigos.dto.customerreview.CustomerReviewDto;
 import com.amigos.product.ProductService;
 import com.amigos.product.model.ProductEntity;
 import com.amigos.product.repository.ProductRepository;
@@ -28,10 +30,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static com.amigos.common.Constants.ENTITY_NOT_FOUND;
 
@@ -137,7 +138,30 @@ public class ProductServiceImpl implements ProductService {
     public ResponseApi getProductNewReleases(int limit)
     {
         List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false and p.productSizes.size > 0 order by p.createAt desc").setMaxResults(limit).getResultList();
+        Map<UUID,Integer> map = new HashMap<UUID,Integer>();
+        Map<UUID,Integer> mapSize = new HashMap<UUID,Integer>();
+        resultList.forEach(productEntity -> {
+            if (productEntity.getProductCustomerReview().size() > 0){
+                map.put(productEntity.getId(),AvgStarCustomerReviewByList(productEntity.getProductCustomerReview()));
+                mapSize.put(productEntity.getId(),productEntity.getProductCustomerReview().size());
+            }
+
+        });
         List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+        productEntities.forEach(productDTO -> {
+            if (!map.isEmpty() && map.get(productDTO.getId()) != null){
+                productDTO.setRating(map.get(productDTO.getId()));
+            }else
+                productDTO.setRating(0);
+
+            // size
+            if (!mapSize.isEmpty() && mapSize.get(productDTO.getId()) != null){
+                productDTO.setTotalReview(mapSize.get(productDTO.getId()));
+            }else{
+                productDTO.setTotalReview(0);
+            }
+
+        });
         ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
         return rs;
     }
@@ -154,10 +178,71 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseApi getProductFeaturedProducts(int limit) {
-        List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false and p.productSizes.size > 0").setMaxResults(limit).getResultList();
-        List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
-        ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
-        return rs;
+        try {
+            List<ProductEntity> resultList = entityManager.createQuery("select p from ProductEntity p where p.isDeleted = false and p.productSizes.size > 0").setMaxResults(limit).getResultList();
+            List<ProductDTO> productEntities = modelMapper.mapAll(resultList, ProductDTO.class);
+
+            Map<UUID,Integer> map = new HashMap<UUID,Integer>();
+            resultList.forEach(productEntity -> {
+                if (productEntity.getProductCustomerReview().size() > 0){
+                    map.put(productEntity.getId(),AvgStarCustomerReviewByList(productEntity.getProductCustomerReview()));
+                }
+
+            });
+            productEntities.forEach(productDTO -> {
+                if (!map.isEmpty() && map.get(productDTO.getId()) != null){
+                    productDTO.setRating(map.get(productDTO.getId()));
+                }else
+                productDTO.setRating(0);
+            });
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), productEntities);
+            return rs;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    private Integer AvgStarCustomerReviewByList(List<CustomerReviewEntity> list){
+
+        try {
+            Map<Integer, List<Integer>> result = list.stream()
+                    .collect(Collectors.groupingBy(p->p.getRating(), Collectors.mapping(p-> p.getRating() , Collectors.toList())));
+
+            AtomicInteger starCount = new AtomicInteger();
+            AtomicInteger activeStar = new AtomicInteger();
+            AtomicInteger countactiveStar = new AtomicInteger();
+            result.forEach((integer, integers) -> {
+                Integer customerRvStar = integer.intValue();
+                var countSize  =  integers.size();
+
+                if(customerRvStar.equals(1)){
+                    activeStar.addAndGet(1);
+                    countactiveStar.getAndIncrement();
+                    starCount.addAndGet((1 * countSize));
+                }else if(customerRvStar.equals(2)){
+                    activeStar.addAndGet(2);
+                    countactiveStar.getAndIncrement();
+                    starCount.addAndGet((2 * countSize));
+                }else if(customerRvStar.equals(3)){
+                    activeStar.addAndGet(3);
+                    countactiveStar.getAndIncrement();
+                    starCount.addAndGet((3 * countSize));
+                }else if(customerRvStar.equals(4)){
+                    activeStar.addAndGet(4);
+                    countactiveStar.getAndIncrement();
+                    starCount.addAndGet((4 * countSize));
+                }else if(customerRvStar.equals(5)){
+                    activeStar.addAndGet(5);
+                    countactiveStar.getAndIncrement();
+                    starCount.addAndGet((5 * countSize));
+                }
+
+            });
+            var result1 =  (starCount.get() /(activeStar.get() / countactiveStar.get()));
+            return  result1;
+        }catch (Exception x){
+            throw x;
+        }
+
     }
 
     private void setProductImages(MultipartFile image_1, MultipartFile image_2, MultipartFile image_3, ProductEntity entity) throws IOException

@@ -43,4 +43,6 @@ public class ProductDTO
     private Date updateAt;
 
     private String cateName;
+    private Integer rating ;
+    private Integer totalReview;
 }

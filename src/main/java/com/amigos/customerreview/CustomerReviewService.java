@@ -14,4 +14,5 @@ public interface CustomerReviewService {
 
     ResponseApi getCustomerReview();
     ResponseApi delete(UUID id);
+    ResponseApi CheckCustomerReview(UUID productId);
 }
