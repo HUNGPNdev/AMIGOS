@@ -15,4 +15,6 @@ export class Product {
     createAt: Date;
     updateAt: Date;
     cateName: string;
+    rating :number;
+    totalReview:number;
 }

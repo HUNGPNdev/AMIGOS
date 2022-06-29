@@ -1,223 +1,224 @@
 <div id="page-content">
-  <section id="home" class="home-page-content page-content">
-    <section class="homepage-slider" tabindex="-1" aria-label="carousel" role="contentinfo">
-      <div class="container">
+    <section id="home" class="home-page-content page-content">
+        <section class="homepage-slider" tabindex="-1" aria-label="carousel" role="contentinfo">
+            <div class="container">
 
-        <div class="homeCarousel flexslider" data-animation="fade" data-slideshowspeed="10000" role="region"
-          tabindex="-1" aria-label="carousel" role="contentinfo">
-          <ul class="slides" tabindex="-1">
+                <div class="homeCarousel flexslider" data-animation="fade" data-slideshowspeed="10000" role="region" tabindex="-1" aria-label="carousel" role="contentinfo">
+                    <ul class="slides" tabindex="-1">
 
-            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png"
-                  alt="" tabindex="-1" /></a></li>
-            <li tabindex="-1"><a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png"
-                  alt="" tabindex="-1" /></a></li>
+                        <li tabindex="-1">
+                            <a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a>
+                        </li>
+                        <li tabindex="-1">
+                            <a href="ACCESSORIES_c_8-2.html" tabindex="-1"><img src="assets/assets/images/banner.png" alt="" tabindex="-1" /></a>
+                        </li>
 
-          </ul>
-        </div>
+                    </ul>
+                </div>
 
-      </div>
-    </section>
+            </div>
+        </section>
 
 
-    <section class="products-section">
-      <div class="container" aria-label="featuredproducts" role="main">
-        <h1 class="header-specials h2" role="heading" aria-level="1">Featured Products</h1>
-        <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
+        <section class="products-section">
+            <div class="container" aria-label="featuredproducts" role="main">
+                <h1 class="header-specials h2" role="heading" aria-level="1">Featured Products</h1>
+                <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
 
-          <ul class="product-items slides" data-productcols="4">
-            <!-- <script class="slick-cloned"
+                    <ul class="product-items slides" data-productcols="4">
+                        <!-- <script class="slick-cloned"
               type="text/javascript">if (typeof _3d_items_collection === "undefined") { window._3d_items_collection = {}; }</script> -->
-            <li *ngFor="let p of productFeaturedProducts">
-              <div class="product-item" data-catalogid="1" data-ajaxcart="1" data-addcart-callback="addcart_callback"
-                data-categoryid="0">
-                <div class="img">
-                  <a href="details/{{p.id}}">
-                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;"
-                      class="img-responsive" />
-                  </a>
-                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal"
-                    data-target=".bd-example-modal-lg">QuickView</button>
+                        <li *ngFor="let p of productFeaturedProducts">
+                            <div class="product-item" data-catalogid="1" data-ajaxcart="1" data-addcart-callback="addcart_callback" data-categoryid="0">
+                                <div class="img">
+                                    <a href="details/{{p.id}}">
+                                        <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;" class="img-responsive" />
+                                    </a>
+                                    <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
 
+                                </div>
+                                <div class="product-content">
+                                    <div class="name">
+                                        <a href="details/{{p.id}}">{{p.name}}</a>
+                                    </div>
+                                    <div class="reviews">
+                                        <span [className]="p.rating >= 1 ? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 2? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 3? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 4? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 5? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                    </div>
+                                    <div class="action">
+                                        <a href="details" class="add-to-cart btn btn-default">
+                                            <span class="buyitlink-text"> Select Options</span>
+                                            <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                            <span class="ajaxcart-added icon-ok"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="product-content">
-                  <div class="name">
-                    <a href="details/{{p.id}}">{{p.name}}</a>
-                  </div>
-                  <div class="reviews">
-                    <span class="reviews-stars rating-5" role="presentation"></span>
-                  </div>
-                  <div class="action">
-                    <a href="details" class="add-to-cart btn btn-default">
-                      <span class="buyitlink-text"> Select Options</span>
-                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                      <span class="ajaxcart-added icon-ok"></span>
-                    </a>
-                  </div>
+            </div>
+        </section>
+
+        <div id="modNewReleases" class="products-section">
+            <div class="container">
+                <h2 class="header-specials" role="heading" aria-level="2">New Releases</h2>
+                <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
+                    <ul class="product-items slides" data-productcols="[product-cols-number]">
+                        <li *ngFor="let p of productNewReleases">
+                            <div class="product-item" data-catalogid="9" data-ajaxcart="1" data-addcart-callback="addcart_callback" data-categoryid="[cat_id]">
+                                <div class="img">
+                                    <a href="Corner-Top-Cacti_p_9.html">
+                                        <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;" class="img-responsive" />
+                                    </a>
+                                    <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal" data-target=".bd-example-modal-lg">QuickView</button>
+                                </div>
+                                <div class="product-content">
+                                    <div class="name">
+                                        <a href="details/{{p.id}}">{{p.name}}</a>
+                                    </div>
+                                    <div class="reviews">
+                                        <span class="reviews-stars rating-0" role="presentation"></span>
+                                    </div>
+                                    <div class="action">
+                                        <a href="Corner-Top-Cacti_p_9.html?quick=1&amp;item_id=9&amp;cat_id=[cat_id]" class="add-to-cart btn btn-default">
+                                            <span class="buyitlink-text">Select Options</span>
+                                            <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
+                                            <span class="ajaxcart-added icon-ok"></span>
+                                        </a>
+                                    </div>
+                                    <div id="divPrevMessage_9" style="display: none; margin-bottom:15px;">
+                                        <em>You previously purchased this item on&nbsp;<span id="spnPrevPurchDate_9"></span></em>
+                                        <br /><a href="#" id="lnkPrevPurchOrderTracking_9">View this order</a>
+                                    </div>
+                                    <script>
+                                        if ("" != "") {
+                                            setTimeout("checkPrevPurch('','9');", 500);
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+
+                            <script>
+                                function checkPrevPurch(userId, caId) {
+
+                                    jQuery.ajax({
+                                        url: 'ajaxPrevPurch.asp',
+                                        dataType: 'json',
+                                        type: 'get',
+                                        data: 'cu=' + userId + '&ca=' + caId,
+                                        cache: false,
+                                        success: function(strResult) {
+                                            if (strResult.trackinglink != '') {
+                                                jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
+                                                jQuery("#divPrevMessage_" + String(caId)).css({
+                                                    "display": "block"
+                                                });
+                                                jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
+                                            } else {
+                                                jQuery("#divPrevMessage_" + String(caId)).css({
+                                                    "display": "none"
+                                                });
+                                            }
+                                        },
+                                        error: jQuery("#divPrevMessage_" + String(caId)).css({
+                                            "display": "none"
+                                        })
+
+                                    });
+                                }
+                            </script>
+
+                        </li>
+                    </ul>
                 </div>
-              </div>
-            </li>
-          </ul>
+            </div>
         </div>
-      </div>
     </section>
-
-    <div id="modNewReleases" class="products-section">
-      <div class="container">
-        <h2 class="header-specials" role="heading" aria-level="2">New Releases</h2>
-        <div class="product-carousel flexslider" aria-label="carousel" role="contentinfo">
-          <ul class="product-items slides" data-productcols="[product-cols-number]">
-            <li *ngFor="let p of productNewReleases">
-              <div class="product-item" data-catalogid="9" data-ajaxcart="1" data-addcart-callback="addcart_callback"
-                data-categoryid="[cat_id]">
-                <div class="img">
-                  <a href="Corner-Top-Cacti_p_9.html">
-                    <img src="http://localhost:8081/images/{{p.image_1}}" style="height: 270px; width: 262;"
-                      class="img-responsive" />
-                  </a>
-                  <button (click)="findProductSizeByProductId(p.id)" class="quickview" data-toggle="modal"
-                    data-target=".bd-example-modal-lg">QuickView</button>
-                </div>
-                <div class="product-content">
-                  <div class="name">
-                    <a href="details/{{p.id}}">{{p.name}}</a>
-                  </div>
-                  <div class="reviews">
-                    <span class="reviews-stars rating-0" role="presentation"></span>
-                  </div>
-                  <div class="action">
-                    <a href="Corner-Top-Cacti_p_9.html?quick=1&amp;item_id=9&amp;cat_id=[cat_id]"
-                      class="add-to-cart btn btn-default">
-                      <span class="buyitlink-text">Select Options</span>
-                      <span class="ajaxcart-loader icon-spin2 animate-spin"></span>
-                      <span class="ajaxcart-added icon-ok"></span>
-                    </a>
-                  </div>
-                  <div id="divPrevMessage_9" style="display: none; margin-bottom:15px;">
-                    <em>You previously purchased this item on&nbsp;<span id="spnPrevPurchDate_9"></span></em>
-                    <br /><a href="#" id="lnkPrevPurchOrderTracking_9">View this order</a>
-                  </div>
-                  <script>
-                    if ("" != "") {
-                      setTimeout("checkPrevPurch('','9');", 500);
-                    }
-                  </script>
-                </div>
-              </div>
-
-              <script>
-                function checkPrevPurch(userId, caId) {
-
-                  jQuery.ajax({
-                    url: 'ajaxPrevPurch.asp',
-                    dataType: 'json',
-                    type: 'get',
-                    data: 'cu=' + userId + '&ca=' + caId,
-                    cache: false,
-                    success: function (strResult) {
-                      if (strResult.trackinglink != '') {
-                        jQuery("#lnkPrevPurchOrderTracking_" + String(caId)).attr("href", strResult.trackinglink);
-                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "block" });
-                        jQuery("#spnPrevPurchDate_" + String(caId)).html(strResult.purchaseDate);
-                      }
-                      else {
-                        jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" });
-                      }
-                    },
-                    error: jQuery("#divPrevMessage_" + String(caId)).css({ "display": "none" })
-
-                  });
-                }
-              </script>
-
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
 
 <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{productSize.title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{productSize.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <img *ngIf="productSize.image_1" src="http://localhost:8081/images/{{productSize.image_1}}"
-                  style="height: 270px; width: 262;" />
-              </div>
-              <div class="col-md-5">
-                <h3 itemprop="name" class="name">{{productSize.name}}</h3>
-                <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSize.discount}}</h4>
-                <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSize.price}}
-                </div>
-                <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
-                <div id="prodDetails">
-                  <div id="divOptionsBlock" class="options sub-section">
-                    <div class="header">
-                      <h4 class="page_heading ">Choose Options</h4>
-                    </div>
-                    <div class="options-inner">
-                      <div class="opt-regular">
-                        <div class="opt-label">
-                          <label class="label">Size</label>
-                        </div>
-                        <div class="opt-field">
-                          <label class="radio-format" *ngFor="let p of productSizes">
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img *ngIf="productSize.image_1" src="http://localhost:8081/images/{{productSize.image_1}}" style="height: 270px; width: 262;" />
+                            </div>
+                            <div class="col-md-5">
+                                <h3 itemprop="name" class="name">{{productSize.name}}</h3>
+                                <h4 itemprop="name" class="name">Your Price:&nbsp;${{productSize.discount}}</h4>
+                                <div style="text-decoration: line-through;">Retail Price:&nbsp;${{productSize.price}}
+                                </div>
+                                <h4><b>Provider:</b>&nbsp;{{productSize.provider}}</h4><br>
+                                <div id="prodDetails">
+                                    <div id="divOptionsBlock" class="options sub-section">
+                                        <div class="header">
+                                            <h4 class="page_heading ">Choose Options</h4>
+                                        </div>
+                                        <div class="options-inner">
+                                            <div class="opt-regular">
+                                                <div class="opt-label">
+                                                    <label class="label">Size</label>
+                                                </div>
+                                                <div class="opt-field">
+                                                    <label class="radio-format" *ngFor="let p of productSizes">
                             <label class="radio-option" *ngIf="p.id == productSize.id; else notShow">
                               <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
                                 value="{{p.sizeName}}" checked="checked" (click)="findProductSizeBySizeName(p.id)">
                               <span>{{p.sizeName}}</span>
                             </label>
-                            <ng-template #notShow>
-                              <label class="radio-option">
+                                                    <ng-template #notShow>
+                                                        <label class="radio-option">
                                 <input type="radio" id="{{p.sizeName}}" name="size" class="customoption"
                                   value="{{p.sizeName}}" (click)="findProductSizeBySizeName(p.id)">
                                 <span>{{p.sizeName}}</span>
                               </label>
-                            </ng-template>
-                          </label>
-                          <span>&nbsp;{{productSize.count}} sản phẩm sẵn có</span>
-                        </div>
-                      </div>
-                      <div style="height: 17px;">
-                        <span style="color: red;" *ngIf="message">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm
+                                                    </ng-template>
+                                                    </label>
+                                                    <span>&nbsp;{{productSize.count}} sản phẩm sẵn có</span>
+                                                </div>
+                                            </div>
+                                            <div style="height: 17px;">
+                                                <span style="color: red;" *ngIf="message">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm
                           này</span>
-                      </div>
-                    </div>
-                  </div><br>
-                  <div class="clearfix add-cart-block">
-                    <label class="qty-input">
+                                            </div>
+                                        </div>
+                                    </div><br>
+                                    <div class="clearfix add-cart-block">
+                                        <label class="qty-input">
                       <input type="number" class="form-control" name="qty-0" [value]="quantity" min="1"
                         (change)="onChangeSort($event)">
                     </label>
-                    <button (click)="addToCart()" type="button" class="btn btn-primary" data-dismiss="modal"><i
+                                        <button (click)="addToCart()" type="button" class="btn btn-primary" data-dismiss="modal"><i
                         class="icon-basket"></i>Add to Cart</button>
-                    <div class="clearfix"></div>
-                    <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i
+                                        <div class="clearfix"></div>
+                                        <a class="btn btn-link qv-moredetails" href="details/{{productSize.productId}}"><i
                         class="icon-search"></i> More
                       Details</a>
-                  </div>
-                  <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
