@@ -21,32 +21,32 @@
   </div>
 </nav> -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" routerLink="home">AMIGOS-ADMIN</a>
-            <ul class="user-menu">
-                <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="home">AMIGOS-ADMIN</a>
+      <ul class="user-menu">
+        <li class="dropdown pull-right">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user">
               <use xlink:href="#stroked-male-user"></use>
             </svg> User <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li *ngIf="!authority"><a href="auth/login"><svg class="glyph stroked lock">
+          <ul class="dropdown-menu" role="menu">
+            <li *ngIf="!isLoggedIn"><a href="auth/login"><svg class="glyph stroked lock">
                   <use xlink:href="#stroked-lock"></use>
                 </svg> Login</a>
-                        </li>
-                        <li *ngIf="authority"><a href="" (click)="logout()"><svg class="glyph stroked cancel">
+            </li>
+            <li *ngIf="isLoggedIn"><a href="" (click)="logout()"><svg class="glyph stroked cancel">
                   <use xlink:href="#stroked-cancel"></use>
                 </svg> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-    <!-- /.container-fluid -->
+  </div>
+  <!-- /.container-fluid -->
 </nav>
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-  <ul class="nav menu">
+  <ul class="nav menu" *ngIf="authority">
     <li role="presentation" class="divider"></li>
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="home"><svg class="glyph stroked dashboard-dial">
           <use xlink:href="#stroked-dashboard-dial"></use>
@@ -66,6 +66,10 @@
     <li [routerLinkActive]="['active']"><a routerLink="list-product-size"><svg class="glyph stroked calendar">
           <use xlink:href="#stroked-calendar"></use>
         </svg> Product Size</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="list-user"><svg class="glyph stroked male user ">
+          <use xlink:href="#stroked-male-user" />
+        </svg>User</a></li>
+    <li>
         <li [routerLinkActive]="['active']">
           <a routerLink="list-blog">
               <svg class="glyph stroked open-folder">
@@ -88,5 +92,5 @@
 </div>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

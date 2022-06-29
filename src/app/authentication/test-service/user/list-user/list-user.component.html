@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">User</h1>
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">User List</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
+                </div>
+                <div class="bootstrap-table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="margin-top:20px;">				
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Name</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of users | filter:searchText | paginate: {itemsPerPage: 4,currentPage: p}">
+                                    <td>{{p.userName}}</td>
+                                    <td>{{p.firstName}}</td>
+                                    <td>{{p.lastName}}</td>
+                                    <td>{{p.email}}</td>
+                                    <td>{{p.phone}}</td>
+                                    <td>{{p.address}}</td>
+                                    <td *ngIf="p.is_deleted == false">
+                                        <img class="ant-image-img" src="./assets/admin/img/success-status.png" style="height: 35px;">
+                                    </td>
+                                    <td *ngIf="p.is_deleted == true">
+                                        <img class="ant-image-img" src="./assets/admin/img/false-status.png" style="height: 22px;">
+                                    </td>
+                                    <td class="action-user">
+                                        <a (click)="goToUpdate(p.id)" class="btn-edit btn btn-warning"><span
+                                            class="glyphicon glyphicon-edit"></span> update</a>
+                                        <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash"></span> delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>				
+                        <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>			
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div><!--/.row-->

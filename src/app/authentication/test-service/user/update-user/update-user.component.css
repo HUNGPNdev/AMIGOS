@@ -1,0 +1,20 @@
+.button-update {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-update {
+    margin-right: 10px;
+}
+.status {
+    display: flex;
+}
+.status .true {
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+}
+.status .false {
+    display: flex;
+    justify-content: center;
+}

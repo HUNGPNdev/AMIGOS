@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">User</h1>
+    </div>
+</div>
+<!--/.row-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">User</div>
+            <div class="panel-body">
+                <form (ngSubmit)="f.valid && onSubmit()" enctype="multipart/form-data" #f="ngForm">
+                    <div class="row" style="margin-bottom:40px">
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <label>User Name</label>
+                                <input type="text" name="userName" class="form-control" [(ngModel)]="user.userName" #userName="ngModel" required>
+                                <div *ngIf="f.submitted && userName.invalid">
+                                    <div *ngIf="userName.errors?.required" style="color: red;">Please enter your user name</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" name="firstName" class="form-control" [(ngModel)]="user.firstName" #firstName="ngModel" required>
+                                <div *ngIf="f.submitted && firstName.invalid">
+                                    <div *ngIf="firstName.errors?.required" style="color: red;">Please enter your first name</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lastName" class="form-control" [(ngModel)]="user.lastName" #lastName="ngModel" required>
+                                <div *ngIf="f.submitted && lastName.invalid">
+                                    <div *ngIf="lastName.errors?.required" style="color: red;">Please enter your last name</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" name="email" class="form-control" [(ngModel)]="user.email" #email="ngModel" required email>
+                                <div *ngIf="f.submitted && email.invalid">
+                                    <div *ngIf="email.errors?.required" style="color: red;">Please enter your email</div>
+                                    <div *ngIf="email.errors?.email" style="color: red;">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" name="phone" class="form-control" [(ngModel)]="user.phone" #phone="ngModel" pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" required>
+                                <div *ngIf="f.submitted && phone.invalid">
+                                    <div *ngIf="phone.errors?.required" style="color: red;">Please enter your phone</div>
+                                    <div *ngIf="phone.errors?.pattern" style="color: red;">Phone must be a valid Phone address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control" [(ngModel)]="user.address" #address="ngModel" required>
+                                <div *ngIf="f.submitted && address.invalid">
+                                    <div *ngIf="address.errors?.required" style="color: red;">Please enter your address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <select class="form-control" multiple [(ngModel)]="user.roleId" name="roleId">
+
+                                    <option *ngFor="let r of roles" value="{{r.id}}">{{r.name}}</option>
+                                </select>
+                                <div *ngIf="f.submitted && address.invalid">
+                                    <div *ngIf="address.errors?.required" style="color: red;">Please enter your address</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="status">
+                                    <div class="true">
+                                        <label for="status">True: </label>
+                                        <input type="radio" id="status" name="is_deleted" [value]="true">
+                                    </div>
+                                    <div class="false">
+                                        <label for="status1">False: </label>
+                                        <input type="radio" checked id="status1" name="is_deleted" [value]="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="f.submitted && isUpdateFailed" class="alert alert-danger">
+                                Update failed: {{error}}
+                            </div>
+                            <div class="button-update">
+                                <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-update">
+                                <a routerLink="../../list-user" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->

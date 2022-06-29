@@ -1,0 +1,16 @@
+.btn-edit {
+    margin-right: 10px;
+}
+.action-user {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+td, th {
+    text-align: center;
+}
+.pagination {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
