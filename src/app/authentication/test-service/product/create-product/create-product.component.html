@@ -28,13 +28,11 @@
 
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" class="form-control"
-                                    [(ngModel)]="product.title">
+                                <input type="text" name="title" class="form-control" [(ngModel)]="product.title">
                             </div>
                             <div class="form-group">
                                 <label>Guarantee</label>
-                                <input type="text" name="guarantee" class="form-control"
-                                    [(ngModel)]="product.guarantee">
+                                <input type="text" name="guarantee" class="form-control" [(ngModel)]="product.guarantee">
                             </div>
                             <div class="form-group">
                                 <label>Part</label>
@@ -58,13 +56,11 @@
                                 <div class="status">
                                     <div class="true">
                                         <label for="status">true: </label>
-                                        <input type="radio" [(ngModel)]="product.isDeleted" id="status" name="isDeleted"
-                                        [value]="true">
+                                        <input type="radio" [(ngModel)]="product.isDeleted" id="status" name="isDeleted" [value]="true">
                                     </div>
                                     <div class="false">
                                         <label for="status1">false: </label>
-                                        <input type="radio" [(ngModel)]="product.isDeleted" checked id="status1"
-                                        name="isDeleted" [value]="false">
+                                        <input type="radio" [(ngModel)]="product.isDeleted" checked id="status1" name="isDeleted" [value]="false">
                                     </div>
                                 </div>
                             </div>
@@ -76,24 +72,18 @@
                         <div class="col-md-5 image">
                             <div class="form-group">
                                 <label>Image 1</label>
-                                <input required (change)="onChangeImage1($event)" [required]="true" id="img1"
-                                    type="file" class="hidden" onchange="changeImg1(this)" >
-                                <img id="avatar1" onclick="getElementById('img1').click()" class="thumbnail"
-                                    width="125px" [src]="image1">
+                                <input required (change)="onChangeImage1($event)" [required]="true" id="img1" type="file" class="hidden" onchange="changeImg1(this)">
+                                <img id="avatar1" onclick="getElementById('img1').click()" class="thumbnail" width="125px" [src]="image1">
                             </div>
                             <div class="form-group">
                                 <label>Image 2</label>
-                                <input (change)="onChangeImage2($event)" [required]="true" id="img2" type="file"
-                                    class="hidden" onchange="changeImg2(this)">
-                                <img id="avatar2" onclick="getElementById('img2').click()" class="thumbnail"
-                                    width="125px" [src]="image2">
+                                <input (change)="onChangeImage2($event)" [required]="true" id="img2" type="file" class="hidden" onchange="changeImg2(this)">
+                                <img id="avatar2" onclick="getElementById('img2').click()" class="thumbnail" width="125px" [src]="image2">
                             </div>
                             <div class="form-group">
                                 <label>Image 3</label>
-                                <input (change)="onChangeImage3($event)" [required]="true" id="img3" type="file"
-                                    class="hidden" onchange="changeImg3(this)">
-                                <img id="avatar3" onclick="getElementById('img3').click()" class="thumbnail"
-                                    width="125px" [src]="image3">
+                                <input (change)="onChangeImage3($event)" [required]="true" id="img3" type="file" class="hidden" onchange="changeImg3(this)">
+                                <img id="avatar3" onclick="getElementById('img3').click()" class="thumbnail" width="125px" [src]="image3">
                             </div>
                         </div>
                     </div>
