@@ -34,6 +34,11 @@ public class CustomerReviewController {
     public ResponseEntity<ResponseApi> getCustomerReviewByProduct(@NotEmpty @PathVariable("proId") UUID proId) {
         return ResponseEntity.ok(service.getCustomerReviewByProduct(proId));
     }
+    @GetMapping("/checkCustomerReview/{proId}")
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<ResponseApi> checkCustomerReview(@NotEmpty @PathVariable("proId") UUID proId ,HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(service.CheckCustomerReview(proId,httpServletRequest), HttpStatus.OK);
+    }
     @GetMapping("/getAll")
     @PreAuthorize("hasRole('ROLE_PM') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<ResponseApi> getListCustomerReviews() {

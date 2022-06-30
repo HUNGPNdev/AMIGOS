@@ -3,6 +3,8 @@ package com.amigos.cartproductsize.repository;
 import com.amigos.cartproductsize.model.CartProductSizeEntity;
 import com.amigos.cartproductsize.model.EnumStatusCart;
 import com.amigos.dto.CartProductSizeDTO;
+import com.amigos.productsize.model.ProductSizeEntity;
+import com.amigos.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,7 +25,7 @@ public interface CartProductSizeRepository extends JpaRepository<CartProductSize
     int countAllByUserId_IdAndStatus(UUID userId, EnumStatusCart status);
 
     List<CartProductSizeEntity> findAllByUserId_IdAndStatus(UUID userId, EnumStatusCart status);
-    boolean existsByUserId_IdAndStatusAndProductSizeId(UUID userId, EnumStatusCart status,UUID productSizeId);
+    boolean existsByUserId_IdAndStatusAndProductSizeId_Id(UUID userId, EnumStatusCart status, UUID productSizeId);
     @Override
     @Query("select c from CartProductSizeEntity c where c.id = ?1")
     Optional<CartProductSizeEntity> findById(UUID uuid);

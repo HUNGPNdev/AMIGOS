@@ -1,8 +1,8 @@
 package com.amigos.customerreview.impl;
 
 import com.amigos.authentication.jwt.JwtProvider;
+import com.amigos.cartproductsize.model.EnumStatusCart;
 import com.amigos.cartproductsize.repository.CartProductSizeRepository;
-import com.amigos.category.model.CategoryEntity;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -148,10 +149,26 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
     }
 
     @Override
-    public ResponseApi CheckCustomerReview(UUID productId) {
+    public ResponseApi CheckCustomerReview(UUID productId, HttpServletRequest httpServletRequest) {
         try {
-         //   CartProductSizeRepository.existsByUserId_IdAndStatusAndProductSizeId(productId,)
-            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), true);
+            User createBy = UserCommon.getUserFromRequest(httpServletRequest, tokenProvider, userRepository);
+            if(createBy == null) {
+                ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), false);
+                return rs;
+            }
+          var product  = (productRepository.findById(productId)).get();
+            AtomicBoolean check = new AtomicBoolean(false);
+            if (product != null && product.getProductSizes().size() > 0){
+                product.getProductSizes().forEach(prSize -> {
+                  boolean exits =  cartProductSizeRepository.existsByUserId_IdAndStatusAndProductSizeId_Id(createBy.getId(), EnumStatusCart.DELIVERED,prSize.getId());
+                  if (exits){
+                      check.set(true);
+                      return;
+                  }
+                });
+            }
+
+            ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), check.get());
             return  rs;
         }catch (Exception e){
             ResponseApi rs = new ResponseApi(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), false);
