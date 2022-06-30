@@ -11,13 +11,13 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Blog List</div>
             <div class="panel-body">
-                <div class="form-group">
+                <div class="form-group w-20">
                     <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
                 </div>
                 <div class="bootstrap-table">
                     <div class="table-responsive">
-                        <a routerLink="../create-blog" class="btn btn-primary">Add Blog</a>&nbsp;
-                        <a (click)="findByStatus()" class="btn btn-secondary"><i class="fa fa-trash" aria-hidden="true"></i> Find By Status</a>
+                        <a routerLink="../create-blog" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add</a>&nbsp;
+                        <a (click)="findByStatus()" class="btn btn-outline-info"><span class="glyphicon glyphicon-search"></span> Find By Status</a>
                         <table class="table table-bordered" style="margin-top:20px;">
                             <thead>
                                 <tr class="bg-primary">
@@ -35,9 +35,9 @@
                                     <td class="action">
                                         <div class="action-blog">
                                             <a class="btn btn-warning btn-update" (click)="goToUpdate(p.id)"><span
-                                                class="glyphicon glyphicon-edit"></span> Update</a>
+                                                class="glyphicon glyphicon-edit"></span></a>
                                             <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">
-                                                <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                                <span class="glyphicon glyphicon-trash"></span></a>
                                         </div>
                                     </td>
                                 </tr>

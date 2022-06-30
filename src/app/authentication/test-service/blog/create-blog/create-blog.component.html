@@ -31,11 +31,9 @@
                                 <input required (change)="onChangeImage($event)" [required]="true" id="img" type="file" class="hidden" onchange="changeImg1(this)">
                                 <img id="avatar1" onclick="getElementById('img').click()" class="thumbnail" width="100px" [src]="image">
                             </div>
+                            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-saved"></span>&nbsp;Submit</button>&nbsp;
 
-
-                            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-
-                            <a style="margin-left:15px ;" router-link="../list-blog" class="btn btn-danger">Cancel</a>
+                            <a style="margin-left:15px ;" router-link="../list-blog" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Cancel</a>
                         </div>
                     </div>
                 </form>

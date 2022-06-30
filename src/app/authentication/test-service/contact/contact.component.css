@@ -29,3 +29,6 @@ td, th {
     justify-content: end;
     align-items: center;
 }
+.w-25 {
+    width: 25%;
+}

@@ -11,7 +11,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Customer Review</div>
             <div class="panel-body">
-                <div class="form-group">
+                <div class="form-group w-20">
                     <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText">
                 </div>
                 <div class="bootstrap-table">
@@ -41,7 +41,7 @@
                                     <td>
 
                                         <a (click)="deleteById(p.id)" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
-                                        Delete</a>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
