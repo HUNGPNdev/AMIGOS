@@ -125,11 +125,13 @@ export class DetailsComponent implements OnInit {
 /** Customer review  */
   WriteReview(){
     if(this.token.getUsername()) {
-      if(this.elementWriteComment){
-        this.elementWriteComment = false;
-      }else{
-        this.elementWriteComment = true;
-      }
+        this.customerReviewService.checkCustomerReviewByProId(this.productId).subscribe(data=>{
+          if(data.data){
+            this.elementWriteComment = true;
+          }else{
+            alert("You must purchase to write a review");
+          }
+        })
       }else
         alert("Please login!")
   }
@@ -205,14 +207,15 @@ export class DetailsComponent implements OnInit {
     })
   }
   styleWith(width:number){
-console.log(width);
     return'50'
     
   }
 
+
   /**end */
 
   onChangeSortPopup(event) {
+    
     var value = event.target.value;
     if(value > this.productSizeModel.count) {
       this.messageModel = true;

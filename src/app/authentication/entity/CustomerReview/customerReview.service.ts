@@ -20,4 +20,7 @@ export class CustomerReviewService {
   getCustomerReviewByProId(id: number): Observable<ResponseApi> {
     return this.httpClient.get<ResponseApi>(`${this.baseUrl}/${id}`);
   }
+  checkCustomerReviewByProId(id: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(`${this.baseUrl}/checkCustomerReview/${id}`);
+  }
 }
