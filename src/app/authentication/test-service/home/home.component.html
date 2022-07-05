@@ -81,7 +81,11 @@
                                         <a href="details/{{p.id}}">{{p.name}}</a>
                                     </div>
                                     <div class="reviews">
-                                        <span class="reviews-stars rating-0" role="presentation"></span>
+                                        <span [className]="p.rating >= 1 ? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 2? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 3? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 4? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
+                                        <span [className]="p.rating >= 5? 'reviews-stars-one star-active' : 'reviews-stars-one'"></span>
                                     </div>
                                     <div class="action">
                                         <a href="Corner-Top-Cacti_p_9.html?quick=1&amp;item_id=9&amp;cat_id=[cat_id]" class="add-to-cart btn btn-default">
