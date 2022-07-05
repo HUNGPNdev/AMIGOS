@@ -213,7 +213,8 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
                }
 
            });
-           var result1 =  (starCount.get() /(activeStar.get() / countactiveStar.get()));
+           int result1 = 0;
+               result1 = (starCount.get()/countactiveStar.get());
            return  result1;
        }catch (Exception x){
            throw x;
