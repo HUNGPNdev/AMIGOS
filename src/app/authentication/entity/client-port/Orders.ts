@@ -11,4 +11,5 @@ export class Orders {
     createAt: Date;
     cartProductSizes: CartProductSize[];
     totalPrice: number;
+    proId: number;
 }
