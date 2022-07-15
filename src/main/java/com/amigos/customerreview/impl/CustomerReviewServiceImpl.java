@@ -214,7 +214,9 @@ public class CustomerReviewServiceImpl implements CustomerReviewService {
 
            });
            int result1 = 0;
+           if(countactiveStar.get() > 0) {
                result1 = (starCount.get()/countactiveStar.get());
+           }
            return  result1;
        }catch (Exception x){
            throw x;

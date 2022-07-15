@@ -151,6 +151,7 @@ public class OrderServiceImpl implements OrderService
                         t.setImage_1(product.getImage_1());
                         c.setTotalPrice(c.getTotalPrice() + t.getPrice()*t.getCount());
                         t.setProName(product.getName());
+                        t.setProId(product.getId());
                     }
                 }
             });

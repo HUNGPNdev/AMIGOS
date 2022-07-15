@@ -17,6 +17,8 @@ public class OrderCartDTO
 
     private UUID userId;
 
+    private UUID proId;
+
     private String firstName;
 
     private String lastName;

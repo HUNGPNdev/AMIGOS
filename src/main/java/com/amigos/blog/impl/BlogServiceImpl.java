@@ -7,21 +7,23 @@ import com.amigos.blog.repository.BlogRepository;
 import com.amigos.common.ResponseApi;
 import com.amigos.common.UserCommon;
 import com.amigos.config.ModelMapperConfig;
-import com.amigos.dto.ProductDTO;
 import com.amigos.dto.blog.BlogDTO;
-import com.amigos.product.model.ProductEntity;
 import com.amigos.user.model.User;
 import com.amigos.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     ModelMapperConfig modelMapper;
+
+    @Autowired
+    private Environment properties;
 
     @Override
     public ResponseApi addBlog(Blog blog) {
@@ -66,8 +71,7 @@ public class BlogServiceImpl implements BlogService {
                 return rs;
             }
             entityCreate.setUserId(createBy.getId());
-            String fileNameUpload = setProductImages(image, entityCreate);
-            entityCreate.setImage(fileNameUpload);
+            setProductImages(image, entityCreate);
             entityCreate.setIs_deleted(false);
             entityCreate = blogRepository.save(entityCreate);
             blD = modelMapper.map(entityCreate, BlogDTO.class);
@@ -77,18 +81,7 @@ public class BlogServiceImpl implements BlogService {
             throw e;
         }
     }
-    private String setProductImages(MultipartFile image,  Blog entity) throws IOException
-    {
-        Date date = new Date();
-        if(image != null) {
-            String fileName = date.getTime()+"1"+image.getOriginalFilename();
-            String photoPath = context.getRealPath("images/" + fileName);
-            image.transferTo(new File(photoPath));
-            entity.setImage(fileName);
-            return fileName;
-        }
-        return  null;
-    }
+
     @Override
     public ResponseApi updateBlog(Blog b) {
         Optional<Blog> find = blogRepository.findById(b.getId());
@@ -149,5 +142,29 @@ public class BlogServiceImpl implements BlogService {
         return  rs;
     }
 
-
+    private void setProductImages(MultipartFile image,  Blog entity) throws IOException
+    {
+        Date date = new Date();
+        String env = properties.getProperty("spring.datasource.url");
+        String rootPath = "";
+        if(env.equals("jdbc:mysql://localhost:3306/amigos?useSSL=false")) {
+            rootPath = "D:/amigos/images/";
+        } else if (env.equals("jdbc:mysql://mysqldb/amigos?allowPublicKeyRetrieval=true&useSSL=false")){
+            rootPath = "images/";
+        } else {
+            return;
+        }
+        if(image != null) {
+            String fileName = date.getTime()+"1"+image.getOriginalFilename();
+            Path location = Paths.get(rootPath + fileName);
+            try {
+                Files.copy(image.getInputStream(),
+                        location,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+            entity.setImage(fileName);
+        }
+    }
 }
